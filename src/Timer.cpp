@@ -38,6 +38,7 @@ void Timer::push(int id, int timeout, const TimeoutCallback& cb) {
 }
 
 void Timer::adjust(int id, int timeout) {
+
     size_t idx = m_map[id];
     m_heap[idx].expires = Clock::now() + MS(timeout);
     shift_down(shift_up(idx));  // 先往上走, 再往下 down

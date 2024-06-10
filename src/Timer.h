@@ -25,7 +25,7 @@ struct TimerNode {
 };
 
 /**
- * TODO: 需要考虑线程安全
+ * 超时定时器, 超时执行回调
  */
 class Timer {
 
@@ -62,6 +62,8 @@ private:
 
     std::vector<TimerNode> m_heap;
     std::unordered_map<int, size_t> m_map;  // 根据id找到在heap中的下标
+
+    std::mutex m_mutex;
 };
 
 
