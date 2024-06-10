@@ -1,2 +1,0 @@
-/usr/bin/ar qc /dwt/project/dwt_src/lib/libdwt_src.a CMakeFiles/dwt_src.dir/Logger.cpp.o CMakeFiles/dwt_src.dir/SRCServer.cpp.o CMakeFiles/dwt_src.dir/Session.cpp.o CMakeFiles/dwt_src.dir/Timer.cpp.o CMakeFiles/dwt_src.dir/main.cpp.o
-/usr/bin/ranlib /dwt/project/dwt_src/lib/libdwt_src.a

@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/test.dir/test.cpp.o -o /dwt/project/dwt_src/bin/test   -L/dwt/project/dwt_src/lib  -Wl,-rpath,/dwt/project/dwt_src/lib /dwt/project/dwt_src/lib/libdwt_src.a
