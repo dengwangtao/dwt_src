@@ -14,7 +14,7 @@ HeapHeartBeatCounter::~HeapHeartBeatCounter() {
 
 }
 
-void HeapHeartBeatCounter::push(int id, const HeartbeatCountReachCallback& cb) {
+void HeapHeartBeatCounter::push(size_t id, const HeartbeatCountReachCallback& cb) {
 
     // 判断节点是否存在
     if(m_map.count(id) > 0) {
@@ -37,7 +37,7 @@ void HeapHeartBeatCounter::push(int id, const HeartbeatCountReachCallback& cb) {
 
 }
 
-void HeapHeartBeatCounter::adjust(int id, int count) {
+void HeapHeartBeatCounter::adjust(size_t id, int count) {
     // id不存在
     if(m_map.count(id) == 0) {
         return;
@@ -47,7 +47,7 @@ void HeapHeartBeatCounter::adjust(int id, int count) {
     shift_down(shift_up(idx));  // 先往上走, 再往下 down
 }
 
-void HeapHeartBeatCounter::addOne(int id) {
+void HeapHeartBeatCounter::addOne(size_t id) {
     // id不存在
     if(m_map.count(id) == 0) {
         return;

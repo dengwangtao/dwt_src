@@ -15,7 +15,7 @@ using TimePoint = Clock::time_point;   // 时间点
 using MS = std::chrono::milliseconds;   //  毫秒
 
 struct TimerNode {
-    int id;             // 节点id
+    size_t id;             // 节点id
     TimePoint expires;  // 过期时间
     TimeoutCallback cb; // 过期执行的回调
 
@@ -35,10 +35,10 @@ public:
     ~HeapTimer();
 
     // 添加节点, 超时时间(毫秒)和超时回调
-    void push(int id, int timeout, const TimeoutCallback& cb);
+    void push(size_t id, int timeout, const TimeoutCallback& cb);
 
     // 更新节点的过期时间
-    void adjust(int id, int timeout);
+    void adjust(size_t id, int timeout);
 
     // tick, 删除超时节点
     void tick();
@@ -53,7 +53,7 @@ public:
     void clear();
 
     // 删除id
-    void del(int id);
+    void del(size_t id);
 
 
 private:
@@ -64,7 +64,7 @@ private:
 
 public:
     std::vector<TimerNode> m_heap;
-    std::unordered_map<int, size_t> m_map;  // 根据id找到在heap中的下标
+    std::unordered_map<size_t, size_t> m_map;  // 根据id找到在heap中的下标
 };
 
 

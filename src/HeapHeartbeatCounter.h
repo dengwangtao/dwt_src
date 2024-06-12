@@ -12,7 +12,7 @@ namespace dwt {
 
 
 struct HeartBeatCounterNode {
-    int id;             // 节点id
+    size_t id;             // 节点id
     int heartbeatCount; // 心跳计数
     HeartbeatCountReachCallback cb; // 过期执行的回调
 
@@ -32,13 +32,13 @@ public:
     ~HeapHeartBeatCounter();
 
     // 添加节点和上限回调
-    void push(int id, const TimeoutCallback& cb);
+    void push(size_t id, const TimeoutCallback& cb);
 
     // 更新节点的心跳计数
-    void adjust(int id, int count);
+    void adjust(size_t id, int count);
 
     // 节点的心跳计数+1
-    void addOne(int id);
+    void addOne(size_t id);
 
     // tick, 删除达到上限的节点
     void tick();
@@ -58,7 +58,7 @@ private:
 
 
     std::vector<HeartBeatCounterNode> m_heap;
-    std::unordered_map<int, size_t> m_map;  // 根据id找到在heap中的下标
+    std::unordered_map<size_t, size_t> m_map;  // 根据id找到在heap中的下标
 
     const int LIMIT;
 };

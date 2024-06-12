@@ -14,7 +14,7 @@ HeapTimer::~HeapTimer() {
 
 }
 
-void HeapTimer::push(int id, int timeout, const TimeoutCallback& cb) {
+void HeapTimer::push(size_t id, int timeout, const TimeoutCallback& cb) {
     // LOG_INFO("%s:%d HeapTimer::push(%d, %d, cb)", __FILE__, __LINE__, id, timeout);
 
     // 判断节点是否存在
@@ -38,7 +38,7 @@ void HeapTimer::push(int id, int timeout, const TimeoutCallback& cb) {
 
 }
 
-void HeapTimer::adjust(int id, int timeout) {
+void HeapTimer::adjust(size_t id, int timeout) {
     if(m_map.count(id) == 0) {
         return;
     }
@@ -92,7 +92,7 @@ void HeapTimer::clear() {
     m_map.clear();
 }
 
-void HeapTimer::del(int id) {
+void HeapTimer::del(size_t id) {
     if(m_map.count(id) == 0) {
         return;
     }
