@@ -1,20 +1,21 @@
-#include "Timer.h"
+#include "HeapTimer.h"
 #include "Logger.h"
 
 namespace dwt {
 
 
 
-Timer::Timer() {
+HeapTimer::HeapTimer() {
     m_heap.reserve(64); // 保留64个位置
 }
 
 
-Timer::~Timer() {
+HeapTimer::~HeapTimer() {
 
 }
 
-void Timer::push(int id, int timeout, const TimeoutCallback& cb) {
+void HeapTimer::push(int id, int timeout, const TimeoutCallback& cb) {
+    // LOG_INFO("%s:%d HeapTimer::push(%d, %d, cb)", __FILE__, __LINE__, id, timeout);
 
     // 判断节点是否存在
     if(m_map.count(id) > 0) {
@@ -37,14 +38,18 @@ void Timer::push(int id, int timeout, const TimeoutCallback& cb) {
 
 }
 
-void Timer::adjust(int id, int timeout) {
-
+void HeapTimer::adjust(int id, int timeout) {
+    if(m_map.count(id) == 0) {
+        return;
+    }
     size_t idx = m_map[id];
     m_heap[idx].expires = Clock::now() + MS(timeout);
     shift_down(shift_up(idx));  // 先往上走, 再往下 down
 }
 
-void Timer::tick() {
+void HeapTimer::tick() {
+    std::vector<std::function<void()>> callbacks;
+
     while(!m_heap.empty()) {
         TimerNode& top = m_heap.front();
         if(std::chrono::duration_cast<MS>(top.expires - Clock::now()).count() > 0) {
@@ -52,13 +57,20 @@ void Timer::tick() {
             break;
         }
         // LOG_INFO("id = %d expired", top.id);
-        top.cb();
+        // callbacks.push_back(std::bind(top.cb, top.id));
+        callbacks.push_back([cb = top.cb, id = top.id]() { cb(id); });
+
         pop();
+        // top.cb();
+    }
+    // 超时回调, 统一执行
+    for(auto& cb : callbacks) {
+        cb();
     }
 }
 
 
-int Timer::getNextTick() {
+int HeapTimer::getNextTick() {
     tick();
     int res = -1;   // 没有节点则返回-1
     if(!m_heap.empty()) {
@@ -69,21 +81,30 @@ int Timer::getNextTick() {
 }
 
 
-void Timer::pop() {
+void HeapTimer::pop() {
     if(m_heap.size() > 0) {
         delete_node(0);
     }
 }
 
-void Timer::clear() {
+void HeapTimer::clear() {
     m_heap.clear();
     m_map.clear();
+}
+
+void HeapTimer::del(int id) {
+    if(m_map.count(id) == 0) {
+        return;
+    }
+    size_t idx = m_map[id];
+    delete_node(idx);
 }
 
 
 
 
-void Timer::swap_node(size_t a, size_t b) {
+
+void HeapTimer::swap_node(size_t a, size_t b) {
 
     std::swap(m_heap[a], m_heap[b]);
     m_map[m_heap[a].id] = a;
@@ -91,7 +112,7 @@ void Timer::swap_node(size_t a, size_t b) {
 
 }
 
-size_t Timer::shift_up(size_t idx) {
+size_t HeapTimer::shift_up(size_t idx) {
 
     while(idx > 0) {
         size_t fa = (idx - 1) / 2;
@@ -106,7 +127,7 @@ size_t Timer::shift_up(size_t idx) {
 }
 
 
-size_t Timer::shift_down(size_t idx) {
+size_t HeapTimer::shift_down(size_t idx) {
     size_t n = m_heap.size();
     while(idx < n) {
         size_t lc = idx * 2 + 1;
@@ -127,7 +148,7 @@ size_t Timer::shift_down(size_t idx) {
 }
 
 
-void Timer::delete_node(size_t idx) {
+void HeapTimer::delete_node(size_t idx) {
 
     size_t end_idx = m_heap.size() - 1;
     if(idx < end_idx) {
@@ -141,7 +162,7 @@ void Timer::delete_node(size_t idx) {
     
     m_map.erase(m_heap[idx].id);
     m_heap.pop_back();
-    shift_down(shift_up(idx));      // bug: 忘记该行
+    // shift_down(shift_up(idx));      // remove the line
 }
 
 

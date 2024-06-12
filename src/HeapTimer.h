@@ -27,12 +27,12 @@ struct TimerNode {
 /**
  * 超时定时器, 超时执行回调
  */
-class Timer {
+class HeapTimer {
 
 public:
 
-    Timer();
-    ~Timer();
+    HeapTimer();
+    ~HeapTimer();
 
     // 添加节点, 超时时间(毫秒)和超时回调
     void push(int id, int timeout, const TimeoutCallback& cb);
@@ -52,6 +52,9 @@ public:
     // 清空堆
     void clear();
 
+    // 删除id
+    void del(int id);
+
 
 private:
     size_t shift_up(size_t idx);
@@ -59,11 +62,9 @@ private:
     void swap_node(size_t a, size_t b);
     void delete_node(size_t idx);
 
-
+public:
     std::vector<TimerNode> m_heap;
     std::unordered_map<int, size_t> m_map;  // 根据id找到在heap中的下标
-
-    std::mutex m_mutex;
 };
 
 
