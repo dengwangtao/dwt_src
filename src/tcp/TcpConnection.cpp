@@ -184,9 +184,13 @@ void TcpConnection::connectDestoryed() {
 
 void TcpConnection::handleRead(Timestamp receiceTime) {
     int saveErrno = 0;
+
+    // LOG_INFO("%s:%d TcpConnection::handleRead fd=%d bytes", __FILE__, __LINE__, m_channel->fd());
+
     size_t n = m_inputBuffer.readFd(m_channel->fd(), &saveErrno);
 
     // LOG_INFO("%s:%d TcpConnection::handleRead fd=%d getData=%lu bytes", __FILE__, __LINE__, m_channel->fd(), n);
+    
 
     if(n > 0) {
         // 已连接的用户有数据到达

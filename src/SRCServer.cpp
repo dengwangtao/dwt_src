@@ -2,24 +2,11 @@
 
 #include <cstring>
 
+#include "uuid4.h"
+#include "messages.pb.h"
+
 namespace dwt {
 
-static int createUDPSocket(int timeout) {
-    int fd = ::socket(AF_INET, SOCK_DGRAM, 0);    // 创建UDP监听套接字
-    if(fd == -1) {
-        LOG_FATAL("%s:%d createUDPSocket(%d) error", __FILE__, __LINE__, timeout);
-    }
-
-    // 设置超时时间
-    struct timeval timeout_;
-    timeout_.tv_sec = timeout;      //秒
-    timeout_.tv_usec = 0;           //微秒
-    if(setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &timeout_, sizeof(timeout_)) == -1) {
-        LOG_FATAL("%s:%d createUDPSocket(%d) error", __FILE__, __LINE__, timeout);
-    }
-
-    return fd;
-}
 
 
 
@@ -28,8 +15,7 @@ SRCServer::SRCServer(
     const std::string& name, int timeout, int max_heartbeat)
     : m_loop(loop)
     , m_server(loop, listenAddr, name)
-    , m_UDPThread(std::bind(&SRCServer::HeartbeatHandler, this), name + "_UDP")
-    , m_heartbeatCounter(timeout, max_heartbeat) {
+    , m_heartbeatCounter(listenAddr, timeout, max_heartbeat) {
 
 
     // 构造函数
@@ -46,16 +32,18 @@ SRCServer::SRCServer(
 
     // ==
 
-    m_UDPListenFd = createUDPSocket(3);    // 创建并设置UDP套接字超时时间为3秒
-    // 绑定ip和端口, 和tcp同样的端口    
-    if(::bind(m_UDPListenFd, (struct sockaddr*)(listenAddr.getSockAddr()), sizeof(struct sockaddr_in)) == -1) {
-        LOG_FATAL("::bind UDP error");
-    }
-
+    
     // 设置心跳上限回调
     m_heartbeatCounter.setHeartbeatReachCallback(
         std::bind(&SRCServer::onHeartbeatReachLimit, this, std::placeholders::_1)
     );
+
+    // 设置UDP心跳消息到达处理回调
+    m_heartbeatCounter.setOnUDPMessageCallback(
+        std::bind(&SRCServer::onUDPMessage, this, std::placeholders::_1)
+    );
+
+
     
 }
 
@@ -66,7 +54,7 @@ SRCServer::~SRCServer() {
 
 void SRCServer::start() {
     m_server.start();
-    m_UDPThread.start();    // 启动心跳监测线程
+    m_heartbeatCounter.start(); // 启动心跳检测线程
 }
 
 void SRCServer::onConnection(const TcpConnectionPtr& conn) {
@@ -75,59 +63,68 @@ void SRCServer::onConnection(const TcpConnectionPtr& conn) {
     }
 }
 
+// 该函数执行的线程为 ioLoop(s)
 void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestamp time) {
-    std::string buf = buffer->retrieveAllAsString();
-    conn->send(buf);
+    std::string data = buffer->retrieveAllAsString();
+
+    dwt_proto::WrappedRequest wrappedRequest;
+    if(!wrappedRequest.ParseFromString(data)) {
+        LOG_ERROR("wrappedRequest.ParseFromString(%s)", data.c_str());
+        return;
+    }
+
+    if(wrappedRequest.requesttype() == dwt_proto::MessageType::Connection) {
+        // 连接请求
+        size_t sessionId = UUID4::generateSessionId();
+
+        LOG_INFO("generated sessionId = %lu to %s", sessionId, conn->peerAddress().toIpPort().c_str());
+
+        // 创建会话映射
+        m_sessionManager.add(sessionId, conn->peerAddress());
+        // 放入心跳定时器
+        m_heartbeatCounter.push(sessionId);
+
+        dwt_proto::ConnectionResponse connRes;
+        connRes.set_sessionid(sessionId);
+
+        dwt_proto::WrappedResponse resp;
+        resp.set_responsetype(dwt_proto::MessageType::Connection);
+        resp.set_data(connRes.SerializeAsString());
+
+        conn->send(resp.SerializeAsString());
+        return;
+
+
+    } else {
+        // 业务请求
+        LOG_WARN("业务分支");
+    }
+
+    
+
+    
 }
 
-// 单独线程进行心跳检测
-void SRCServer::HeartbeatHandler() {
-    char buf[256] = {0};
-    struct sockaddr_in peer_addr;
-
-    while(1) {
-        m_heartbeatCounter.tick();  // 清理超时节点, 并执行回调
-        ::memset(&peer_addr, 0, sizeof peer_addr);
-        socklen_t len = sizeof(peer_addr);
-        int n = ::recvfrom(m_UDPListenFd, buf, 256, 0, (sockaddr*)&peer_addr, &len);
-        buf[n] = '\0';
-
-        InetAddress addr(peer_addr);
-        if(n <= 0) {
-            // ::recvfrom 超时
-            // LOG_INFO("======== ::recvfrom timeout ========");
-
-            // TODO: 可以执行其他函数 ...
-            continue;
-        }
-
-        LOG_INFO("reveive data from %s", addr.toIpPort().c_str());
-
-        // 根据[ip:port]计算session id
-        size_t sessionId = std::hash<std::string>()(addr.toIpPort());
-        if(m_sessions.count(sessionId) <= 0) {
-            // 第一次收到该id的心跳包, 设置超时时间, 设置心跳上限回调 
-            m_sessions.insert(sessionId);
-
-            m_heartbeatCounter.push(sessionId);
-        } else {
-            // 心跳消息到达
-            m_heartbeatCounter.reset(sessionId);
-        }
 
 
+void SRCServer::onUDPMessage(size_t sessionId) {
+    if(m_sessionManager.exist(sessionId)) { // TCP已经建立了会话
+        // 心跳消息到达
+        m_heartbeatCounter.reset(sessionId);
+    } else { // 没有会话, 不作处理
+        LOG_WARN("receive not registerd Heartbeat, sessionId = %lu", sessionId);
     }
 }
+
 
 
 /**
  * TODO:删除会话, 删除会话节点
  *      runinLoop ...
  */
-void SRCServer::onHeartbeatReachLimit(size_t id) {
-    LOG_INFO("session %lu died", id);
-    m_sessions.erase(id);
+void SRCServer::onHeartbeatReachLimit(size_t sessionId) {
+    LOG_INFO("session %lu died", sessionId);
+    m_sessionManager.remove(sessionId);
 }
-
 
 } // end namespace dwt

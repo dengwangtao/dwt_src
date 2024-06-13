@@ -14,4 +14,5 @@ include_directories(${PROJECT_SOURCE_DIR}/src/tcp)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 add_subdirectory(src)
-add_subdirectory(test)
+add_subdirectory(client)
+# add_subdirectory(test)

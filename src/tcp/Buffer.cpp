@@ -20,7 +20,7 @@ size_t Buffer::readFd(int fd, int* saveErrno) {
     vec[1].iov_len = sizeof extrabuf;
 
     // 保证一次至少读出64k的数据
-    const int iovecCount = (writable < sizeof extrabuf) ? 2 : 1;
+    const int iovecCount = (writable < (sizeof extrabuf)) ? 2 : 1;
 
     // 分散读
     const size_t n = ::readv(fd, vec, iovecCount);
