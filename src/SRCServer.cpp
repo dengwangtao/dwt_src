@@ -68,8 +68,11 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
     std::string data = buffer->retrieveAllAsString();
 
     dwt_proto::WrappedRequest wrappedRequest;
+    dwt_proto::WrappedResponse resp;    // 响应
     if(!wrappedRequest.ParseFromString(data)) {
         LOG_ERROR("wrappedRequest.ParseFromString(%s)", data.c_str());
+        resp.set_responsetype(dwt_proto::MessageType::Error);
+        conn->send(resp.SerializeAsString());
         return;
     }
 
@@ -84,24 +87,23 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
         // 放入心跳定时器
         m_heartbeatCounter.push(sessionId);
 
+        // 连接响应
         dwt_proto::ConnectionResponse connRes;
         connRes.set_sessionid(sessionId);
 
-        dwt_proto::WrappedResponse resp;
+        
         resp.set_responsetype(dwt_proto::MessageType::Connection);
         resp.set_data(connRes.SerializeAsString());
 
+        // 发送响应
         conn->send(resp.SerializeAsString());
-        return;
 
 
     } else {
         // 业务请求
         LOG_WARN("业务分支");
+        
     }
-
-    
-
     
 }
 

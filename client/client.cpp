@@ -30,6 +30,7 @@ int main() {
     connReq.set_requesttype(dwt_proto::MessageType::Connection);
     std::string tobeSend = connReq.SerializeAsString();
     int n = ::send(fd, &tobeSend[0], tobeSend.size(), 0);
+    // int n = ::send(fd, "hahhaha", 8, 0);
     if(n < 0) {
         ::perror("write");
         exit(1);
@@ -56,6 +57,8 @@ int main() {
         resp.ParseFromString(res.data());
         sessionId = resp.sessionid();
         std::cout << "sessionId=" << resp.sessionid() << std::endl;
+    } else if(res.responsetype() == dwt_proto::MessageType::Error) {
+        std::cout << "Error Response" << std::endl;
     }
 
     close(fd);

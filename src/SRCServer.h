@@ -12,18 +12,6 @@
 
 namespace dwt {
 
-// enum class NodeType {
-//     PERSISTENT,         // 永久节点
-//     EPHEMERAL,          // 临时节点 (会话节点, 会话关闭后, 节点失效)
-// };
-
-
-// 节点类型
-struct Node {
-    int id;
-    std::string name;
-};
-
 class SRCServer {
 
 public:
@@ -51,10 +39,6 @@ private:
     TcpServer m_server;   // Tcp Server, 主从Reactor, one loop per thread
     EventLoop* m_loop;    // TCP 事件循环 (mainLoop)
 
-
-
-    std::unordered_map<std::string, Node>   m_data;   // name    -> Node
-    std::unordered_map<int, std::string>    m_dict;   // Node.id -> name
 
 
     SessionManager m_sessionManager;

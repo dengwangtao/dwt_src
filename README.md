@@ -6,11 +6,11 @@
 
 ```
 命令: 
-- create UserService zdsfksjhfgzxdjkjfhgdf
-- get UserService 
-- set 
-- delete
-- ls
-- stat
-- exists
+- create /userService/userinfo data_xxxxxx
+- get /userService/userinfo 
+- set /userService/userinfo data_xxxxxx
+- delete /userService/userinfo
+- ls /userService
+- stat /userService/userinfo
+- exists /userService/userinfo
 ```

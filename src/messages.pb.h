@@ -23,6 +23,7 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
+#include <google/protobuf/generated_message_bases.h>
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata_lite.h>
 #include <google/protobuf/generated_message_reflection.h>
@@ -55,9 +56,51 @@ extern CreateNodeRequestDefaultTypeInternal _CreateNodeRequest_default_instance_
 class CreateNodeResponse;
 struct CreateNodeResponseDefaultTypeInternal;
 extern CreateNodeResponseDefaultTypeInternal _CreateNodeResponse_default_instance_;
+class DeleteNodeRequest;
+struct DeleteNodeRequestDefaultTypeInternal;
+extern DeleteNodeRequestDefaultTypeInternal _DeleteNodeRequest_default_instance_;
+class DeleteNodeResponse;
+struct DeleteNodeResponseDefaultTypeInternal;
+extern DeleteNodeResponseDefaultTypeInternal _DeleteNodeResponse_default_instance_;
+class ExistsNodeRequest;
+struct ExistsNodeRequestDefaultTypeInternal;
+extern ExistsNodeRequestDefaultTypeInternal _ExistsNodeRequest_default_instance_;
+class ExistsNodeResponse;
+struct ExistsNodeResponseDefaultTypeInternal;
+extern ExistsNodeResponseDefaultTypeInternal _ExistsNodeResponse_default_instance_;
+class GetNodeRequest;
+struct GetNodeRequestDefaultTypeInternal;
+extern GetNodeRequestDefaultTypeInternal _GetNodeRequest_default_instance_;
+class GetNodeResponse;
+struct GetNodeResponseDefaultTypeInternal;
+extern GetNodeResponseDefaultTypeInternal _GetNodeResponse_default_instance_;
 class HeartbeatMessage;
 struct HeartbeatMessageDefaultTypeInternal;
 extern HeartbeatMessageDefaultTypeInternal _HeartbeatMessage_default_instance_;
+class LsNodeRequest;
+struct LsNodeRequestDefaultTypeInternal;
+extern LsNodeRequestDefaultTypeInternal _LsNodeRequest_default_instance_;
+class LsNodeResponse;
+struct LsNodeResponseDefaultTypeInternal;
+extern LsNodeResponseDefaultTypeInternal _LsNodeResponse_default_instance_;
+class NodeState;
+struct NodeStateDefaultTypeInternal;
+extern NodeStateDefaultTypeInternal _NodeState_default_instance_;
+class ServiceRequest;
+struct ServiceRequestDefaultTypeInternal;
+extern ServiceRequestDefaultTypeInternal _ServiceRequest_default_instance_;
+class SetNodeRequest;
+struct SetNodeRequestDefaultTypeInternal;
+extern SetNodeRequestDefaultTypeInternal _SetNodeRequest_default_instance_;
+class SetNodeResponse;
+struct SetNodeResponseDefaultTypeInternal;
+extern SetNodeResponseDefaultTypeInternal _SetNodeResponse_default_instance_;
+class StatNodeRequest;
+struct StatNodeRequestDefaultTypeInternal;
+extern StatNodeRequestDefaultTypeInternal _StatNodeRequest_default_instance_;
+class StatNodeResponse;
+struct StatNodeResponseDefaultTypeInternal;
+extern StatNodeResponseDefaultTypeInternal _StatNodeResponse_default_instance_;
 class WrappedRequest;
 struct WrappedRequestDefaultTypeInternal;
 extern WrappedRequestDefaultTypeInternal _WrappedRequest_default_instance_;
@@ -69,12 +112,84 @@ PROTOBUF_NAMESPACE_OPEN
 template<> ::dwt_proto::ConnectionResponse* Arena::CreateMaybeMessage<::dwt_proto::ConnectionResponse>(Arena*);
 template<> ::dwt_proto::CreateNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::CreateNodeRequest>(Arena*);
 template<> ::dwt_proto::CreateNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::CreateNodeResponse>(Arena*);
+template<> ::dwt_proto::DeleteNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::DeleteNodeRequest>(Arena*);
+template<> ::dwt_proto::DeleteNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::DeleteNodeResponse>(Arena*);
+template<> ::dwt_proto::ExistsNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::ExistsNodeRequest>(Arena*);
+template<> ::dwt_proto::ExistsNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::ExistsNodeResponse>(Arena*);
+template<> ::dwt_proto::GetNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::GetNodeRequest>(Arena*);
+template<> ::dwt_proto::GetNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::GetNodeResponse>(Arena*);
 template<> ::dwt_proto::HeartbeatMessage* Arena::CreateMaybeMessage<::dwt_proto::HeartbeatMessage>(Arena*);
+template<> ::dwt_proto::LsNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::LsNodeRequest>(Arena*);
+template<> ::dwt_proto::LsNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::LsNodeResponse>(Arena*);
+template<> ::dwt_proto::NodeState* Arena::CreateMaybeMessage<::dwt_proto::NodeState>(Arena*);
+template<> ::dwt_proto::ServiceRequest* Arena::CreateMaybeMessage<::dwt_proto::ServiceRequest>(Arena*);
+template<> ::dwt_proto::SetNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::SetNodeRequest>(Arena*);
+template<> ::dwt_proto::SetNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::SetNodeResponse>(Arena*);
+template<> ::dwt_proto::StatNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::StatNodeRequest>(Arena*);
+template<> ::dwt_proto::StatNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::StatNodeResponse>(Arena*);
 template<> ::dwt_proto::WrappedRequest* Arena::CreateMaybeMessage<::dwt_proto::WrappedRequest>(Arena*);
 template<> ::dwt_proto::WrappedResponse* Arena::CreateMaybeMessage<::dwt_proto::WrappedResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace dwt_proto {
 
+enum MessageType : int {
+  Nothing_MessageType = 0,
+  Connection = 1,
+  Service = 2,
+  Error = 3,
+  MessageType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  MessageType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool MessageType_IsValid(int value);
+constexpr MessageType MessageType_MIN = Nothing_MessageType;
+constexpr MessageType MessageType_MAX = Error;
+constexpr int MessageType_ARRAYSIZE = MessageType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MessageType_descriptor();
+template<typename T>
+inline const std::string& MessageType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, MessageType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function MessageType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    MessageType_descriptor(), enum_t_value);
+}
+inline bool MessageType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MessageType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MessageType>(
+    MessageType_descriptor(), name, value);
+}
+enum ServiceType : int {
+  Nothing_ServiceType = 0,
+  Create = 1,
+  Get = 2,
+  Set = 3,
+  Delete = 4,
+  Ls = 5,
+  Stat = 6,
+  Exists = 7,
+  ServiceType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  ServiceType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool ServiceType_IsValid(int value);
+constexpr ServiceType ServiceType_MIN = Nothing_ServiceType;
+constexpr ServiceType ServiceType_MAX = Exists;
+constexpr int ServiceType_ARRAYSIZE = ServiceType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ServiceType_descriptor();
+template<typename T>
+inline const std::string& ServiceType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ServiceType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ServiceType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ServiceType_descriptor(), enum_t_value);
+}
+inline bool ServiceType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ServiceType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ServiceType>(
+    ServiceType_descriptor(), name, value);
+}
 enum NodeType : int {
   PERSISTENT = 0,
   EPHEMERAL = 1,
@@ -99,32 +214,6 @@ inline bool NodeType_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, NodeType* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<NodeType>(
     NodeType_descriptor(), name, value);
-}
-enum MessageType : int {
-  Nothing = 0,
-  Connection = 1,
-  Service = 2,
-  MessageType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  MessageType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
-};
-bool MessageType_IsValid(int value);
-constexpr MessageType MessageType_MIN = Nothing;
-constexpr MessageType MessageType_MAX = Service;
-constexpr int MessageType_ARRAYSIZE = MessageType_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MessageType_descriptor();
-template<typename T>
-inline const std::string& MessageType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, MessageType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function MessageType_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    MessageType_descriptor(), enum_t_value);
-}
-inline bool MessageType_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MessageType* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MessageType>(
-    MessageType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -413,10 +502,10 @@ class WrappedResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 2,
+    kDataFieldNumber = 3,
     kResponseTypeFieldNumber = 1,
   };
-  // bytes data = 2;
+  // bytes data = 3;
   void clear_data();
   const std::string& data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -752,6 +841,170 @@ class HeartbeatMessage final :
 };
 // -------------------------------------------------------------------
 
+class ServiceRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.ServiceRequest) */ {
+ public:
+  inline ServiceRequest() : ServiceRequest(nullptr) {}
+  ~ServiceRequest() override;
+  explicit PROTOBUF_CONSTEXPR ServiceRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ServiceRequest(const ServiceRequest& from);
+  ServiceRequest(ServiceRequest&& from) noexcept
+    : ServiceRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ServiceRequest& operator=(const ServiceRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ServiceRequest& operator=(ServiceRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ServiceRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ServiceRequest* internal_default_instance() {
+    return reinterpret_cast<const ServiceRequest*>(
+               &_ServiceRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(ServiceRequest& a, ServiceRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ServiceRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ServiceRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ServiceRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ServiceRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ServiceRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ServiceRequest& from) {
+    ServiceRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ServiceRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.ServiceRequest";
+  }
+  protected:
+  explicit ServiceRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kServiceParametersFieldNumber = 2,
+    kServiceTypeFieldNumber = 1,
+  };
+  // bytes serviceParameters = 2;
+  void clear_serviceparameters();
+  const std::string& serviceparameters() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_serviceparameters(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_serviceparameters();
+  PROTOBUF_NODISCARD std::string* release_serviceparameters();
+  void set_allocated_serviceparameters(std::string* serviceparameters);
+  private:
+  const std::string& _internal_serviceparameters() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_serviceparameters(const std::string& value);
+  std::string* _internal_mutable_serviceparameters();
+  public:
+
+  // .dwt_proto.ServiceType serviceType = 1;
+  void clear_servicetype();
+  ::dwt_proto::ServiceType servicetype() const;
+  void set_servicetype(::dwt_proto::ServiceType value);
+  private:
+  ::dwt_proto::ServiceType _internal_servicetype() const;
+  void _internal_set_servicetype(::dwt_proto::ServiceType value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.ServiceRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr serviceparameters_;
+    int servicetype_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
 class CreateNodeRequest final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.CreateNodeRequest) */ {
  public:
@@ -800,7 +1053,7 @@ class CreateNodeRequest final :
                &_CreateNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(CreateNodeRequest& a, CreateNodeRequest& b) {
     a.Swap(&b);
@@ -873,11 +1126,26 @@ class CreateNodeRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNodeNameFieldNumber = 1,
-    kNodeDataFieldNumber = 2,
-    kNodeTypeFieldNumber = 3,
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+    kNodeDataFieldNumber = 3,
+    kNodeTypeFieldNumber = 4,
   };
-  // bytes NodeName = 1;
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
   void clear_nodename();
   const std::string& nodename() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -891,7 +1159,7 @@ class CreateNodeRequest final :
   std::string* _internal_mutable_nodename();
   public:
 
-  // bytes NodeData = 2;
+  // bytes nodeData = 3;
   void clear_nodedata();
   const std::string& nodedata() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -905,7 +1173,7 @@ class CreateNodeRequest final :
   std::string* _internal_mutable_nodedata();
   public:
 
-  // .dwt_proto.NodeType NodeType = 3;
+  // .dwt_proto.NodeType nodeType = 4;
   void clear_nodetype();
   ::dwt_proto::NodeType nodetype() const;
   void set_nodetype(::dwt_proto::NodeType value);
@@ -922,6 +1190,7 @@ class CreateNodeRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodedata_;
     int nodetype_;
@@ -980,7 +1249,7 @@ class CreateNodeResponse final :
                &_CreateNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(CreateNodeResponse& a, CreateNodeResponse& b) {
     a.Swap(&b);
@@ -1053,15 +1322,15 @@ class CreateNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kOKFieldNumber = 1,
+    kSuccessFieldNumber = 1,
   };
-  // bool OK = 1;
-  void clear_ok();
-  bool ok() const;
-  void set_ok(bool value);
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
   private:
-  bool _internal_ok() const;
-  void _internal_set_ok(bool value);
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
   public:
 
   // @@protoc_insertion_point(class_scope:dwt_proto.CreateNodeResponse)
@@ -1072,7 +1341,2116 @@ class CreateNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    bool ok_;
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.GetNodeRequest) */ {
+ public:
+  inline GetNodeRequest() : GetNodeRequest(nullptr) {}
+  ~GetNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR GetNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  GetNodeRequest(const GetNodeRequest& from);
+  GetNodeRequest(GetNodeRequest&& from) noexcept
+    : GetNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline GetNodeRequest& operator=(const GetNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetNodeRequest& operator=(GetNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const GetNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const GetNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const GetNodeRequest*>(
+               &_GetNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(GetNodeRequest& a, GetNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  GetNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<GetNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const GetNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const GetNodeRequest& from) {
+    GetNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.GetNodeRequest";
+  }
+  protected:
+  explicit GetNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.GetNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.GetNodeResponse) */ {
+ public:
+  inline GetNodeResponse() : GetNodeResponse(nullptr) {}
+  ~GetNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR GetNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  GetNodeResponse(const GetNodeResponse& from);
+  GetNodeResponse(GetNodeResponse&& from) noexcept
+    : GetNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline GetNodeResponse& operator=(const GetNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetNodeResponse& operator=(GetNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const GetNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const GetNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const GetNodeResponse*>(
+               &_GetNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(GetNodeResponse& a, GetNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  GetNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<GetNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const GetNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const GetNodeResponse& from) {
+    GetNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.GetNodeResponse";
+  }
+  protected:
+  explicit GetNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfoFieldNumber = 2,
+    kSuccessFieldNumber = 1,
+  };
+  // bytes info = 2;
+  void clear_info();
+  const std::string& info() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_info(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_info();
+  PROTOBUF_NODISCARD std::string* release_info();
+  void set_allocated_info(std::string* info);
+  private:
+  const std::string& _internal_info() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_info(const std::string& value);
+  std::string* _internal_mutable_info();
+  public:
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.GetNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SetNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.SetNodeRequest) */ {
+ public:
+  inline SetNodeRequest() : SetNodeRequest(nullptr) {}
+  ~SetNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR SetNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  SetNodeRequest(const SetNodeRequest& from);
+  SetNodeRequest(SetNodeRequest&& from) noexcept
+    : SetNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline SetNodeRequest& operator=(const SetNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SetNodeRequest& operator=(SetNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SetNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SetNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const SetNodeRequest*>(
+               &_SetNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(SetNodeRequest& a, SetNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SetNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SetNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SetNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SetNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const SetNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const SetNodeRequest& from) {
+    SetNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SetNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.SetNodeRequest";
+  }
+  protected:
+  explicit SetNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+    kNodeDataFieldNumber = 3,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // bytes nodeData = 3;
+  void clear_nodedata();
+  const std::string& nodedata() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodedata(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodedata();
+  PROTOBUF_NODISCARD std::string* release_nodedata();
+  void set_allocated_nodedata(std::string* nodedata);
+  private:
+  const std::string& _internal_nodedata() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodedata(const std::string& value);
+  std::string* _internal_mutable_nodedata();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.SetNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodedata_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SetNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.SetNodeResponse) */ {
+ public:
+  inline SetNodeResponse() : SetNodeResponse(nullptr) {}
+  ~SetNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR SetNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  SetNodeResponse(const SetNodeResponse& from);
+  SetNodeResponse(SetNodeResponse&& from) noexcept
+    : SetNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline SetNodeResponse& operator=(const SetNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SetNodeResponse& operator=(SetNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SetNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SetNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const SetNodeResponse*>(
+               &_SetNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(SetNodeResponse& a, SetNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SetNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SetNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SetNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SetNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const SetNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const SetNodeResponse& from) {
+    SetNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SetNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.SetNodeResponse";
+  }
+  protected:
+  explicit SetNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.SetNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DeleteNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.DeleteNodeRequest) */ {
+ public:
+  inline DeleteNodeRequest() : DeleteNodeRequest(nullptr) {}
+  ~DeleteNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR DeleteNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteNodeRequest(const DeleteNodeRequest& from);
+  DeleteNodeRequest(DeleteNodeRequest&& from) noexcept
+    : DeleteNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteNodeRequest& operator=(const DeleteNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteNodeRequest& operator=(DeleteNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const DeleteNodeRequest*>(
+               &_DeleteNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(DeleteNodeRequest& a, DeleteNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteNodeRequest& from) {
+    DeleteNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.DeleteNodeRequest";
+  }
+  protected:
+  explicit DeleteNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.DeleteNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DeleteNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.DeleteNodeResponse) */ {
+ public:
+  inline DeleteNodeResponse() : DeleteNodeResponse(nullptr) {}
+  ~DeleteNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR DeleteNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteNodeResponse(const DeleteNodeResponse& from);
+  DeleteNodeResponse(DeleteNodeResponse&& from) noexcept
+    : DeleteNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteNodeResponse& operator=(const DeleteNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteNodeResponse& operator=(DeleteNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const DeleteNodeResponse*>(
+               &_DeleteNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(DeleteNodeResponse& a, DeleteNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteNodeResponse& from) {
+    DeleteNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.DeleteNodeResponse";
+  }
+  protected:
+  explicit DeleteNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.DeleteNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LsNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.LsNodeRequest) */ {
+ public:
+  inline LsNodeRequest() : LsNodeRequest(nullptr) {}
+  ~LsNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR LsNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LsNodeRequest(const LsNodeRequest& from);
+  LsNodeRequest(LsNodeRequest&& from) noexcept
+    : LsNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline LsNodeRequest& operator=(const LsNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LsNodeRequest& operator=(LsNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LsNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LsNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const LsNodeRequest*>(
+               &_LsNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(LsNodeRequest& a, LsNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LsNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LsNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LsNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LsNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LsNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LsNodeRequest& from) {
+    LsNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LsNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.LsNodeRequest";
+  }
+  protected:
+  explicit LsNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.LsNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LsNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.LsNodeResponse) */ {
+ public:
+  inline LsNodeResponse() : LsNodeResponse(nullptr) {}
+  ~LsNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR LsNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LsNodeResponse(const LsNodeResponse& from);
+  LsNodeResponse(LsNodeResponse&& from) noexcept
+    : LsNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline LsNodeResponse& operator=(const LsNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LsNodeResponse& operator=(LsNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LsNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LsNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const LsNodeResponse*>(
+               &_LsNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  friend void swap(LsNodeResponse& a, LsNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LsNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LsNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LsNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LsNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LsNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LsNodeResponse& from) {
+    LsNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LsNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.LsNodeResponse";
+  }
+  protected:
+  explicit LsNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kChildrenFieldNumber = 2,
+    kSuccessFieldNumber = 1,
+  };
+  // repeated bytes children = 2;
+  int children_size() const;
+  private:
+  int _internal_children_size() const;
+  public:
+  void clear_children();
+  const std::string& children(int index) const;
+  std::string* mutable_children(int index);
+  void set_children(int index, const std::string& value);
+  void set_children(int index, std::string&& value);
+  void set_children(int index, const char* value);
+  void set_children(int index, const void* value, size_t size);
+  std::string* add_children();
+  void add_children(const std::string& value);
+  void add_children(std::string&& value);
+  void add_children(const char* value);
+  void add_children(const void* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& children() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_children();
+  private:
+  const std::string& _internal_children(int index) const;
+  std::string* _internal_add_children();
+  public:
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.LsNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> children_;
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class NodeState final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:dwt_proto.NodeState) */ {
+ public:
+  inline NodeState() : NodeState(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR NodeState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  NodeState(const NodeState& from);
+  NodeState(NodeState&& from) noexcept
+    : NodeState() {
+    *this = ::std::move(from);
+  }
+
+  inline NodeState& operator=(const NodeState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline NodeState& operator=(NodeState&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const NodeState& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const NodeState* internal_default_instance() {
+    return reinterpret_cast<const NodeState*>(
+               &_NodeState_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  friend void swap(NodeState& a, NodeState& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(NodeState* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(NodeState* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  NodeState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<NodeState>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const NodeState& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const NodeState& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.NodeState";
+  }
+  protected:
+  explicit NodeState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.NodeState)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class StatNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.StatNodeRequest) */ {
+ public:
+  inline StatNodeRequest() : StatNodeRequest(nullptr) {}
+  ~StatNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR StatNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  StatNodeRequest(const StatNodeRequest& from);
+  StatNodeRequest(StatNodeRequest&& from) noexcept
+    : StatNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline StatNodeRequest& operator=(const StatNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline StatNodeRequest& operator=(StatNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const StatNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const StatNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const StatNodeRequest*>(
+               &_StatNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(StatNodeRequest& a, StatNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(StatNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(StatNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  StatNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<StatNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const StatNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const StatNodeRequest& from) {
+    StatNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(StatNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.StatNodeRequest";
+  }
+  protected:
+  explicit StatNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.StatNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class StatNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.StatNodeResponse) */ {
+ public:
+  inline StatNodeResponse() : StatNodeResponse(nullptr) {}
+  ~StatNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR StatNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  StatNodeResponse(const StatNodeResponse& from);
+  StatNodeResponse(StatNodeResponse&& from) noexcept
+    : StatNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline StatNodeResponse& operator=(const StatNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline StatNodeResponse& operator=(StatNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const StatNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const StatNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const StatNodeResponse*>(
+               &_StatNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  friend void swap(StatNodeResponse& a, StatNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(StatNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(StatNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  StatNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<StatNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const StatNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const StatNodeResponse& from) {
+    StatNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(StatNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.StatNodeResponse";
+  }
+  protected:
+  explicit StatNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kStateFieldNumber = 2,
+    kSuccessFieldNumber = 1,
+  };
+  // .dwt_proto.NodeState state = 2;
+  bool has_state() const;
+  private:
+  bool _internal_has_state() const;
+  public:
+  void clear_state();
+  const ::dwt_proto::NodeState& state() const;
+  PROTOBUF_NODISCARD ::dwt_proto::NodeState* release_state();
+  ::dwt_proto::NodeState* mutable_state();
+  void set_allocated_state(::dwt_proto::NodeState* state);
+  private:
+  const ::dwt_proto::NodeState& _internal_state() const;
+  ::dwt_proto::NodeState* _internal_mutable_state();
+  public:
+  void unsafe_arena_set_allocated_state(
+      ::dwt_proto::NodeState* state);
+  ::dwt_proto::NodeState* unsafe_arena_release_state();
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.StatNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::dwt_proto::NodeState* state_;
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ExistsNodeRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.ExistsNodeRequest) */ {
+ public:
+  inline ExistsNodeRequest() : ExistsNodeRequest(nullptr) {}
+  ~ExistsNodeRequest() override;
+  explicit PROTOBUF_CONSTEXPR ExistsNodeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ExistsNodeRequest(const ExistsNodeRequest& from);
+  ExistsNodeRequest(ExistsNodeRequest&& from) noexcept
+    : ExistsNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ExistsNodeRequest& operator=(const ExistsNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ExistsNodeRequest& operator=(ExistsNodeRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ExistsNodeRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ExistsNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const ExistsNodeRequest*>(
+               &_ExistsNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(ExistsNodeRequest& a, ExistsNodeRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ExistsNodeRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ExistsNodeRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ExistsNodeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ExistsNodeRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ExistsNodeRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ExistsNodeRequest& from) {
+    ExistsNodeRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ExistsNodeRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.ExistsNodeRequest";
+  }
+  protected:
+  explicit ExistsNodeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPathFieldNumber = 1,
+    kNodeNameFieldNumber = 2,
+  };
+  // bytes path = 1;
+  void clear_path();
+  const std::string& path() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_path(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_path();
+  PROTOBUF_NODISCARD std::string* release_path();
+  void set_allocated_path(std::string* path);
+  private:
+  const std::string& _internal_path() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
+  std::string* _internal_mutable_path();
+  public:
+
+  // bytes nodeName = 2;
+  void clear_nodename();
+  const std::string& nodename() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nodename(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodename();
+  PROTOBUF_NODISCARD std::string* release_nodename();
+  void set_allocated_nodename(std::string* nodename);
+  private:
+  const std::string& _internal_nodename() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
+  std::string* _internal_mutable_nodename();
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.ExistsNodeRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ExistsNodeResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.ExistsNodeResponse) */ {
+ public:
+  inline ExistsNodeResponse() : ExistsNodeResponse(nullptr) {}
+  ~ExistsNodeResponse() override;
+  explicit PROTOBUF_CONSTEXPR ExistsNodeResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ExistsNodeResponse(const ExistsNodeResponse& from);
+  ExistsNodeResponse(ExistsNodeResponse&& from) noexcept
+    : ExistsNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ExistsNodeResponse& operator=(const ExistsNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ExistsNodeResponse& operator=(ExistsNodeResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ExistsNodeResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ExistsNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const ExistsNodeResponse*>(
+               &_ExistsNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    19;
+
+  friend void swap(ExistsNodeResponse& a, ExistsNodeResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ExistsNodeResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ExistsNodeResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ExistsNodeResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ExistsNodeResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ExistsNodeResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ExistsNodeResponse& from) {
+    ExistsNodeResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ExistsNodeResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.ExistsNodeResponse";
+  }
+  protected:
+  explicit ExistsNodeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+    kExistFieldNumber = 2,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // bool exist = 2;
+  void clear_exist();
+  bool exist() const;
+  void set_exist(bool value);
+  private:
+  bool _internal_exist() const;
+  void _internal_set_exist(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.ExistsNodeResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool success_;
+    bool exist_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1183,7 +3561,7 @@ inline void WrappedResponse::set_responsetype(::dwt_proto::MessageType value) {
   // @@protoc_insertion_point(field_set:dwt_proto.WrappedResponse.responseType)
 }
 
-// bytes data = 2;
+// bytes data = 3;
 inline void WrappedResponse::clear_data() {
   _impl_.data_.ClearToEmpty();
 }
@@ -1283,14 +3661,138 @@ inline void HeartbeatMessage::set_sessionid(uint64_t value) {
 
 // -------------------------------------------------------------------
 
+// ServiceRequest
+
+// .dwt_proto.ServiceType serviceType = 1;
+inline void ServiceRequest::clear_servicetype() {
+  _impl_.servicetype_ = 0;
+}
+inline ::dwt_proto::ServiceType ServiceRequest::_internal_servicetype() const {
+  return static_cast< ::dwt_proto::ServiceType >(_impl_.servicetype_);
+}
+inline ::dwt_proto::ServiceType ServiceRequest::servicetype() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceRequest.serviceType)
+  return _internal_servicetype();
+}
+inline void ServiceRequest::_internal_set_servicetype(::dwt_proto::ServiceType value) {
+  
+  _impl_.servicetype_ = value;
+}
+inline void ServiceRequest::set_servicetype(::dwt_proto::ServiceType value) {
+  _internal_set_servicetype(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceRequest.serviceType)
+}
+
+// bytes serviceParameters = 2;
+inline void ServiceRequest::clear_serviceparameters() {
+  _impl_.serviceparameters_.ClearToEmpty();
+}
+inline const std::string& ServiceRequest::serviceparameters() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceRequest.serviceParameters)
+  return _internal_serviceparameters();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ServiceRequest::set_serviceparameters(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.serviceparameters_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceRequest.serviceParameters)
+}
+inline std::string* ServiceRequest::mutable_serviceparameters() {
+  std::string* _s = _internal_mutable_serviceparameters();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.ServiceRequest.serviceParameters)
+  return _s;
+}
+inline const std::string& ServiceRequest::_internal_serviceparameters() const {
+  return _impl_.serviceparameters_.Get();
+}
+inline void ServiceRequest::_internal_set_serviceparameters(const std::string& value) {
+  
+  _impl_.serviceparameters_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ServiceRequest::_internal_mutable_serviceparameters() {
+  
+  return _impl_.serviceparameters_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ServiceRequest::release_serviceparameters() {
+  // @@protoc_insertion_point(field_release:dwt_proto.ServiceRequest.serviceParameters)
+  return _impl_.serviceparameters_.Release();
+}
+inline void ServiceRequest::set_allocated_serviceparameters(std::string* serviceparameters) {
+  if (serviceparameters != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.serviceparameters_.SetAllocated(serviceparameters, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.serviceparameters_.IsDefault()) {
+    _impl_.serviceparameters_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ServiceRequest.serviceParameters)
+}
+
+// -------------------------------------------------------------------
+
 // CreateNodeRequest
 
-// bytes NodeName = 1;
+// bytes path = 1;
+inline void CreateNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& CreateNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CreateNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.path)
+}
+inline std::string* CreateNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.path)
+  return _s;
+}
+inline const std::string& CreateNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void CreateNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CreateNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CreateNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void CreateNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.path)
+}
+
+// bytes nodeName = 2;
 inline void CreateNodeRequest::clear_nodename() {
   _impl_.nodename_.ClearToEmpty();
 }
 inline const std::string& CreateNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.NodeName)
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.nodeName)
   return _internal_nodename();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1298,11 +3800,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void CreateNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
  
  _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.NodeName)
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.nodeName)
 }
 inline std::string* CreateNodeRequest::mutable_nodename() {
   std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.NodeName)
+  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.nodeName)
   return _s;
 }
 inline const std::string& CreateNodeRequest::_internal_nodename() const {
@@ -1317,7 +3819,7 @@ inline std::string* CreateNodeRequest::_internal_mutable_nodename() {
   return _impl_.nodename_.Mutable(GetArenaForAllocation());
 }
 inline std::string* CreateNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.NodeName)
+  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.nodeName)
   return _impl_.nodename_.Release();
 }
 inline void CreateNodeRequest::set_allocated_nodename(std::string* nodename) {
@@ -1332,15 +3834,15 @@ inline void CreateNodeRequest::set_allocated_nodename(std::string* nodename) {
     _impl_.nodename_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.NodeName)
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.nodeName)
 }
 
-// bytes NodeData = 2;
+// bytes nodeData = 3;
 inline void CreateNodeRequest::clear_nodedata() {
   _impl_.nodedata_.ClearToEmpty();
 }
 inline const std::string& CreateNodeRequest::nodedata() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.NodeData)
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.nodeData)
   return _internal_nodedata();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1348,11 +3850,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void CreateNodeRequest::set_nodedata(ArgT0&& arg0, ArgT... args) {
  
  _impl_.nodedata_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.NodeData)
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.nodeData)
 }
 inline std::string* CreateNodeRequest::mutable_nodedata() {
   std::string* _s = _internal_mutable_nodedata();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.NodeData)
+  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.nodeData)
   return _s;
 }
 inline const std::string& CreateNodeRequest::_internal_nodedata() const {
@@ -1367,7 +3869,7 @@ inline std::string* CreateNodeRequest::_internal_mutable_nodedata() {
   return _impl_.nodedata_.Mutable(GetArenaForAllocation());
 }
 inline std::string* CreateNodeRequest::release_nodedata() {
-  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.NodeData)
+  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.nodeData)
   return _impl_.nodedata_.Release();
 }
 inline void CreateNodeRequest::set_allocated_nodedata(std::string* nodedata) {
@@ -1382,10 +3884,10 @@ inline void CreateNodeRequest::set_allocated_nodedata(std::string* nodedata) {
     _impl_.nodedata_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.NodeData)
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.nodeData)
 }
 
-// .dwt_proto.NodeType NodeType = 3;
+// .dwt_proto.NodeType nodeType = 4;
 inline void CreateNodeRequest::clear_nodetype() {
   _impl_.nodetype_ = 0;
 }
@@ -1393,7 +3895,7 @@ inline ::dwt_proto::NodeType CreateNodeRequest::_internal_nodetype() const {
   return static_cast< ::dwt_proto::NodeType >(_impl_.nodetype_);
 }
 inline ::dwt_proto::NodeType CreateNodeRequest::nodetype() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.NodeType)
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.nodeType)
   return _internal_nodetype();
 }
 inline void CreateNodeRequest::_internal_set_nodetype(::dwt_proto::NodeType value) {
@@ -1402,36 +3904,1121 @@ inline void CreateNodeRequest::_internal_set_nodetype(::dwt_proto::NodeType valu
 }
 inline void CreateNodeRequest::set_nodetype(::dwt_proto::NodeType value) {
   _internal_set_nodetype(value);
-  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.NodeType)
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.nodeType)
 }
 
 // -------------------------------------------------------------------
 
 // CreateNodeResponse
 
-// bool OK = 1;
-inline void CreateNodeResponse::clear_ok() {
-  _impl_.ok_ = false;
+// bool success = 1;
+inline void CreateNodeResponse::clear_success() {
+  _impl_.success_ = false;
 }
-inline bool CreateNodeResponse::_internal_ok() const {
-  return _impl_.ok_;
+inline bool CreateNodeResponse::_internal_success() const {
+  return _impl_.success_;
 }
-inline bool CreateNodeResponse::ok() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeResponse.OK)
-  return _internal_ok();
+inline bool CreateNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeResponse.success)
+  return _internal_success();
 }
-inline void CreateNodeResponse::_internal_set_ok(bool value) {
+inline void CreateNodeResponse::_internal_set_success(bool value) {
   
-  _impl_.ok_ = value;
+  _impl_.success_ = value;
 }
-inline void CreateNodeResponse::set_ok(bool value) {
-  _internal_set_ok(value);
-  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeResponse.OK)
+inline void CreateNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeResponse.success)
+}
+
+// -------------------------------------------------------------------
+
+// GetNodeRequest
+
+// bytes path = 1;
+inline void GetNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& GetNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void GetNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeRequest.path)
+}
+inline std::string* GetNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeRequest.path)
+  return _s;
+}
+inline const std::string& GetNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void GetNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* GetNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* GetNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void GetNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void GetNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& GetNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void GetNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeRequest.nodeName)
+}
+inline std::string* GetNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& GetNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void GetNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* GetNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* GetNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void GetNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeRequest.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// GetNodeResponse
+
+// bool success = 1;
+inline void GetNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool GetNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool GetNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeResponse.success)
+  return _internal_success();
+}
+inline void GetNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void GetNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.success)
+}
+
+// bytes info = 2;
+inline void GetNodeResponse::clear_info() {
+  _impl_.info_.ClearToEmpty();
+}
+inline const std::string& GetNodeResponse::info() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeResponse.info)
+  return _internal_info();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void GetNodeResponse::set_info(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.info_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.info)
+}
+inline std::string* GetNodeResponse::mutable_info() {
+  std::string* _s = _internal_mutable_info();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeResponse.info)
+  return _s;
+}
+inline const std::string& GetNodeResponse::_internal_info() const {
+  return _impl_.info_.Get();
+}
+inline void GetNodeResponse::_internal_set_info(const std::string& value) {
+  
+  _impl_.info_.Set(value, GetArenaForAllocation());
+}
+inline std::string* GetNodeResponse::_internal_mutable_info() {
+  
+  return _impl_.info_.Mutable(GetArenaForAllocation());
+}
+inline std::string* GetNodeResponse::release_info() {
+  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeResponse.info)
+  return _impl_.info_.Release();
+}
+inline void GetNodeResponse::set_allocated_info(std::string* info) {
+  if (info != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.info_.SetAllocated(info, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.info_.IsDefault()) {
+    _impl_.info_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeResponse.info)
+}
+
+// -------------------------------------------------------------------
+
+// SetNodeRequest
+
+// bytes path = 1;
+inline void SetNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& SetNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void SetNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeRequest.path)
+}
+inline std::string* SetNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.SetNodeRequest.path)
+  return _s;
+}
+inline const std::string& SetNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void SetNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.SetNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void SetNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void SetNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& SetNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void SetNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeRequest.nodeName)
+}
+inline std::string* SetNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.SetNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& SetNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void SetNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.SetNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void SetNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeRequest.nodeName)
+}
+
+// bytes nodeData = 3;
+inline void SetNodeRequest::clear_nodedata() {
+  _impl_.nodedata_.ClearToEmpty();
+}
+inline const std::string& SetNodeRequest::nodedata() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeRequest.nodeData)
+  return _internal_nodedata();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void SetNodeRequest::set_nodedata(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodedata_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeRequest.nodeData)
+}
+inline std::string* SetNodeRequest::mutable_nodedata() {
+  std::string* _s = _internal_mutable_nodedata();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.SetNodeRequest.nodeData)
+  return _s;
+}
+inline const std::string& SetNodeRequest::_internal_nodedata() const {
+  return _impl_.nodedata_.Get();
+}
+inline void SetNodeRequest::_internal_set_nodedata(const std::string& value) {
+  
+  _impl_.nodedata_.Set(value, GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::_internal_mutable_nodedata() {
+  
+  return _impl_.nodedata_.Mutable(GetArenaForAllocation());
+}
+inline std::string* SetNodeRequest::release_nodedata() {
+  // @@protoc_insertion_point(field_release:dwt_proto.SetNodeRequest.nodeData)
+  return _impl_.nodedata_.Release();
+}
+inline void SetNodeRequest::set_allocated_nodedata(std::string* nodedata) {
+  if (nodedata != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodedata_.SetAllocated(nodedata, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodedata_.IsDefault()) {
+    _impl_.nodedata_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeRequest.nodeData)
+}
+
+// -------------------------------------------------------------------
+
+// SetNodeResponse
+
+// bool success = 1;
+inline void SetNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool SetNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool SetNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeResponse.success)
+  return _internal_success();
+}
+inline void SetNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void SetNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeResponse.success)
+}
+
+// -------------------------------------------------------------------
+
+// DeleteNodeRequest
+
+// bytes path = 1;
+inline void DeleteNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& DeleteNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.DeleteNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DeleteNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeRequest.path)
+}
+inline std::string* DeleteNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.DeleteNodeRequest.path)
+  return _s;
+}
+inline const std::string& DeleteNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void DeleteNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DeleteNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DeleteNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.DeleteNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void DeleteNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.DeleteNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void DeleteNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& DeleteNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.DeleteNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DeleteNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeRequest.nodeName)
+}
+inline std::string* DeleteNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.DeleteNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& DeleteNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void DeleteNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DeleteNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DeleteNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.DeleteNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void DeleteNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.DeleteNodeRequest.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// DeleteNodeResponse
+
+// bool success = 1;
+inline void DeleteNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool DeleteNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool DeleteNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.DeleteNodeResponse.success)
+  return _internal_success();
+}
+inline void DeleteNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void DeleteNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeResponse.success)
+}
+
+// -------------------------------------------------------------------
+
+// LsNodeRequest
+
+// bytes path = 1;
+inline void LsNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& LsNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void LsNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeRequest.path)
+}
+inline std::string* LsNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.LsNodeRequest.path)
+  return _s;
+}
+inline const std::string& LsNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void LsNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* LsNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* LsNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.LsNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void LsNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.LsNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void LsNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& LsNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void LsNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeRequest.nodeName)
+}
+inline std::string* LsNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.LsNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& LsNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void LsNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* LsNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* LsNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.LsNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void LsNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.LsNodeRequest.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// LsNodeResponse
+
+// bool success = 1;
+inline void LsNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool LsNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool LsNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeResponse.success)
+  return _internal_success();
+}
+inline void LsNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void LsNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeResponse.success)
+}
+
+// repeated bytes children = 2;
+inline int LsNodeResponse::_internal_children_size() const {
+  return _impl_.children_.size();
+}
+inline int LsNodeResponse::children_size() const {
+  return _internal_children_size();
+}
+inline void LsNodeResponse::clear_children() {
+  _impl_.children_.Clear();
+}
+inline std::string* LsNodeResponse::add_children() {
+  std::string* _s = _internal_add_children();
+  // @@protoc_insertion_point(field_add_mutable:dwt_proto.LsNodeResponse.children)
+  return _s;
+}
+inline const std::string& LsNodeResponse::_internal_children(int index) const {
+  return _impl_.children_.Get(index);
+}
+inline const std::string& LsNodeResponse::children(int index) const {
+  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeResponse.children)
+  return _internal_children(index);
+}
+inline std::string* LsNodeResponse::mutable_children(int index) {
+  // @@protoc_insertion_point(field_mutable:dwt_proto.LsNodeResponse.children)
+  return _impl_.children_.Mutable(index);
+}
+inline void LsNodeResponse::set_children(int index, const std::string& value) {
+  _impl_.children_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::set_children(int index, std::string&& value) {
+  _impl_.children_.Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::set_children(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.children_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::set_children(int index, const void* value, size_t size) {
+  _impl_.children_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:dwt_proto.LsNodeResponse.children)
+}
+inline std::string* LsNodeResponse::_internal_add_children() {
+  return _impl_.children_.Add();
+}
+inline void LsNodeResponse::add_children(const std::string& value) {
+  _impl_.children_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::add_children(std::string&& value) {
+  _impl_.children_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::add_children(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.children_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:dwt_proto.LsNodeResponse.children)
+}
+inline void LsNodeResponse::add_children(const void* value, size_t size) {
+  _impl_.children_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:dwt_proto.LsNodeResponse.children)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+LsNodeResponse::children() const {
+  // @@protoc_insertion_point(field_list:dwt_proto.LsNodeResponse.children)
+  return _impl_.children_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+LsNodeResponse::mutable_children() {
+  // @@protoc_insertion_point(field_mutable_list:dwt_proto.LsNodeResponse.children)
+  return &_impl_.children_;
+}
+
+// -------------------------------------------------------------------
+
+// NodeState
+
+// -------------------------------------------------------------------
+
+// StatNodeRequest
+
+// bytes path = 1;
+inline void StatNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& StatNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void StatNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.StatNodeRequest.path)
+}
+inline std::string* StatNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.StatNodeRequest.path)
+  return _s;
+}
+inline const std::string& StatNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void StatNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* StatNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* StatNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.StatNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void StatNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void StatNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& StatNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void StatNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.StatNodeRequest.nodeName)
+}
+inline std::string* StatNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.StatNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& StatNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void StatNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* StatNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* StatNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.StatNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void StatNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeRequest.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// StatNodeResponse
+
+// bool success = 1;
+inline void StatNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool StatNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool StatNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeResponse.success)
+  return _internal_success();
+}
+inline void StatNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void StatNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.StatNodeResponse.success)
+}
+
+// .dwt_proto.NodeState state = 2;
+inline bool StatNodeResponse::_internal_has_state() const {
+  return this != internal_default_instance() && _impl_.state_ != nullptr;
+}
+inline bool StatNodeResponse::has_state() const {
+  return _internal_has_state();
+}
+inline void StatNodeResponse::clear_state() {
+  if (GetArenaForAllocation() == nullptr && _impl_.state_ != nullptr) {
+    delete _impl_.state_;
+  }
+  _impl_.state_ = nullptr;
+}
+inline const ::dwt_proto::NodeState& StatNodeResponse::_internal_state() const {
+  const ::dwt_proto::NodeState* p = _impl_.state_;
+  return p != nullptr ? *p : reinterpret_cast<const ::dwt_proto::NodeState&>(
+      ::dwt_proto::_NodeState_default_instance_);
+}
+inline const ::dwt_proto::NodeState& StatNodeResponse::state() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeResponse.state)
+  return _internal_state();
+}
+inline void StatNodeResponse::unsafe_arena_set_allocated_state(
+    ::dwt_proto::NodeState* state) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.state_);
+  }
+  _impl_.state_ = state;
+  if (state) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:dwt_proto.StatNodeResponse.state)
+}
+inline ::dwt_proto::NodeState* StatNodeResponse::release_state() {
+  
+  ::dwt_proto::NodeState* temp = _impl_.state_;
+  _impl_.state_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::dwt_proto::NodeState* StatNodeResponse::unsafe_arena_release_state() {
+  // @@protoc_insertion_point(field_release:dwt_proto.StatNodeResponse.state)
+  
+  ::dwt_proto::NodeState* temp = _impl_.state_;
+  _impl_.state_ = nullptr;
+  return temp;
+}
+inline ::dwt_proto::NodeState* StatNodeResponse::_internal_mutable_state() {
+  
+  if (_impl_.state_ == nullptr) {
+    auto* p = CreateMaybeMessage<::dwt_proto::NodeState>(GetArenaForAllocation());
+    _impl_.state_ = p;
+  }
+  return _impl_.state_;
+}
+inline ::dwt_proto::NodeState* StatNodeResponse::mutable_state() {
+  ::dwt_proto::NodeState* _msg = _internal_mutable_state();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.StatNodeResponse.state)
+  return _msg;
+}
+inline void StatNodeResponse::set_allocated_state(::dwt_proto::NodeState* state) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.state_;
+  }
+  if (state) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(state);
+    if (message_arena != submessage_arena) {
+      state = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeResponse.state)
+}
+
+// -------------------------------------------------------------------
+
+// ExistsNodeRequest
+
+// bytes path = 1;
+inline void ExistsNodeRequest::clear_path() {
+  _impl_.path_.ClearToEmpty();
+}
+inline const std::string& ExistsNodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeRequest.path)
+  return _internal_path();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ExistsNodeRequest::set_path(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.path_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeRequest.path)
+}
+inline std::string* ExistsNodeRequest::mutable_path() {
+  std::string* _s = _internal_mutable_path();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.ExistsNodeRequest.path)
+  return _s;
+}
+inline const std::string& ExistsNodeRequest::_internal_path() const {
+  return _impl_.path_.Get();
+}
+inline void ExistsNodeRequest::_internal_set_path(const std::string& value) {
+  
+  _impl_.path_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ExistsNodeRequest::_internal_mutable_path() {
+  
+  return _impl_.path_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ExistsNodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:dwt_proto.ExistsNodeRequest.path)
+  return _impl_.path_.Release();
+}
+inline void ExistsNodeRequest::set_allocated_path(std::string* path) {
+  if (path != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.path_.SetAllocated(path, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.path_.IsDefault()) {
+    _impl_.path_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ExistsNodeRequest.path)
+}
+
+// bytes nodeName = 2;
+inline void ExistsNodeRequest::clear_nodename() {
+  _impl_.nodename_.ClearToEmpty();
+}
+inline const std::string& ExistsNodeRequest::nodename() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeRequest.nodeName)
+  return _internal_nodename();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ExistsNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeRequest.nodeName)
+}
+inline std::string* ExistsNodeRequest::mutable_nodename() {
+  std::string* _s = _internal_mutable_nodename();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.ExistsNodeRequest.nodeName)
+  return _s;
+}
+inline const std::string& ExistsNodeRequest::_internal_nodename() const {
+  return _impl_.nodename_.Get();
+}
+inline void ExistsNodeRequest::_internal_set_nodename(const std::string& value) {
+  
+  _impl_.nodename_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ExistsNodeRequest::_internal_mutable_nodename() {
+  
+  return _impl_.nodename_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ExistsNodeRequest::release_nodename() {
+  // @@protoc_insertion_point(field_release:dwt_proto.ExistsNodeRequest.nodeName)
+  return _impl_.nodename_.Release();
+}
+inline void ExistsNodeRequest::set_allocated_nodename(std::string* nodename) {
+  if (nodename != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nodename_.IsDefault()) {
+    _impl_.nodename_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ExistsNodeRequest.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// ExistsNodeResponse
+
+// bool success = 1;
+inline void ExistsNodeResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool ExistsNodeResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool ExistsNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeResponse.success)
+  return _internal_success();
+}
+inline void ExistsNodeResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void ExistsNodeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeResponse.success)
+}
+
+// bool exist = 2;
+inline void ExistsNodeResponse::clear_exist() {
+  _impl_.exist_ = false;
+}
+inline bool ExistsNodeResponse::_internal_exist() const {
+  return _impl_.exist_;
+}
+inline bool ExistsNodeResponse::exist() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeResponse.exist)
+  return _internal_exist();
+}
+inline void ExistsNodeResponse::_internal_set_exist(bool value) {
+  
+  _impl_.exist_ = value;
+}
+inline void ExistsNodeResponse::set_exist(bool value) {
+  _internal_set_exist(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeResponse.exist)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1449,15 +5036,20 @@ inline void CreateNodeResponse::set_ok(bool value) {
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::dwt_proto::NodeType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::dwt_proto::NodeType>() {
-  return ::dwt_proto::NodeType_descriptor();
-}
 template <> struct is_proto_enum< ::dwt_proto::MessageType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::dwt_proto::MessageType>() {
   return ::dwt_proto::MessageType_descriptor();
+}
+template <> struct is_proto_enum< ::dwt_proto::ServiceType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::dwt_proto::ServiceType>() {
+  return ::dwt_proto::ServiceType_descriptor();
+}
+template <> struct is_proto_enum< ::dwt_proto::NodeType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::dwt_proto::NodeType>() {
+  return ::dwt_proto::NodeType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE
