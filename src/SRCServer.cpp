@@ -15,7 +15,8 @@ SRCServer::SRCServer(
     const std::string& name, int timeout, int max_heartbeat)
     : m_loop(loop)
     , m_server(loop, listenAddr, name)
-    , m_heartbeatCounter(listenAddr, timeout, max_heartbeat) {
+    , m_heartbeatCounter(listenAddr, timeout, max_heartbeat)
+    , m_services(std::make_unique<Services>(/* DOTO: 补齐参数 */)) {
 
 
     // 构造函数
@@ -27,6 +28,7 @@ SRCServer::SRCServer(
         std::bind(&SRCServer::onMessage, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)
     );
 
+    // 设置业务线程数
     m_server.setThreadNum(3);
 
 
@@ -102,7 +104,8 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
     } else {
         // 业务请求
         LOG_WARN("业务分支");
-        
+
+
     }
     
 }
@@ -113,7 +116,8 @@ void SRCServer::onUDPMessage(size_t sessionId) {
     if(m_sessionManager.exist(sessionId)) { // TCP已经建立了会话
         // 心跳消息到达
         m_heartbeatCounter.reset(sessionId);
-    } else { // 没有会话, 不作处理
+    } else {
+        // 没有会话, 不作处理
         LOG_WARN("receive not registerd Heartbeat, sessionId = %lu", sessionId);
     }
 }
@@ -127,6 +131,8 @@ void SRCServer::onUDPMessage(size_t sessionId) {
 void SRCServer::onHeartbeatReachLimit(size_t sessionId) {
     LOG_INFO("session %lu died", sessionId);
     m_sessionManager.remove(sessionId);
+
+    // TODO: 删除会话节点
 }
 
 } // end namespace dwt

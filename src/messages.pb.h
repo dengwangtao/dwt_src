@@ -23,7 +23,6 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
-#include <google/protobuf/generated_message_bases.h>
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata_lite.h>
 #include <google/protobuf/generated_message_reflection.h>
@@ -963,6 +962,7 @@ class ServiceRequest final :
 
   enum : int {
     kServiceParametersFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
     kServiceTypeFieldNumber = 1,
   };
   // bytes serviceParameters = 2;
@@ -977,6 +977,15 @@ class ServiceRequest final :
   const std::string& _internal_serviceparameters() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_serviceparameters(const std::string& value);
   std::string* _internal_mutable_serviceparameters();
+  public:
+
+  // uint64 sessionId = 3;
+  void clear_sessionid();
+  uint64_t sessionid() const;
+  void set_sessionid(uint64_t value);
+  private:
+  uint64_t _internal_sessionid() const;
+  void _internal_set_sessionid(uint64_t value);
   public:
 
   // .dwt_proto.ServiceType serviceType = 1;
@@ -997,6 +1006,7 @@ class ServiceRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr serviceparameters_;
+    uint64_t sessionid_;
     int servicetype_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1322,8 +1332,23 @@ class CreateNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kErrmsgFieldNumber = 2,
     kSuccessFieldNumber = 1,
   };
+  // bytes errmsg = 2;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -1341,6 +1366,7 @@ class CreateNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1640,6 +1666,7 @@ class GetNodeResponse final :
 
   enum : int {
     kInfoFieldNumber = 2,
+    kErrmsgFieldNumber = 3,
     kSuccessFieldNumber = 1,
   };
   // bytes info = 2;
@@ -1654,6 +1681,20 @@ class GetNodeResponse final :
   const std::string& _internal_info() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_info(const std::string& value);
   std::string* _internal_mutable_info();
+  public:
+
+  // bytes errmsg = 3;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
   public:
 
   // bool success = 1;
@@ -1674,6 +1715,7 @@ class GetNodeResponse final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1988,8 +2030,23 @@ class SetNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kErrmsgFieldNumber = 2,
     kSuccessFieldNumber = 1,
   };
+  // bytes errmsg = 2;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -2007,6 +2064,7 @@ class SetNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -2305,8 +2363,23 @@ class DeleteNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kErrmsgFieldNumber = 2,
     kSuccessFieldNumber = 1,
   };
+  // bytes errmsg = 2;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -2324,6 +2397,7 @@ class DeleteNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -2623,6 +2697,7 @@ class LsNodeResponse final :
 
   enum : int {
     kChildrenFieldNumber = 2,
+    kErrmsgFieldNumber = 3,
     kSuccessFieldNumber = 1,
   };
   // repeated bytes children = 2;
@@ -2649,6 +2724,20 @@ class LsNodeResponse final :
   std::string* _internal_add_children();
   public:
 
+  // bytes errmsg = 3;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -2667,6 +2756,7 @@ class LsNodeResponse final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> children_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -2676,9 +2766,10 @@ class LsNodeResponse final :
 // -------------------------------------------------------------------
 
 class NodeState final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:dwt_proto.NodeState) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.NodeState) */ {
  public:
   inline NodeState() : NodeState(nullptr) {}
+  ~NodeState() override;
   explicit PROTOBUF_CONSTEXPR NodeState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   NodeState(const NodeState& from);
@@ -2751,15 +2842,29 @@ class NodeState final :
   NodeState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<NodeState>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const NodeState& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const NodeState& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const NodeState& from) {
+    NodeState::MergeImpl(*this, from);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const NodeState& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(NodeState* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
@@ -2780,6 +2885,43 @@ class NodeState final :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kEphemeralOwnerFieldNumber = 1,
+    kNumChildrenFieldNumber = 2,
+    kDataLengthFieldNumber = 3,
+  };
+  // bytes ephemeralOwner = 1;
+  void clear_ephemeralowner();
+  const std::string& ephemeralowner() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_ephemeralowner(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_ephemeralowner();
+  PROTOBUF_NODISCARD std::string* release_ephemeralowner();
+  void set_allocated_ephemeralowner(std::string* ephemeralowner);
+  private:
+  const std::string& _internal_ephemeralowner() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ephemeralowner(const std::string& value);
+  std::string* _internal_mutable_ephemeralowner();
+  public:
+
+  // int32 numChildren = 2;
+  void clear_numchildren();
+  int32_t numchildren() const;
+  void set_numchildren(int32_t value);
+  private:
+  int32_t _internal_numchildren() const;
+  void _internal_set_numchildren(int32_t value);
+  public:
+
+  // int32 dataLength = 3;
+  void clear_datalength();
+  int32_t datalength() const;
+  void set_datalength(int32_t value);
+  private:
+  int32_t _internal_datalength() const;
+  void _internal_set_datalength(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:dwt_proto.NodeState)
  private:
   class _Internal;
@@ -2788,7 +2930,12 @@ class NodeState final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ephemeralowner_;
+    int32_t numchildren_;
+    int32_t datalength_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_messages_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3083,9 +3230,24 @@ class StatNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kErrmsgFieldNumber = 3,
     kStateFieldNumber = 2,
     kSuccessFieldNumber = 1,
   };
+  // bytes errmsg = 3;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // .dwt_proto.NodeState state = 2;
   bool has_state() const;
   private:
@@ -3121,6 +3283,7 @@ class StatNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     ::dwt_proto::NodeState* state_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -3420,9 +3583,24 @@ class ExistsNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kErrmsgFieldNumber = 3,
     kSuccessFieldNumber = 1,
     kExistFieldNumber = 2,
   };
+  // bytes errmsg = 3;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_errmsg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_errmsg();
+  PROTOBUF_NODISCARD std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -3449,6 +3627,7 @@ class ExistsNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     bool exist_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -3733,6 +3912,26 @@ inline void ServiceRequest::set_allocated_serviceparameters(std::string* service
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.ServiceRequest.serviceParameters)
 }
 
+// uint64 sessionId = 3;
+inline void ServiceRequest::clear_sessionid() {
+  _impl_.sessionid_ = uint64_t{0u};
+}
+inline uint64_t ServiceRequest::_internal_sessionid() const {
+  return _impl_.sessionid_;
+}
+inline uint64_t ServiceRequest::sessionid() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceRequest.sessionId)
+  return _internal_sessionid();
+}
+inline void ServiceRequest::_internal_set_sessionid(uint64_t value) {
+  
+  _impl_.sessionid_ = value;
+}
+inline void ServiceRequest::set_sessionid(uint64_t value) {
+  _internal_set_sessionid(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceRequest.sessionId)
+}
+
 // -------------------------------------------------------------------
 
 // CreateNodeRequest
@@ -3931,6 +4130,56 @@ inline void CreateNodeResponse::set_success(bool value) {
   // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeResponse.success)
 }
 
+// bytes errmsg = 2;
+inline void CreateNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& CreateNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CreateNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeResponse.errmsg)
+}
+inline std::string* CreateNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& CreateNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void CreateNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CreateNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CreateNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void CreateNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeResponse.errmsg)
+}
+
 // -------------------------------------------------------------------
 
 // GetNodeRequest
@@ -4107,6 +4356,56 @@ inline void GetNodeResponse::set_allocated_info(std::string* info) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeResponse.info)
+}
+
+// bytes errmsg = 3;
+inline void GetNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& GetNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void GetNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.errmsg)
+}
+inline std::string* GetNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& GetNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void GetNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* GetNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* GetNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void GetNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeResponse.errmsg)
 }
 
 // -------------------------------------------------------------------
@@ -4287,6 +4586,56 @@ inline void SetNodeResponse::set_success(bool value) {
   // @@protoc_insertion_point(field_set:dwt_proto.SetNodeResponse.success)
 }
 
+// bytes errmsg = 2;
+inline void SetNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& SetNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void SetNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeResponse.errmsg)
+}
+inline std::string* SetNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.SetNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& SetNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void SetNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* SetNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* SetNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.SetNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void SetNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeResponse.errmsg)
+}
+
 // -------------------------------------------------------------------
 
 // DeleteNodeRequest
@@ -4413,6 +4762,56 @@ inline void DeleteNodeResponse::_internal_set_success(bool value) {
 inline void DeleteNodeResponse::set_success(bool value) {
   _internal_set_success(value);
   // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeResponse.success)
+}
+
+// bytes errmsg = 2;
+inline void DeleteNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& DeleteNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.DeleteNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DeleteNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeResponse.errmsg)
+}
+inline std::string* DeleteNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.DeleteNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& DeleteNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void DeleteNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DeleteNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DeleteNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.DeleteNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void DeleteNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.DeleteNodeResponse.errmsg)
 }
 
 // -------------------------------------------------------------------
@@ -4618,9 +5017,149 @@ LsNodeResponse::mutable_children() {
   return &_impl_.children_;
 }
 
+// bytes errmsg = 3;
+inline void LsNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& LsNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void LsNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeResponse.errmsg)
+}
+inline std::string* LsNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.LsNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& LsNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void LsNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* LsNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* LsNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.LsNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void LsNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.LsNodeResponse.errmsg)
+}
+
 // -------------------------------------------------------------------
 
 // NodeState
+
+// bytes ephemeralOwner = 1;
+inline void NodeState::clear_ephemeralowner() {
+  _impl_.ephemeralowner_.ClearToEmpty();
+}
+inline const std::string& NodeState::ephemeralowner() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.NodeState.ephemeralOwner)
+  return _internal_ephemeralowner();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void NodeState::set_ephemeralowner(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.ephemeralowner_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.NodeState.ephemeralOwner)
+}
+inline std::string* NodeState::mutable_ephemeralowner() {
+  std::string* _s = _internal_mutable_ephemeralowner();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.NodeState.ephemeralOwner)
+  return _s;
+}
+inline const std::string& NodeState::_internal_ephemeralowner() const {
+  return _impl_.ephemeralowner_.Get();
+}
+inline void NodeState::_internal_set_ephemeralowner(const std::string& value) {
+  
+  _impl_.ephemeralowner_.Set(value, GetArenaForAllocation());
+}
+inline std::string* NodeState::_internal_mutable_ephemeralowner() {
+  
+  return _impl_.ephemeralowner_.Mutable(GetArenaForAllocation());
+}
+inline std::string* NodeState::release_ephemeralowner() {
+  // @@protoc_insertion_point(field_release:dwt_proto.NodeState.ephemeralOwner)
+  return _impl_.ephemeralowner_.Release();
+}
+inline void NodeState::set_allocated_ephemeralowner(std::string* ephemeralowner) {
+  if (ephemeralowner != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.ephemeralowner_.SetAllocated(ephemeralowner, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.ephemeralowner_.IsDefault()) {
+    _impl_.ephemeralowner_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.NodeState.ephemeralOwner)
+}
+
+// int32 numChildren = 2;
+inline void NodeState::clear_numchildren() {
+  _impl_.numchildren_ = 0;
+}
+inline int32_t NodeState::_internal_numchildren() const {
+  return _impl_.numchildren_;
+}
+inline int32_t NodeState::numchildren() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.NodeState.numChildren)
+  return _internal_numchildren();
+}
+inline void NodeState::_internal_set_numchildren(int32_t value) {
+  
+  _impl_.numchildren_ = value;
+}
+inline void NodeState::set_numchildren(int32_t value) {
+  _internal_set_numchildren(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.NodeState.numChildren)
+}
+
+// int32 dataLength = 3;
+inline void NodeState::clear_datalength() {
+  _impl_.datalength_ = 0;
+}
+inline int32_t NodeState::_internal_datalength() const {
+  return _impl_.datalength_;
+}
+inline int32_t NodeState::datalength() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.NodeState.dataLength)
+  return _internal_datalength();
+}
+inline void NodeState::_internal_set_datalength(int32_t value) {
+  
+  _impl_.datalength_ = value;
+}
+inline void NodeState::set_datalength(int32_t value) {
+  _internal_set_datalength(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.NodeState.dataLength)
+}
 
 // -------------------------------------------------------------------
 
@@ -4840,6 +5379,56 @@ inline void StatNodeResponse::set_allocated_state(::dwt_proto::NodeState* state)
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeResponse.state)
 }
 
+// bytes errmsg = 3;
+inline void StatNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& StatNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void StatNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.StatNodeResponse.errmsg)
+}
+inline std::string* StatNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.StatNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& StatNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void StatNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* StatNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* StatNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.StatNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void StatNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeResponse.errmsg)
+}
+
 // -------------------------------------------------------------------
 
 // ExistsNodeRequest
@@ -4986,6 +5575,56 @@ inline void ExistsNodeResponse::_internal_set_exist(bool value) {
 inline void ExistsNodeResponse::set_exist(bool value) {
   _internal_set_exist(value);
   // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeResponse.exist)
+}
+
+// bytes errmsg = 3;
+inline void ExistsNodeResponse::clear_errmsg() {
+  _impl_.errmsg_.ClearToEmpty();
+}
+inline const std::string& ExistsNodeResponse::errmsg() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeResponse.errmsg)
+  return _internal_errmsg();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ExistsNodeResponse::set_errmsg(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.errmsg_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeResponse.errmsg)
+}
+inline std::string* ExistsNodeResponse::mutable_errmsg() {
+  std::string* _s = _internal_mutable_errmsg();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.ExistsNodeResponse.errmsg)
+  return _s;
+}
+inline const std::string& ExistsNodeResponse::_internal_errmsg() const {
+  return _impl_.errmsg_.Get();
+}
+inline void ExistsNodeResponse::_internal_set_errmsg(const std::string& value) {
+  
+  _impl_.errmsg_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ExistsNodeResponse::_internal_mutable_errmsg() {
+  
+  return _impl_.errmsg_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ExistsNodeResponse::release_errmsg() {
+  // @@protoc_insertion_point(field_release:dwt_proto.ExistsNodeResponse.errmsg)
+  return _impl_.errmsg_.Release();
+}
+inline void ExistsNodeResponse::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.errmsg_.SetAllocated(errmsg, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.errmsg_.IsDefault()) {
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ExistsNodeResponse.errmsg)
 }
 
 #ifdef __GNUC__

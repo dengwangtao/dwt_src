@@ -78,6 +78,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR ServiceRequest::ServiceRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.serviceparameters_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.sessionid_)*/uint64_t{0u}
   , /*decltype(_impl_.servicetype_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ServiceRequestDefaultTypeInternal {
@@ -107,7 +108,8 @@ struct CreateNodeRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CreateNodeRequestDefaultTypeInternal _CreateNodeRequest_default_instance_;
 PROTOBUF_CONSTEXPR CreateNodeResponse::CreateNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.success_)*/false
+    /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CreateNodeResponseDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CreateNodeResponseDefaultTypeInternal()
@@ -135,6 +137,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR GetNodeResponse::GetNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.info_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct GetNodeResponseDefaultTypeInternal {
@@ -163,7 +166,8 @@ struct SetNodeRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SetNodeRequestDefaultTypeInternal _SetNodeRequest_default_instance_;
 PROTOBUF_CONSTEXPR SetNodeResponse::SetNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.success_)*/false
+    /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SetNodeResponseDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SetNodeResponseDefaultTypeInternal()
@@ -190,7 +194,8 @@ struct DeleteNodeRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteNodeRequestDefaultTypeInternal _DeleteNodeRequest_default_instance_;
 PROTOBUF_CONSTEXPR DeleteNodeResponse::DeleteNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.success_)*/false
+    /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct DeleteNodeResponseDefaultTypeInternal {
   PROTOBUF_CONSTEXPR DeleteNodeResponseDefaultTypeInternal()
@@ -218,6 +223,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR LsNodeResponse::LsNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.children_)*/{}
+  , /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct LsNodeResponseDefaultTypeInternal {
@@ -230,7 +236,11 @@ struct LsNodeResponseDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LsNodeResponseDefaultTypeInternal _LsNodeResponse_default_instance_;
 PROTOBUF_CONSTEXPR NodeState::NodeState(
-    ::_pbi::ConstantInitialized) {}
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.ephemeralowner_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.numchildren_)*/0
+  , /*decltype(_impl_.datalength_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct NodeStateDefaultTypeInternal {
   PROTOBUF_CONSTEXPR NodeStateDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -256,7 +266,8 @@ struct StatNodeRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 StatNodeRequestDefaultTypeInternal _StatNodeRequest_default_instance_;
 PROTOBUF_CONSTEXPR StatNodeResponse::StatNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.state_)*/nullptr
+    /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.state_)*/nullptr
   , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct StatNodeResponseDefaultTypeInternal {
@@ -284,7 +295,8 @@ struct ExistsNodeRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ExistsNodeRequestDefaultTypeInternal _ExistsNodeRequest_default_instance_;
 PROTOBUF_CONSTEXPR ExistsNodeResponse::ExistsNodeResponse(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.success_)*/false
+    /*decltype(_impl_.errmsg_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_.exist_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ExistsNodeResponseDefaultTypeInternal {
@@ -340,6 +352,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::ServiceRequest, _impl_.servicetype_),
   PROTOBUF_FIELD_OFFSET(::dwt_proto::ServiceRequest, _impl_.serviceparameters_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::ServiceRequest, _impl_.sessionid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::CreateNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -357,6 +370,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::CreateNodeResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::CreateNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::GetNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -373,6 +387,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::GetNodeResponse, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::dwt_proto::GetNodeResponse, _impl_.info_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::GetNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::SetNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -389,6 +404,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::SetNodeResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::SetNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::DeleteNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -404,6 +420,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::DeleteNodeResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::DeleteNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::LsNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -420,12 +437,16 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::LsNodeResponse, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::dwt_proto::LsNodeResponse, _impl_.children_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::LsNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::NodeState, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::NodeState, _impl_.ephemeralowner_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::NodeState, _impl_.numchildren_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::NodeState, _impl_.datalength_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::StatNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -442,6 +463,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::StatNodeResponse, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::dwt_proto::StatNodeResponse, _impl_.state_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::StatNodeResponse, _impl_.errmsg_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::ExistsNodeRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -458,6 +480,7 @@ const uint32_t TableStruct_messages_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::dwt_proto::ExistsNodeResponse, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::dwt_proto::ExistsNodeResponse, _impl_.exist_),
+  PROTOBUF_FIELD_OFFSET(::dwt_proto::ExistsNodeResponse, _impl_.errmsg_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::dwt_proto::WrappedRequest)},
@@ -465,21 +488,21 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 16, -1, -1, sizeof(::dwt_proto::ConnectionResponse)},
   { 23, -1, -1, sizeof(::dwt_proto::HeartbeatMessage)},
   { 30, -1, -1, sizeof(::dwt_proto::ServiceRequest)},
-  { 38, -1, -1, sizeof(::dwt_proto::CreateNodeRequest)},
-  { 48, -1, -1, sizeof(::dwt_proto::CreateNodeResponse)},
-  { 55, -1, -1, sizeof(::dwt_proto::GetNodeRequest)},
-  { 63, -1, -1, sizeof(::dwt_proto::GetNodeResponse)},
-  { 71, -1, -1, sizeof(::dwt_proto::SetNodeRequest)},
-  { 80, -1, -1, sizeof(::dwt_proto::SetNodeResponse)},
-  { 87, -1, -1, sizeof(::dwt_proto::DeleteNodeRequest)},
-  { 95, -1, -1, sizeof(::dwt_proto::DeleteNodeResponse)},
-  { 102, -1, -1, sizeof(::dwt_proto::LsNodeRequest)},
-  { 110, -1, -1, sizeof(::dwt_proto::LsNodeResponse)},
-  { 118, -1, -1, sizeof(::dwt_proto::NodeState)},
-  { 124, -1, -1, sizeof(::dwt_proto::StatNodeRequest)},
-  { 132, -1, -1, sizeof(::dwt_proto::StatNodeResponse)},
-  { 140, -1, -1, sizeof(::dwt_proto::ExistsNodeRequest)},
-  { 148, -1, -1, sizeof(::dwt_proto::ExistsNodeResponse)},
+  { 39, -1, -1, sizeof(::dwt_proto::CreateNodeRequest)},
+  { 49, -1, -1, sizeof(::dwt_proto::CreateNodeResponse)},
+  { 57, -1, -1, sizeof(::dwt_proto::GetNodeRequest)},
+  { 65, -1, -1, sizeof(::dwt_proto::GetNodeResponse)},
+  { 74, -1, -1, sizeof(::dwt_proto::SetNodeRequest)},
+  { 83, -1, -1, sizeof(::dwt_proto::SetNodeResponse)},
+  { 91, -1, -1, sizeof(::dwt_proto::DeleteNodeRequest)},
+  { 99, -1, -1, sizeof(::dwt_proto::DeleteNodeResponse)},
+  { 107, -1, -1, sizeof(::dwt_proto::LsNodeRequest)},
+  { 115, -1, -1, sizeof(::dwt_proto::LsNodeResponse)},
+  { 124, -1, -1, sizeof(::dwt_proto::NodeState)},
+  { 133, -1, -1, sizeof(::dwt_proto::StatNodeRequest)},
+  { 141, -1, -1, sizeof(::dwt_proto::StatNodeResponse)},
+  { 150, -1, -1, sizeof(::dwt_proto::ExistsNodeRequest)},
+  { 158, -1, -1, sizeof(::dwt_proto::ExistsNodeResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -512,40 +535,44 @@ const char descriptor_table_protodef_messages_2eproto[] PROTOBUF_SECTION_VARIABL
   "\017WrappedResponse\022,\n\014responseType\030\001 \001(\0162\026"
   ".dwt_proto.MessageType\022\014\n\004data\030\003 \001(\014\"\'\n\022"
   "ConnectionResponse\022\021\n\tsessionId\030\001 \001(\004\"%\n"
-  "\020HeartbeatMessage\022\021\n\tsessionId\030\001 \001(\004\"X\n\016"
+  "\020HeartbeatMessage\022\021\n\tsessionId\030\001 \001(\004\"k\n\016"
   "ServiceRequest\022+\n\013serviceType\030\001 \001(\0162\026.dw"
   "t_proto.ServiceType\022\031\n\021serviceParameters"
-  "\030\002 \001(\014\"l\n\021CreateNodeRequest\022\014\n\004path\030\001 \001("
-  "\014\022\020\n\010nodeName\030\002 \001(\014\022\020\n\010nodeData\030\003 \001(\014\022%\n"
-  "\010nodeType\030\004 \001(\0162\023.dwt_proto.NodeType\"%\n\022"
-  "CreateNodeResponse\022\017\n\007success\030\001 \001(\010\"0\n\016G"
-  "etNodeRequest\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030"
-  "\002 \001(\014\"0\n\017GetNodeResponse\022\017\n\007success\030\001 \001("
-  "\010\022\014\n\004info\030\002 \001(\014\"B\n\016SetNodeRequest\022\014\n\004pat"
-  "h\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\022\020\n\010nodeData\030\003 "
-  "\001(\014\"\"\n\017SetNodeResponse\022\017\n\007success\030\001 \001(\010\""
-  "3\n\021DeleteNodeRequest\022\014\n\004path\030\001 \001(\014\022\020\n\010no"
-  "deName\030\002 \001(\014\"%\n\022DeleteNodeResponse\022\017\n\007su"
-  "ccess\030\001 \001(\010\"/\n\rLsNodeRequest\022\014\n\004path\030\001 \001"
-  "(\014\022\020\n\010nodeName\030\002 \001(\014\"3\n\016LsNodeResponse\022\017"
-  "\n\007success\030\001 \001(\010\022\020\n\010children\030\002 \003(\014\"\013\n\tNod"
-  "eState\"1\n\017StatNodeRequest\022\014\n\004path\030\001 \001(\014\022"
-  "\020\n\010nodeName\030\002 \001(\014\"H\n\020StatNodeResponse\022\017\n"
-  "\007success\030\001 \001(\010\022#\n\005state\030\002 \001(\0132\024.dwt_prot"
-  "o.NodeState\"3\n\021ExistsNodeRequest\022\014\n\004path"
-  "\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\"4\n\022ExistsNodeRe"
-  "sponse\022\017\n\007success\030\001 \001(\010\022\r\n\005exist\030\002 \001(\010*N"
-  "\n\013MessageType\022\027\n\023Nothing_MessageType\020\000\022\016"
-  "\n\nConnection\020\001\022\013\n\007Service\020\002\022\t\n\005Error\020\003*n"
-  "\n\013ServiceType\022\027\n\023Nothing_ServiceType\020\000\022\n"
-  "\n\006Create\020\001\022\007\n\003Get\020\002\022\007\n\003Set\020\003\022\n\n\006Delete\020\004"
-  "\022\006\n\002Ls\020\005\022\010\n\004Stat\020\006\022\n\n\006Exists\020\007*)\n\010NodeTy"
-  "pe\022\016\n\nPERSISTENT\020\000\022\r\n\tEPHEMERAL\020\001b\006proto"
-  "3"
+  "\030\002 \001(\014\022\021\n\tsessionId\030\003 \001(\004\"l\n\021CreateNodeR"
+  "equest\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\022\020"
+  "\n\010nodeData\030\003 \001(\014\022%\n\010nodeType\030\004 \001(\0162\023.dwt"
+  "_proto.NodeType\"5\n\022CreateNodeResponse\022\017\n"
+  "\007success\030\001 \001(\010\022\016\n\006errmsg\030\002 \001(\014\"0\n\016GetNod"
+  "eRequest\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014"
+  "\"@\n\017GetNodeResponse\022\017\n\007success\030\001 \001(\010\022\014\n\004"
+  "info\030\002 \001(\014\022\016\n\006errmsg\030\003 \001(\014\"B\n\016SetNodeReq"
+  "uest\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\022\020\n\010"
+  "nodeData\030\003 \001(\014\"2\n\017SetNodeResponse\022\017\n\007suc"
+  "cess\030\001 \001(\010\022\016\n\006errmsg\030\002 \001(\014\"3\n\021DeleteNode"
+  "Request\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\""
+  "5\n\022DeleteNodeResponse\022\017\n\007success\030\001 \001(\010\022\016"
+  "\n\006errmsg\030\002 \001(\014\"/\n\rLsNodeRequest\022\014\n\004path\030"
+  "\001 \001(\014\022\020\n\010nodeName\030\002 \001(\014\"C\n\016LsNodeRespons"
+  "e\022\017\n\007success\030\001 \001(\010\022\020\n\010children\030\002 \003(\014\022\016\n\006"
+  "errmsg\030\003 \001(\014\"L\n\tNodeState\022\026\n\016ephemeralOw"
+  "ner\030\001 \001(\014\022\023\n\013numChildren\030\002 \001(\005\022\022\n\ndataLe"
+  "ngth\030\003 \001(\005\"1\n\017StatNodeRequest\022\014\n\004path\030\001 "
+  "\001(\014\022\020\n\010nodeName\030\002 \001(\014\"X\n\020StatNodeRespons"
+  "e\022\017\n\007success\030\001 \001(\010\022#\n\005state\030\002 \001(\0132\024.dwt_"
+  "proto.NodeState\022\016\n\006errmsg\030\003 \001(\014\"3\n\021Exist"
+  "sNodeRequest\022\014\n\004path\030\001 \001(\014\022\020\n\010nodeName\030\002"
+  " \001(\014\"D\n\022ExistsNodeResponse\022\017\n\007success\030\001 "
+  "\001(\010\022\r\n\005exist\030\002 \001(\010\022\016\n\006errmsg\030\003 \001(\014*N\n\013Me"
+  "ssageType\022\027\n\023Nothing_MessageType\020\000\022\016\n\nCo"
+  "nnection\020\001\022\013\n\007Service\020\002\022\t\n\005Error\020\003*n\n\013Se"
+  "rviceType\022\027\n\023Nothing_ServiceType\020\000\022\n\n\006Cr"
+  "eate\020\001\022\007\n\003Get\020\002\022\007\n\003Set\020\003\022\n\n\006Delete\020\004\022\006\n\002"
+  "Ls\020\005\022\010\n\004Stat\020\006\022\n\n\006Exists\020\007*)\n\010NodeType\022\016"
+  "\n\nPERSISTENT\020\000\022\r\n\tEPHEMERAL\020\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_messages_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_messages_2eproto = {
-    false, false, 1401, descriptor_table_protodef_messages_2eproto,
+    false, false, 1597, descriptor_table_protodef_messages_2eproto,
     "messages.proto",
     &descriptor_table_messages_2eproto_once, nullptr, 0, 20,
     schemas, file_default_instances, TableStruct_messages_2eproto::offsets,
@@ -1439,6 +1466,7 @@ ServiceRequest::ServiceRequest(const ServiceRequest& from)
   ServiceRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.serviceparameters_){}
+    , decltype(_impl_.sessionid_){}
     , decltype(_impl_.servicetype_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -1451,7 +1479,9 @@ ServiceRequest::ServiceRequest(const ServiceRequest& from)
     _this->_impl_.serviceparameters_.Set(from._internal_serviceparameters(), 
       _this->GetArenaForAllocation());
   }
-  _this->_impl_.servicetype_ = from._impl_.servicetype_;
+  ::memcpy(&_impl_.sessionid_, &from._impl_.sessionid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.servicetype_) -
+    reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.servicetype_));
   // @@protoc_insertion_point(copy_constructor:dwt_proto.ServiceRequest)
 }
 
@@ -1461,6 +1491,7 @@ inline void ServiceRequest::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.serviceparameters_){}
+    , decltype(_impl_.sessionid_){uint64_t{0u}}
     , decltype(_impl_.servicetype_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -1495,7 +1526,9 @@ void ServiceRequest::Clear() {
   (void) cached_has_bits;
 
   _impl_.serviceparameters_.ClearToEmpty();
-  _impl_.servicetype_ = 0;
+  ::memset(&_impl_.sessionid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.servicetype_) -
+      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.servicetype_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1519,6 +1552,14 @@ const char* ServiceRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_serviceparameters();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 sessionId = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.sessionid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1565,6 +1606,12 @@ uint8_t* ServiceRequest::_InternalSerialize(
         2, this->_internal_serviceparameters(), target);
   }
 
+  // uint64 sessionId = 3;
+  if (this->_internal_sessionid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(3, this->_internal_sessionid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1586,6 +1633,11 @@ size_t ServiceRequest::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_serviceparameters());
+  }
+
+  // uint64 sessionId = 3;
+  if (this->_internal_sessionid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_sessionid());
   }
 
   // .dwt_proto.ServiceType serviceType = 1;
@@ -1615,6 +1667,9 @@ void ServiceRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (!from._internal_serviceparameters().empty()) {
     _this->_internal_set_serviceparameters(from._internal_serviceparameters());
   }
+  if (from._internal_sessionid() != 0) {
+    _this->_internal_set_sessionid(from._internal_sessionid());
+  }
   if (from._internal_servicetype() != 0) {
     _this->_internal_set_servicetype(from._internal_servicetype());
   }
@@ -1641,7 +1696,12 @@ void ServiceRequest::InternalSwap(ServiceRequest* other) {
       &_impl_.serviceparameters_, lhs_arena,
       &other->_impl_.serviceparameters_, rhs_arena
   );
-  swap(_impl_.servicetype_, other->_impl_.servicetype_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ServiceRequest, _impl_.servicetype_)
+      + sizeof(ServiceRequest::_impl_.servicetype_)
+      - PROTOBUF_FIELD_OFFSET(ServiceRequest, _impl_.sessionid_)>(
+          reinterpret_cast<char*>(&_impl_.sessionid_),
+          reinterpret_cast<char*>(&other->_impl_.sessionid_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServiceRequest::GetMetadata() const {
@@ -1984,10 +2044,19 @@ CreateNodeResponse::CreateNodeResponse(const CreateNodeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   CreateNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:dwt_proto.CreateNodeResponse)
 }
@@ -1997,9 +2066,14 @@ inline void CreateNodeResponse::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){false}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 CreateNodeResponse::~CreateNodeResponse() {
@@ -2013,6 +2087,7 @@ CreateNodeResponse::~CreateNodeResponse() {
 
 inline void CreateNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.errmsg_.Destroy();
 }
 
 void CreateNodeResponse::SetCachedSize(int size) const {
@@ -2025,6 +2100,7 @@ void CreateNodeResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.errmsg_.ClearToEmpty();
   _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -2039,6 +2115,15 @@ const char* CreateNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseCon
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2078,6 +2163,12 @@ uint8_t* CreateNodeResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
   }
 
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2093,6 +2184,13 @@ size_t CreateNodeResponse::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
+  }
 
   // bool success = 1;
   if (this->_internal_success() != 0) {
@@ -2117,6 +2215,9 @@ void CreateNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -2136,7 +2237,13 @@ bool CreateNodeResponse::IsInitialized() const {
 
 void CreateNodeResponse::InternalSwap(CreateNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   swap(_impl_.success_, other->_impl_.success_);
 }
 
@@ -2406,6 +2513,7 @@ GetNodeResponse::GetNodeResponse(const GetNodeResponse& from)
   GetNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.info_){}
+    , decltype(_impl_.errmsg_){}
     , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -2418,6 +2526,14 @@ GetNodeResponse::GetNodeResponse(const GetNodeResponse& from)
     _this->_impl_.info_.Set(from._internal_info(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:dwt_proto.GetNodeResponse)
 }
@@ -2428,12 +2544,17 @@ inline void GetNodeResponse::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.info_){}
+    , decltype(_impl_.errmsg_){}
     , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.info_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.info_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -2449,6 +2570,7 @@ GetNodeResponse::~GetNodeResponse() {
 inline void GetNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.info_.Destroy();
+  _impl_.errmsg_.Destroy();
 }
 
 void GetNodeResponse::SetCachedSize(int size) const {
@@ -2462,6 +2584,7 @@ void GetNodeResponse::Clear() {
   (void) cached_has_bits;
 
   _impl_.info_.ClearToEmpty();
+  _impl_.errmsg_.ClearToEmpty();
   _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -2484,6 +2607,15 @@ const char* GetNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseContex
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_info();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_errmsg();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
@@ -2530,6 +2662,12 @@ uint8_t* GetNodeResponse::_InternalSerialize(
         2, this->_internal_info(), target);
   }
 
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        3, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2551,6 +2689,13 @@ size_t GetNodeResponse::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_info());
+  }
+
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
   }
 
   // bool success = 1;
@@ -2579,6 +2724,9 @@ void GetNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   if (!from._internal_info().empty()) {
     _this->_internal_set_info(from._internal_info());
   }
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -2604,6 +2752,10 @@ void GetNodeResponse::InternalSwap(GetNodeResponse* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.info_, lhs_arena,
       &other->_impl_.info_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
   );
   swap(_impl_.success_, other->_impl_.success_);
 }
@@ -2918,10 +3070,19 @@ SetNodeResponse::SetNodeResponse(const SetNodeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   SetNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:dwt_proto.SetNodeResponse)
 }
@@ -2931,9 +3092,14 @@ inline void SetNodeResponse::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){false}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 SetNodeResponse::~SetNodeResponse() {
@@ -2947,6 +3113,7 @@ SetNodeResponse::~SetNodeResponse() {
 
 inline void SetNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.errmsg_.Destroy();
 }
 
 void SetNodeResponse::SetCachedSize(int size) const {
@@ -2959,6 +3126,7 @@ void SetNodeResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.errmsg_.ClearToEmpty();
   _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -2973,6 +3141,15 @@ const char* SetNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseContex
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3012,6 +3189,12 @@ uint8_t* SetNodeResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
   }
 
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3027,6 +3210,13 @@ size_t SetNodeResponse::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
+  }
 
   // bool success = 1;
   if (this->_internal_success() != 0) {
@@ -3051,6 +3241,9 @@ void SetNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -3070,7 +3263,13 @@ bool SetNodeResponse::IsInitialized() const {
 
 void SetNodeResponse::InternalSwap(SetNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   swap(_impl_.success_, other->_impl_.success_);
 }
 
@@ -3339,10 +3538,19 @@ DeleteNodeResponse::DeleteNodeResponse(const DeleteNodeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   DeleteNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:dwt_proto.DeleteNodeResponse)
 }
@@ -3352,9 +3560,14 @@ inline void DeleteNodeResponse::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){false}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 DeleteNodeResponse::~DeleteNodeResponse() {
@@ -3368,6 +3581,7 @@ DeleteNodeResponse::~DeleteNodeResponse() {
 
 inline void DeleteNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.errmsg_.Destroy();
 }
 
 void DeleteNodeResponse::SetCachedSize(int size) const {
@@ -3380,6 +3594,7 @@ void DeleteNodeResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.errmsg_.ClearToEmpty();
   _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -3394,6 +3609,15 @@ const char* DeleteNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseCon
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3433,6 +3657,12 @@ uint8_t* DeleteNodeResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
   }
 
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3448,6 +3678,13 @@ size_t DeleteNodeResponse::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // bytes errmsg = 2;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
+  }
 
   // bool success = 1;
   if (this->_internal_success() != 0) {
@@ -3472,6 +3709,9 @@ void DeleteNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -3491,7 +3731,13 @@ bool DeleteNodeResponse::IsInitialized() const {
 
 void DeleteNodeResponse::InternalSwap(DeleteNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   swap(_impl_.success_, other->_impl_.success_);
 }
 
@@ -3761,10 +4007,19 @@ LsNodeResponse::LsNodeResponse(const LsNodeResponse& from)
   LsNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.children_){from._impl_.children_}
+    , decltype(_impl_.errmsg_){}
     , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:dwt_proto.LsNodeResponse)
 }
@@ -3775,9 +4030,14 @@ inline void LsNodeResponse::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.children_){arena}
+    , decltype(_impl_.errmsg_){}
     , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 LsNodeResponse::~LsNodeResponse() {
@@ -3792,6 +4052,7 @@ LsNodeResponse::~LsNodeResponse() {
 inline void LsNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.children_.~RepeatedPtrField();
+  _impl_.errmsg_.Destroy();
 }
 
 void LsNodeResponse::SetCachedSize(int size) const {
@@ -3805,6 +4066,7 @@ void LsNodeResponse::Clear() {
   (void) cached_has_bits;
 
   _impl_.children_.Clear();
+  _impl_.errmsg_.ClearToEmpty();
   _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -3834,6 +4096,15 @@ const char* LsNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -3878,6 +4149,12 @@ uint8_t* LsNodeResponse::_InternalSerialize(
     target = stream->WriteBytes(2, s, target);
   }
 
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        3, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3900,6 +4177,13 @@ size_t LsNodeResponse::ByteSizeLong() const {
   for (int i = 0, n = _impl_.children_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
       _impl_.children_.Get(i));
+  }
+
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
   }
 
   // bool success = 1;
@@ -3926,6 +4210,9 @@ void LsNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   (void) cached_has_bits;
 
   _this->_impl_.children_.MergeFrom(from._impl_.children_);
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -3945,8 +4232,14 @@ bool LsNodeResponse::IsInitialized() const {
 
 void LsNodeResponse::InternalSwap(LsNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.children_.InternalSwap(&other->_impl_.children_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   swap(_impl_.success_, other->_impl_.success_);
 }
 
@@ -3964,31 +4257,249 @@ class NodeState::_Internal {
 
 NodeState::NodeState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:dwt_proto.NodeState)
 }
 NodeState::NodeState(const NodeState& from)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
   NodeState* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.ephemeralowner_){}
+    , decltype(_impl_.numchildren_){}
+    , decltype(_impl_.datalength_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.ephemeralowner_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.ephemeralowner_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_ephemeralowner().empty()) {
+    _this->_impl_.ephemeralowner_.Set(from._internal_ephemeralowner(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.numchildren_, &from._impl_.numchildren_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.datalength_) -
+    reinterpret_cast<char*>(&_impl_.numchildren_)) + sizeof(_impl_.datalength_));
   // @@protoc_insertion_point(copy_constructor:dwt_proto.NodeState)
 }
 
+inline void NodeState::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.ephemeralowner_){}
+    , decltype(_impl_.numchildren_){0}
+    , decltype(_impl_.datalength_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.ephemeralowner_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.ephemeralowner_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
 
+NodeState::~NodeState() {
+  // @@protoc_insertion_point(destructor:dwt_proto.NodeState)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
 
+inline void NodeState::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.ephemeralowner_.Destroy();
+}
 
+void NodeState::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void NodeState::Clear() {
+// @@protoc_insertion_point(message_clear_start:dwt_proto.NodeState)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.ephemeralowner_.ClearToEmpty();
+  ::memset(&_impl_.numchildren_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.datalength_) -
+      reinterpret_cast<char*>(&_impl_.numchildren_)) + sizeof(_impl_.datalength_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* NodeState::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bytes ephemeralOwner = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_ephemeralowner();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 numChildren = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.numchildren_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 dataLength = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.datalength_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* NodeState::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:dwt_proto.NodeState)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bytes ephemeralOwner = 1;
+  if (!this->_internal_ephemeralowner().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_ephemeralowner(), target);
+  }
+
+  // int32 numChildren = 2;
+  if (this->_internal_numchildren() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_numchildren(), target);
+  }
+
+  // int32 dataLength = 3;
+  if (this->_internal_datalength() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_datalength(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:dwt_proto.NodeState)
+  return target;
+}
+
+size_t NodeState::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:dwt_proto.NodeState)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bytes ephemeralOwner = 1;
+  if (!this->_internal_ephemeralowner().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_ephemeralowner());
+  }
+
+  // int32 numChildren = 2;
+  if (this->_internal_numchildren() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_numchildren());
+  }
+
+  // int32 dataLength = 3;
+  if (this->_internal_datalength() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_datalength());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData NodeState::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    NodeState::MergeImpl
 };
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*NodeState::GetClassData() const { return &_class_data_; }
 
 
+void NodeState::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<NodeState*>(&to_msg);
+  auto& from = static_cast<const NodeState&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:dwt_proto.NodeState)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
+  if (!from._internal_ephemeralowner().empty()) {
+    _this->_internal_set_ephemeralowner(from._internal_ephemeralowner());
+  }
+  if (from._internal_numchildren() != 0) {
+    _this->_internal_set_numchildren(from._internal_numchildren());
+  }
+  if (from._internal_datalength() != 0) {
+    _this->_internal_set_datalength(from._internal_datalength());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
+void NodeState::CopyFrom(const NodeState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:dwt_proto.NodeState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
+bool NodeState::IsInitialized() const {
+  return true;
+}
 
+void NodeState::InternalSwap(NodeState* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.ephemeralowner_, lhs_arena,
+      &other->_impl_.ephemeralowner_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(NodeState, _impl_.datalength_)
+      + sizeof(NodeState::_impl_.datalength_)
+      - PROTOBUF_FIELD_OFFSET(NodeState, _impl_.numchildren_)>(
+          reinterpret_cast<char*>(&_impl_.numchildren_),
+          reinterpret_cast<char*>(&other->_impl_.numchildren_));
+}
 
 ::PROTOBUF_NAMESPACE_ID::Metadata NodeState::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
@@ -4260,11 +4771,20 @@ StatNodeResponse::StatNodeResponse(const StatNodeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   StatNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.state_){nullptr}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.state_){nullptr}
     , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   if (from._internal_has_state()) {
     _this->_impl_.state_ = new ::dwt_proto::NodeState(*from._impl_.state_);
   }
@@ -4277,10 +4797,15 @@ inline void StatNodeResponse::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.state_){nullptr}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.state_){nullptr}
     , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 StatNodeResponse::~StatNodeResponse() {
@@ -4294,6 +4819,7 @@ StatNodeResponse::~StatNodeResponse() {
 
 inline void StatNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.errmsg_.Destroy();
   if (this != internal_default_instance()) delete _impl_.state_;
 }
 
@@ -4307,6 +4833,7 @@ void StatNodeResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.errmsg_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.state_ != nullptr) {
     delete _impl_.state_;
   }
@@ -4333,6 +4860,15 @@ const char* StatNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseConte
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_state(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4379,6 +4915,12 @@ uint8_t* StatNodeResponse::_InternalSerialize(
         _Internal::state(this).GetCachedSize(), target, stream);
   }
 
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        3, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -4394,6 +4936,13 @@ size_t StatNodeResponse::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
+  }
 
   // .dwt_proto.NodeState state = 2;
   if (this->_internal_has_state()) {
@@ -4425,6 +4974,9 @@ void StatNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_has_state()) {
     _this->_internal_mutable_state()->::dwt_proto::NodeState::MergeFrom(
         from._internal_state());
@@ -4448,7 +5000,13 @@ bool StatNodeResponse::IsInitialized() const {
 
 void StatNodeResponse::InternalSwap(StatNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(StatNodeResponse, _impl_.success_)
       + sizeof(StatNodeResponse::_impl_.success_)
@@ -4722,11 +5280,20 @@ ExistsNodeResponse::ExistsNodeResponse(const ExistsNodeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ExistsNodeResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){}
     , decltype(_impl_.exist_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_errmsg().empty()) {
+    _this->_impl_.errmsg_.Set(from._internal_errmsg(), 
+      _this->GetArenaForAllocation());
+  }
   ::memcpy(&_impl_.success_, &from._impl_.success_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.exist_) -
     reinterpret_cast<char*>(&_impl_.success_)) + sizeof(_impl_.exist_));
@@ -4738,10 +5305,15 @@ inline void ExistsNodeResponse::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.success_){false}
+      decltype(_impl_.errmsg_){}
+    , decltype(_impl_.success_){false}
     , decltype(_impl_.exist_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.errmsg_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.errmsg_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 ExistsNodeResponse::~ExistsNodeResponse() {
@@ -4755,6 +5327,7 @@ ExistsNodeResponse::~ExistsNodeResponse() {
 
 inline void ExistsNodeResponse::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.errmsg_.Destroy();
 }
 
 void ExistsNodeResponse::SetCachedSize(int size) const {
@@ -4767,6 +5340,7 @@ void ExistsNodeResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.errmsg_.ClearToEmpty();
   ::memset(&_impl_.success_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.exist_) -
       reinterpret_cast<char*>(&_impl_.success_)) + sizeof(_impl_.exist_));
@@ -4791,6 +5365,15 @@ const char* ExistsNodeResponse::_InternalParse(const char* ptr, ::_pbi::ParseCon
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           _impl_.exist_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bytes errmsg = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_errmsg();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4836,6 +5419,12 @@ uint8_t* ExistsNodeResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_exist(), target);
   }
 
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    target = stream->WriteBytesMaybeAliased(
+        3, this->_internal_errmsg(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -4851,6 +5440,13 @@ size_t ExistsNodeResponse::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // bytes errmsg = 3;
+  if (!this->_internal_errmsg().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_errmsg());
+  }
 
   // bool success = 1;
   if (this->_internal_success() != 0) {
@@ -4880,6 +5476,9 @@ void ExistsNodeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_errmsg().empty()) {
+    _this->_internal_set_errmsg(from._internal_errmsg());
+  }
   if (from._internal_success() != 0) {
     _this->_internal_set_success(from._internal_success());
   }
@@ -4902,7 +5501,13 @@ bool ExistsNodeResponse::IsInitialized() const {
 
 void ExistsNodeResponse::InternalSwap(ExistsNodeResponse* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.errmsg_, lhs_arena,
+      &other->_impl_.errmsg_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ExistsNodeResponse, _impl_.exist_)
       + sizeof(ExistsNodeResponse::_impl_.exist_)

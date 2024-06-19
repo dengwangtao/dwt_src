@@ -8,6 +8,7 @@
 
 #include "HeartbeatCounter.h"
 #include "SessionManager.h"
+#include "Services.h"
 
 
 namespace dwt {
@@ -44,6 +45,9 @@ private:
     SessionManager m_sessionManager;
     // UDP
     HeartbeatCounter m_heartbeatCounter;
+
+    // 业务服务
+    std::unique_ptr<Services> m_services;
 };
 
 

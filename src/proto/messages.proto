@@ -54,6 +54,7 @@ enum ServiceType {
 message ServiceRequest {
     ServiceType     serviceType         = 1;    // 业务类型
     bytes           serviceParameters   = 2;    // 业务参数
+    uint64          sessionId           = 3;    // 会话 Id
 }
 
 // ==========================================
@@ -73,7 +74,8 @@ message CreateNodeRequest {
 }
 
 message CreateNodeResponse {
-    bool success = 1;
+    bool    success = 1;
+    bytes   errmsg  = 2;
 }
 
 // ==========================================
@@ -86,6 +88,7 @@ message GetNodeRequest {
 message GetNodeResponse {
     bool    success = 1;    // 成功/失败
     bytes   info    = 2;    // 节点信息
+    bytes   errmsg  = 3;
 }
 
 // ==========================================
@@ -97,7 +100,8 @@ message SetNodeRequest {
 }
 
 message SetNodeResponse {
-    bool success = 1;
+    bool    success = 1;
+    bytes   errmsg  = 2;
 }
 
 // ==========================================
@@ -108,7 +112,8 @@ message DeleteNodeRequest {
 }
 
 message DeleteNodeResponse {
-    bool success = 1;
+    bool    success = 1;
+    bytes   errmsg  = 2;
 }
 
 // ==========================================
@@ -121,13 +126,16 @@ message LsNodeRequest {
 message LsNodeResponse {
                 bool    success     = 1;
     repeated    bytes   children    = 2;    // 子节点
+                bytes   errmsg      = 3;
 }
 
 // ==========================================
 
 // 节点状态信息
 message NodeState {
-
+    bytes   ephemeralOwner  = 1;
+    int32   numChildren     = 2;
+    int32   dataLength      = 3;
 }
 
 message StatNodeRequest {
@@ -138,6 +146,7 @@ message StatNodeRequest {
 message StatNodeResponse {
     bool        success = 1;
     NodeState   state   = 2;
+    bytes       errmsg  = 3;
 }
 
 // ==========================================
@@ -150,6 +159,7 @@ message ExistsNodeRequest {
 message ExistsNodeResponse {
     bool    success = 1;
     bool    exist   = 2;
+    bytes   errmsg  = 3;
 }
 
 // ==========================================

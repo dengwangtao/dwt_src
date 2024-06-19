@@ -2,7 +2,7 @@
 
 #include <string>
 #include <unordered_map>
-
+#include <memory>
 
 /**
  * ZooKeeper -server host:port cmd args
@@ -43,10 +43,20 @@ struct DNode {
     std::string data;   // 节点数据
     NodeType    type;   // 永久/会话
     size_t      ephemeralOwner;     // 所属的会话Id
-    std::unordered_map<std::string, DNode*> children;   // 子节点
+    std::unordered_map<std::string, std::unique_ptr<DNode>> children;   // 子节点
 
     // dataLength
     // numChildren
+
+    DNode()
+        : name(), data(), type(NodeType::PERSISTENT), ephemeralOwner(0) {}
+
+    DNode(const std::string& name, const std::string& data, NodeType type)
+        : name(name), data(data), type(type), ephemeralOwner(0) {}
+
+    DNode(const std::string& name, const std::string& data, NodeType type, size_t ephemeral)
+        : name(name), data(data), type(type), ephemeralOwner(ephemeral) {}
+        
 };
 
 
