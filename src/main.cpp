@@ -1,33 +1,63 @@
 #include <iostream>
+#include <sstream>
 
 #include "tcp/TcpServer.h"
 #include "SRCServer.h"
 
-
 #include "Services.h"
 
 void test() {
-    auto s = new dwt::Services();
-    // for(auto s : s->splitPath("/userService/method1/para1/")) {
-    //     std::cout << "|" << s << "|" << std::endl;
-    // }
+    auto* s = new dwt::Services();
+    
+    std::string line;
+    std::string op;
+    while(std::getline(std::cin, line)) {
+        std::stringstream ss(line);
+        ss >> op;    // get / create / set / ...
+        if(op == "create") {
+            // create /userservice/method/info  [data]  [1:永久2:会话]
+            std::string path;
+            ss >> path;
 
-    s->createNode(1, "/", "userService", "userService_data", dwt::NodeType::EPHEMERAL);
-    s->createNode(1, "/userService", "method01", "method01_data", dwt::NodeType::EPHEMERAL);
+            std::string data;
+            ss >> data;
 
-    dwt_proto::CreateNodeResponse resp;
-    resp.ParseFromString(s->createNode(1, "/userService/method01", "getUser", "getUser", dwt::NodeType::EPHEMERAL));
-    if(resp.success()) {
-        std::cout << "success" << std::endl;
-    } else {
-        std::cout << resp.errmsg() << std::endl;
-    }
+            int type = 1; // 默认为永久节点
+            ss >> type;
+            if(type == 0) type = 1;
 
-    dwt::DNode* curr;
-    if(s->walkTo("/userService/method01/a", &curr)) {
-        std::cout << curr->data << std::endl;
-    } else {
-        std::cout << "walk error" << std::endl;
+            dwt_proto::CreateNodeRequest req;
+            req.set_path(path);
+            req.set_nodedata(data);
+            req.set_nodetype(static_cast<dwt_proto::NodeType>(type));
+            dwt_proto::CreateNodeResponse resp;
+            if(resp.ParseFromString(s->handle(dwt_proto::ServiceType::Create, req.SerializeAsString(), 123))) {
+                if(resp.success()) {
+                    std::cout << "创建节点: " << path << " 成功" << std::endl;
+                } else {
+                    std::cout << "创建节点: " << path << " 失败, " << resp.errmsg() << std::endl;
+                }
+            }
+
+        } else if(op == "get") {
+            // get /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            dwt_proto::GetNodeRequest req;
+            req.set_path(path);
+
+            dwt_proto::GetNodeResponse resp;
+            if(resp.ParseFromString(s->handle(dwt_proto::ServiceType::Get, req.SerializeAsString(), 123))) {
+                if(resp.success()) {
+                    std::cout << path << ": " << resp.nodedata() << std::endl;
+                } else {
+                    std::cout << "获取节点: " << path << " 失败, " << resp.errmsg() << std::endl;
+                }
+            }
+        } else {
+            std::cout << "invalid operation" << std::endl;
+        }
     }
 }
 

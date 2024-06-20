@@ -190,13 +190,14 @@ inline bool ServiceType_Parse(
     ServiceType_descriptor(), name, value);
 }
 enum NodeType : int {
-  PERSISTENT = 0,
-  EPHEMERAL = 1,
+  Nothing_NodeType = 0,
+  PERSISTENT = 1,
+  EPHEMERAL = 2,
   NodeType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   NodeType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool NodeType_IsValid(int value);
-constexpr NodeType NodeType_MIN = PERSISTENT;
+constexpr NodeType NodeType_MIN = Nothing_NodeType;
 constexpr NodeType NodeType_MAX = EPHEMERAL;
 constexpr int NodeType_ARRAYSIZE = NodeType_MAX + 1;
 
@@ -1137,7 +1138,6 @@ class CreateNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
     kNodeDataFieldNumber = 3,
     kNodeTypeFieldNumber = 4,
   };
@@ -1153,20 +1153,6 @@ class CreateNodeRequest final :
   const std::string& _internal_path() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
   std::string* _internal_mutable_path();
-  public:
-
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
   public:
 
   // bytes nodeData = 3;
@@ -1201,7 +1187,6 @@ class CreateNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodedata_;
     int nodetype_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1497,7 +1482,6 @@ class GetNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
   };
   // bytes path = 1;
   void clear_path();
@@ -1513,20 +1497,6 @@ class GetNodeRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
-  public:
-
   // @@protoc_insertion_point(class_scope:dwt_proto.GetNodeRequest)
  private:
   class _Internal;
@@ -1536,7 +1506,6 @@ class GetNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1665,22 +1634,22 @@ class GetNodeResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfoFieldNumber = 2,
+    kNodeDataFieldNumber = 2,
     kErrmsgFieldNumber = 3,
     kSuccessFieldNumber = 1,
   };
-  // bytes info = 2;
-  void clear_info();
-  const std::string& info() const;
+  // bytes nodeData = 2;
+  void clear_nodedata();
+  const std::string& nodedata() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_info(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_info();
-  PROTOBUF_NODISCARD std::string* release_info();
-  void set_allocated_info(std::string* info);
+  void set_nodedata(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nodedata();
+  PROTOBUF_NODISCARD std::string* release_nodedata();
+  void set_allocated_nodedata(std::string* nodedata);
   private:
-  const std::string& _internal_info() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_info(const std::string& value);
-  std::string* _internal_mutable_info();
+  const std::string& _internal_nodedata() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodedata(const std::string& value);
+  std::string* _internal_mutable_nodedata();
   public:
 
   // bytes errmsg = 3;
@@ -1714,7 +1683,7 @@ class GetNodeResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodedata_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1846,7 +1815,6 @@ class SetNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
     kNodeDataFieldNumber = 3,
   };
   // bytes path = 1;
@@ -1861,20 +1829,6 @@ class SetNodeRequest final :
   const std::string& _internal_path() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_path(const std::string& value);
   std::string* _internal_mutable_path();
-  public:
-
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
   public:
 
   // bytes nodeData = 3;
@@ -1900,7 +1854,6 @@ class SetNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodedata_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -2195,7 +2148,6 @@ class DeleteNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
   };
   // bytes path = 1;
   void clear_path();
@@ -2211,20 +2163,6 @@ class DeleteNodeRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
-  public:
-
   // @@protoc_insertion_point(class_scope:dwt_proto.DeleteNodeRequest)
  private:
   class _Internal;
@@ -2234,7 +2172,6 @@ class DeleteNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2528,7 +2465,6 @@ class LsNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
   };
   // bytes path = 1;
   void clear_path();
@@ -2544,20 +2480,6 @@ class LsNodeRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
-  public:
-
   // @@protoc_insertion_point(class_scope:dwt_proto.LsNodeRequest)
  private:
   class _Internal;
@@ -2567,7 +2489,6 @@ class LsNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3062,7 +2983,6 @@ class StatNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
   };
   // bytes path = 1;
   void clear_path();
@@ -3078,20 +2998,6 @@ class StatNodeRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
-  public:
-
   // @@protoc_insertion_point(class_scope:dwt_proto.StatNodeRequest)
  private:
   class _Internal;
@@ -3101,7 +3007,6 @@ class StatNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3415,7 +3320,6 @@ class ExistsNodeRequest final :
 
   enum : int {
     kPathFieldNumber = 1,
-    kNodeNameFieldNumber = 2,
   };
   // bytes path = 1;
   void clear_path();
@@ -3431,20 +3335,6 @@ class ExistsNodeRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // bytes nodeName = 2;
-  void clear_nodename();
-  const std::string& nodename() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nodename(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nodename();
-  PROTOBUF_NODISCARD std::string* release_nodename();
-  void set_allocated_nodename(std::string* nodename);
-  private:
-  const std::string& _internal_nodename() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nodename(const std::string& value);
-  std::string* _internal_mutable_nodename();
-  public:
-
   // @@protoc_insertion_point(class_scope:dwt_proto.ExistsNodeRequest)
  private:
   class _Internal;
@@ -3454,7 +3344,6 @@ class ExistsNodeRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr path_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nodename_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3986,56 +3875,6 @@ inline void CreateNodeRequest::set_allocated_path(std::string* path) {
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.path)
 }
 
-// bytes nodeName = 2;
-inline void CreateNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& CreateNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.CreateNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void CreateNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.CreateNodeRequest.nodeName)
-}
-inline std::string* CreateNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.CreateNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& CreateNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void CreateNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* CreateNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* CreateNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.CreateNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void CreateNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.CreateNodeRequest.nodeName)
-}
-
 // bytes nodeData = 3;
 inline void CreateNodeRequest::clear_nodedata() {
   _impl_.nodedata_.ClearToEmpty();
@@ -4234,56 +4073,6 @@ inline void GetNodeRequest::set_allocated_path(std::string* path) {
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeRequest.path)
 }
 
-// bytes nodeName = 2;
-inline void GetNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& GetNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void GetNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeRequest.nodeName)
-}
-inline std::string* GetNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& GetNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void GetNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* GetNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* GetNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void GetNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeRequest.nodeName)
-}
-
 // -------------------------------------------------------------------
 
 // GetNodeResponse
@@ -4308,54 +4097,54 @@ inline void GetNodeResponse::set_success(bool value) {
   // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.success)
 }
 
-// bytes info = 2;
-inline void GetNodeResponse::clear_info() {
-  _impl_.info_.ClearToEmpty();
+// bytes nodeData = 2;
+inline void GetNodeResponse::clear_nodedata() {
+  _impl_.nodedata_.ClearToEmpty();
 }
-inline const std::string& GetNodeResponse::info() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeResponse.info)
-  return _internal_info();
+inline const std::string& GetNodeResponse::nodedata() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.GetNodeResponse.nodeData)
+  return _internal_nodedata();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void GetNodeResponse::set_info(ArgT0&& arg0, ArgT... args) {
+void GetNodeResponse::set_nodedata(ArgT0&& arg0, ArgT... args) {
  
- _impl_.info_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.info)
+ _impl_.nodedata_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.GetNodeResponse.nodeData)
 }
-inline std::string* GetNodeResponse::mutable_info() {
-  std::string* _s = _internal_mutable_info();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeResponse.info)
+inline std::string* GetNodeResponse::mutable_nodedata() {
+  std::string* _s = _internal_mutable_nodedata();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.GetNodeResponse.nodeData)
   return _s;
 }
-inline const std::string& GetNodeResponse::_internal_info() const {
-  return _impl_.info_.Get();
+inline const std::string& GetNodeResponse::_internal_nodedata() const {
+  return _impl_.nodedata_.Get();
 }
-inline void GetNodeResponse::_internal_set_info(const std::string& value) {
+inline void GetNodeResponse::_internal_set_nodedata(const std::string& value) {
   
-  _impl_.info_.Set(value, GetArenaForAllocation());
+  _impl_.nodedata_.Set(value, GetArenaForAllocation());
 }
-inline std::string* GetNodeResponse::_internal_mutable_info() {
+inline std::string* GetNodeResponse::_internal_mutable_nodedata() {
   
-  return _impl_.info_.Mutable(GetArenaForAllocation());
+  return _impl_.nodedata_.Mutable(GetArenaForAllocation());
 }
-inline std::string* GetNodeResponse::release_info() {
-  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeResponse.info)
-  return _impl_.info_.Release();
+inline std::string* GetNodeResponse::release_nodedata() {
+  // @@protoc_insertion_point(field_release:dwt_proto.GetNodeResponse.nodeData)
+  return _impl_.nodedata_.Release();
 }
-inline void GetNodeResponse::set_allocated_info(std::string* info) {
-  if (info != nullptr) {
+inline void GetNodeResponse::set_allocated_nodedata(std::string* nodedata) {
+  if (nodedata != nullptr) {
     
   } else {
     
   }
-  _impl_.info_.SetAllocated(info, GetArenaForAllocation());
+  _impl_.nodedata_.SetAllocated(nodedata, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.info_.IsDefault()) {
-    _impl_.info_.Set("", GetArenaForAllocation());
+  if (_impl_.nodedata_.IsDefault()) {
+    _impl_.nodedata_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeResponse.info)
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.GetNodeResponse.nodeData)
 }
 
 // bytes errmsg = 3;
@@ -4460,56 +4249,6 @@ inline void SetNodeRequest::set_allocated_path(std::string* path) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeRequest.path)
-}
-
-// bytes nodeName = 2;
-inline void SetNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& SetNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.SetNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void SetNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.SetNodeRequest.nodeName)
-}
-inline std::string* SetNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.SetNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& SetNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void SetNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* SetNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* SetNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.SetNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void SetNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.SetNodeRequest.nodeName)
 }
 
 // bytes nodeData = 3;
@@ -4690,56 +4429,6 @@ inline void DeleteNodeRequest::set_allocated_path(std::string* path) {
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.DeleteNodeRequest.path)
 }
 
-// bytes nodeName = 2;
-inline void DeleteNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& DeleteNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.DeleteNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void DeleteNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.DeleteNodeRequest.nodeName)
-}
-inline std::string* DeleteNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.DeleteNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& DeleteNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void DeleteNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* DeleteNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* DeleteNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.DeleteNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void DeleteNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.DeleteNodeRequest.nodeName)
-}
-
 // -------------------------------------------------------------------
 
 // DeleteNodeResponse
@@ -4866,56 +4555,6 @@ inline void LsNodeRequest::set_allocated_path(std::string* path) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.LsNodeRequest.path)
-}
-
-// bytes nodeName = 2;
-inline void LsNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& LsNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.LsNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void LsNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.LsNodeRequest.nodeName)
-}
-inline std::string* LsNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.LsNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& LsNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void LsNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* LsNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* LsNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.LsNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void LsNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.LsNodeRequest.nodeName)
 }
 
 // -------------------------------------------------------------------
@@ -5215,56 +4854,6 @@ inline void StatNodeRequest::set_allocated_path(std::string* path) {
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeRequest.path)
 }
 
-// bytes nodeName = 2;
-inline void StatNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& StatNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.StatNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void StatNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.StatNodeRequest.nodeName)
-}
-inline std::string* StatNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.StatNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& StatNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void StatNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* StatNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* StatNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.StatNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void StatNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.StatNodeRequest.nodeName)
-}
-
 // -------------------------------------------------------------------
 
 // StatNodeResponse
@@ -5481,56 +5070,6 @@ inline void ExistsNodeRequest::set_allocated_path(std::string* path) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:dwt_proto.ExistsNodeRequest.path)
-}
-
-// bytes nodeName = 2;
-inline void ExistsNodeRequest::clear_nodename() {
-  _impl_.nodename_.ClearToEmpty();
-}
-inline const std::string& ExistsNodeRequest::nodename() const {
-  // @@protoc_insertion_point(field_get:dwt_proto.ExistsNodeRequest.nodeName)
-  return _internal_nodename();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void ExistsNodeRequest::set_nodename(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nodename_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:dwt_proto.ExistsNodeRequest.nodeName)
-}
-inline std::string* ExistsNodeRequest::mutable_nodename() {
-  std::string* _s = _internal_mutable_nodename();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.ExistsNodeRequest.nodeName)
-  return _s;
-}
-inline const std::string& ExistsNodeRequest::_internal_nodename() const {
-  return _impl_.nodename_.Get();
-}
-inline void ExistsNodeRequest::_internal_set_nodename(const std::string& value) {
-  
-  _impl_.nodename_.Set(value, GetArenaForAllocation());
-}
-inline std::string* ExistsNodeRequest::_internal_mutable_nodename() {
-  
-  return _impl_.nodename_.Mutable(GetArenaForAllocation());
-}
-inline std::string* ExistsNodeRequest::release_nodename() {
-  // @@protoc_insertion_point(field_release:dwt_proto.ExistsNodeRequest.nodeName)
-  return _impl_.nodename_.Release();
-}
-inline void ExistsNodeRequest::set_allocated_nodename(std::string* nodename) {
-  if (nodename != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nodename_.SetAllocated(nodename, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nodename_.IsDefault()) {
-    _impl_.nodename_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ExistsNodeRequest.nodeName)
 }
 
 // -------------------------------------------------------------------
