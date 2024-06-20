@@ -40,6 +40,9 @@ std::vector<std::string> Services::splitPath(const std::string& path) {
     std::stringstream ss(path);
     std::string item;
     while(std::getline(ss, item, '/')) {
+        if(item == "" && !pathes.empty()) { // 路径格式错误
+            return {};
+        }
         pathes.push_back(item);
         // LOG_INFO("path: |%s|", item.c_str());
     }
@@ -55,7 +58,6 @@ bool Services::walkTo(const std::string& path, std::string& nodeName, DNode** ou
     std::vector<std::string> pathes = splitPath(path);  // 右值
 
     if(pathes.size() <= 0) {
-        LOG_INFO("pathes.size() <= 0");
         *outNode = nullptr;
         return false;
     }
