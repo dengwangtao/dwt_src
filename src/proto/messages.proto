@@ -60,15 +60,15 @@ message ServiceRequest {
 // ==========================================
 
 enum NodeType {
-    PERSISTENT  = 0;    // 永久节点
-    EPHEMERAL   = 1;    // 会话节点
+    Nothing_NodeType    = 0;
+    PERSISTENT          = 1;    // 永久节点
+    EPHEMERAL           = 2;    // 会话节点
 }
 
 // ==========================================
 
 message CreateNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
     bytes       nodeData    = 3;    // 127.0.0.1:8001
     NodeType    nodeType    = 4;    // EPHEMERAL
 }
@@ -82,20 +82,18 @@ message CreateNodeResponse {
 
 message GetNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
 }
 
 message GetNodeResponse {
-    bool    success = 1;    // 成功/失败
-    bytes   info    = 2;    // 节点信息
-    bytes   errmsg  = 3;
+    bool    success     = 1;    // 成功/失败
+    bytes   nodeData    = 2;    // 节点信息
+    bytes   errmsg      = 3;
 }
 
 // ==========================================
 
 message SetNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
     bytes       nodeData    = 3;    // 127.0.0.1:8001
 }
 
@@ -108,7 +106,6 @@ message SetNodeResponse {
 
 message DeleteNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
 }
 
 message DeleteNodeResponse {
@@ -120,7 +117,6 @@ message DeleteNodeResponse {
 
 message LsNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
 }
 
 message LsNodeResponse {
@@ -140,7 +136,6 @@ message NodeState {
 
 message StatNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
 }
 
 message StatNodeResponse {
@@ -153,7 +148,6 @@ message StatNodeResponse {
 
 message ExistsNodeRequest {
     bytes       path        = 1;    // /userService
-    bytes       nodeName    = 2;    // getUserInfo
 }
 
 message ExistsNodeResponse {
