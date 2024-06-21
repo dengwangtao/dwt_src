@@ -88,6 +88,9 @@ extern NodeStateDefaultTypeInternal _NodeState_default_instance_;
 class ServiceRequest;
 struct ServiceRequestDefaultTypeInternal;
 extern ServiceRequestDefaultTypeInternal _ServiceRequest_default_instance_;
+class ServiceResponse;
+struct ServiceResponseDefaultTypeInternal;
+extern ServiceResponseDefaultTypeInternal _ServiceResponse_default_instance_;
 class SetNodeRequest;
 struct SetNodeRequestDefaultTypeInternal;
 extern SetNodeRequestDefaultTypeInternal _SetNodeRequest_default_instance_;
@@ -122,6 +125,7 @@ template<> ::dwt_proto::LsNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::Ls
 template<> ::dwt_proto::LsNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::LsNodeResponse>(Arena*);
 template<> ::dwt_proto::NodeState* Arena::CreateMaybeMessage<::dwt_proto::NodeState>(Arena*);
 template<> ::dwt_proto::ServiceRequest* Arena::CreateMaybeMessage<::dwt_proto::ServiceRequest>(Arena*);
+template<> ::dwt_proto::ServiceResponse* Arena::CreateMaybeMessage<::dwt_proto::ServiceResponse>(Arena*);
 template<> ::dwt_proto::SetNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::SetNodeRequest>(Arena*);
 template<> ::dwt_proto::SetNodeResponse* Arena::CreateMaybeMessage<::dwt_proto::SetNodeResponse>(Arena*);
 template<> ::dwt_proto::StatNodeRequest* Arena::CreateMaybeMessage<::dwt_proto::StatNodeRequest>(Arena*);
@@ -502,10 +506,10 @@ class WrappedResponse final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 3,
+    kDataFieldNumber = 2,
     kResponseTypeFieldNumber = 1,
   };
-  // bytes data = 3;
+  // bytes data = 2;
   void clear_data();
   const std::string& data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1016,6 +1020,181 @@ class ServiceRequest final :
 };
 // -------------------------------------------------------------------
 
+class ServiceResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.ServiceResponse) */ {
+ public:
+  inline ServiceResponse() : ServiceResponse(nullptr) {}
+  ~ServiceResponse() override;
+  explicit PROTOBUF_CONSTEXPR ServiceResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ServiceResponse(const ServiceResponse& from);
+  ServiceResponse(ServiceResponse&& from) noexcept
+    : ServiceResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ServiceResponse& operator=(const ServiceResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ServiceResponse& operator=(ServiceResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ServiceResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ServiceResponse* internal_default_instance() {
+    return reinterpret_cast<const ServiceResponse*>(
+               &_ServiceResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(ServiceResponse& a, ServiceResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ServiceResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ServiceResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ServiceResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ServiceResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ServiceResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ServiceResponse& from) {
+    ServiceResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ServiceResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "dwt_proto.ServiceResponse";
+  }
+  protected:
+  explicit ServiceResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDataFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
+    kServiceTypeFieldNumber = 1,
+  };
+  // bytes data = 2;
+  void clear_data();
+  const std::string& data() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_data(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_data();
+  PROTOBUF_NODISCARD std::string* release_data();
+  void set_allocated_data(std::string* data);
+  private:
+  const std::string& _internal_data() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_data(const std::string& value);
+  std::string* _internal_mutable_data();
+  public:
+
+  // uint64 sessionId = 3;
+  void clear_sessionid();
+  uint64_t sessionid() const;
+  void set_sessionid(uint64_t value);
+  private:
+  uint64_t _internal_sessionid() const;
+  void _internal_set_sessionid(uint64_t value);
+  public:
+
+  // .dwt_proto.ServiceType serviceType = 1;
+  void clear_servicetype();
+  ::dwt_proto::ServiceType servicetype() const;
+  void set_servicetype(::dwt_proto::ServiceType value);
+  private:
+  ::dwt_proto::ServiceType _internal_servicetype() const;
+  void _internal_set_servicetype(::dwt_proto::ServiceType value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:dwt_proto.ServiceResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
+    uint64_t sessionid_;
+    int servicetype_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
 class CreateNodeRequest final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:dwt_proto.CreateNodeRequest) */ {
  public:
@@ -1064,7 +1243,7 @@ class CreateNodeRequest final :
                &_CreateNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(CreateNodeRequest& a, CreateNodeRequest& b) {
     a.Swap(&b);
@@ -1244,7 +1423,7 @@ class CreateNodeResponse final :
                &_CreateNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(CreateNodeResponse& a, CreateNodeResponse& b) {
     a.Swap(&b);
@@ -1408,7 +1587,7 @@ class GetNodeRequest final :
                &_GetNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(GetNodeRequest& a, GetNodeRequest& b) {
     a.Swap(&b);
@@ -1561,7 +1740,7 @@ class GetNodeResponse final :
                &_GetNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(GetNodeResponse& a, GetNodeResponse& b) {
     a.Swap(&b);
@@ -1741,7 +1920,7 @@ class SetNodeRequest final :
                &_SetNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(SetNodeRequest& a, SetNodeRequest& b) {
     a.Swap(&b);
@@ -1910,7 +2089,7 @@ class SetNodeResponse final :
                &_SetNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(SetNodeResponse& a, SetNodeResponse& b) {
     a.Swap(&b);
@@ -2074,7 +2253,7 @@ class DeleteNodeRequest final :
                &_DeleteNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(DeleteNodeRequest& a, DeleteNodeRequest& b) {
     a.Swap(&b);
@@ -2227,7 +2406,7 @@ class DeleteNodeResponse final :
                &_DeleteNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(DeleteNodeResponse& a, DeleteNodeResponse& b) {
     a.Swap(&b);
@@ -2391,7 +2570,7 @@ class LsNodeRequest final :
                &_LsNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(LsNodeRequest& a, LsNodeRequest& b) {
     a.Swap(&b);
@@ -2544,7 +2723,7 @@ class LsNodeResponse final :
                &_LsNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(LsNodeResponse& a, LsNodeResponse& b) {
     a.Swap(&b);
@@ -2734,7 +2913,7 @@ class NodeState final :
                &_NodeState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(NodeState& a, NodeState& b) {
     a.Swap(&b);
@@ -2915,7 +3094,7 @@ class StatNodeRequest final :
                &_StatNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   friend void swap(StatNodeRequest& a, StatNodeRequest& b) {
     a.Swap(&b);
@@ -3068,7 +3247,7 @@ class StatNodeResponse final :
                &_StatNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   friend void swap(StatNodeResponse& a, StatNodeResponse& b) {
     a.Swap(&b);
@@ -3252,7 +3431,7 @@ class ExistsNodeRequest final :
                &_ExistsNodeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   friend void swap(ExistsNodeRequest& a, ExistsNodeRequest& b) {
     a.Swap(&b);
@@ -3405,7 +3584,7 @@ class ExistsNodeResponse final :
                &_ExistsNodeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   friend void swap(ExistsNodeResponse& a, ExistsNodeResponse& b) {
     a.Swap(&b);
@@ -3635,7 +3814,7 @@ inline void WrappedResponse::set_responsetype(::dwt_proto::MessageType value) {
   // @@protoc_insertion_point(field_set:dwt_proto.WrappedResponse.responseType)
 }
 
-// bytes data = 3;
+// bytes data = 2;
 inline void WrappedResponse::clear_data() {
   _impl_.data_.ClearToEmpty();
 }
@@ -3825,6 +4004,100 @@ inline void ServiceRequest::_internal_set_sessionid(uint64_t value) {
 inline void ServiceRequest::set_sessionid(uint64_t value) {
   _internal_set_sessionid(value);
   // @@protoc_insertion_point(field_set:dwt_proto.ServiceRequest.sessionId)
+}
+
+// -------------------------------------------------------------------
+
+// ServiceResponse
+
+// .dwt_proto.ServiceType serviceType = 1;
+inline void ServiceResponse::clear_servicetype() {
+  _impl_.servicetype_ = 0;
+}
+inline ::dwt_proto::ServiceType ServiceResponse::_internal_servicetype() const {
+  return static_cast< ::dwt_proto::ServiceType >(_impl_.servicetype_);
+}
+inline ::dwt_proto::ServiceType ServiceResponse::servicetype() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceResponse.serviceType)
+  return _internal_servicetype();
+}
+inline void ServiceResponse::_internal_set_servicetype(::dwt_proto::ServiceType value) {
+  
+  _impl_.servicetype_ = value;
+}
+inline void ServiceResponse::set_servicetype(::dwt_proto::ServiceType value) {
+  _internal_set_servicetype(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceResponse.serviceType)
+}
+
+// bytes data = 2;
+inline void ServiceResponse::clear_data() {
+  _impl_.data_.ClearToEmpty();
+}
+inline const std::string& ServiceResponse::data() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceResponse.data)
+  return _internal_data();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ServiceResponse::set_data(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.data_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceResponse.data)
+}
+inline std::string* ServiceResponse::mutable_data() {
+  std::string* _s = _internal_mutable_data();
+  // @@protoc_insertion_point(field_mutable:dwt_proto.ServiceResponse.data)
+  return _s;
+}
+inline const std::string& ServiceResponse::_internal_data() const {
+  return _impl_.data_.Get();
+}
+inline void ServiceResponse::_internal_set_data(const std::string& value) {
+  
+  _impl_.data_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ServiceResponse::_internal_mutable_data() {
+  
+  return _impl_.data_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ServiceResponse::release_data() {
+  // @@protoc_insertion_point(field_release:dwt_proto.ServiceResponse.data)
+  return _impl_.data_.Release();
+}
+inline void ServiceResponse::set_allocated_data(std::string* data) {
+  if (data != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.data_.SetAllocated(data, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.data_.IsDefault()) {
+    _impl_.data_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:dwt_proto.ServiceResponse.data)
+}
+
+// uint64 sessionId = 3;
+inline void ServiceResponse::clear_sessionid() {
+  _impl_.sessionid_ = uint64_t{0u};
+}
+inline uint64_t ServiceResponse::_internal_sessionid() const {
+  return _impl_.sessionid_;
+}
+inline uint64_t ServiceResponse::sessionid() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.ServiceResponse.sessionId)
+  return _internal_sessionid();
+}
+inline void ServiceResponse::_internal_set_sessionid(uint64_t value) {
+  
+  _impl_.sessionid_ = value;
+}
+inline void ServiceResponse::set_sessionid(uint64_t value) {
+  _internal_set_sessionid(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.ServiceResponse.sessionId)
 }
 
 // -------------------------------------------------------------------
@@ -5165,6 +5438,8 @@ inline void ExistsNodeResponse::set_allocated_errmsg(std::string* errmsg) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

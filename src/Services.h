@@ -7,19 +7,29 @@
 #include <unordered_map>
 #include <vector>
 #include <memory>
+#include <mutex>
 
 namespace dwt {
 
-
+/**
+ * 单例
+ */
 class Services {
 
-public:
-    
+private:
     Services(); // 绑定handler
     ~Services() = default;
+    Services(const Services&) = delete;
+    Services& operator=(const Services&) = delete;
 
+public:
+    static Services& getInstance();
+    
     std::string handle(dwt_proto::ServiceType operation, const std::string& str, size_t sessionId);
 
+    void removeEphemeral(size_t sessionId); // 删除会话节点
+
+private:
     std::string createNodeHandler(const std::string& str, size_t sessionId);
     std::string createNode(size_t sessionId, const std::string& path, const std::string& nodeData, NodeType nodeType);
 
@@ -41,17 +51,21 @@ public:
     std::string existsNodeHandler(const std::string& str, size_t sessionId);
     std::string existsNode(size_t sessionId, const std::string& path);
 
+    void removeEphemeral(DNode* node, size_t sessionId); // 删除会话节点
+
+
 private:
 
     std::vector<std::string> splitPath(const std::string& path);
     DNode* walkTo(const std::vector<std::string>& pathes);
-
 
     using Handler = std::function<std::string(const std::string&, size_t)>;
 
     std::unordered_map<dwt_proto::ServiceType, Handler> m_funcs;
 
     std::unique_ptr<DNode> m_dummy;   // 哑节点  [] => root
+
+    std::mutex m_mutex;
 };
 
 } // end namespace dwt

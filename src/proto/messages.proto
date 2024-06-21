@@ -22,7 +22,7 @@ message WrappedRequest {
 // 整体字段 (响应)
 message WrappedResponse {
     MessageType responseType = 1;
-    bytes       data         = 3;
+    bytes       data         = 2;
 }
 
 // ==========================================
@@ -55,6 +55,11 @@ message ServiceRequest {
     ServiceType     serviceType         = 1;    // 业务类型
     bytes           serviceParameters   = 2;    // 业务参数
     uint64          sessionId           = 3;    // 会话 Id
+}
+
+message ServiceResponse {
+    ServiceType     serviceType     = 1;    // 业务类型
+    bytes           data            = 2;    // 业务结果
 }
 
 // ==========================================

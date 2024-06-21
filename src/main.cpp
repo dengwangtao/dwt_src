@@ -7,8 +7,31 @@
 
 #include "Services.h"
 
+void test();
+
+int main() {
+
+    // test();
+    // return 0;
+
+
+    dwt::EventLoop loop;
+
+    dwt::SRCServer server(
+        &loop,
+        dwt::InetAddress("127.0.0.1", 8888),
+        "SRCServer"
+    );
+
+    server.start();
+    loop.loop();
+
+    return 0;
+}
+
+
 void test() {
-    auto* s = new dwt::Services();
+    auto* s = &(dwt::Services::getInstance());
 
     const int sessionId = 123; // 0x7b
     
@@ -131,26 +154,7 @@ void test() {
                     std::cout << "numChildren: " << resp.state().numchildren() << std::endl;
                     std::cout << "ephemeralOwner: " << std::hex << resp.state().ephemeralowner() << std::endl;
                 } else {
-                    std::cout << "ls 节点: " << path << " 失败, " << resp.errmsg() << std::endl;
-                }
-            }
-        } else if(op == "stat") {
-            // stat /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            dwt_proto::StatNodeRequest req;
-            req.set_path(path);
-
-            dwt_proto::StatNodeResponse resp;
-            if(resp.ParseFromString(s->handle(dwt_proto::ServiceType::Stat, req.SerializeAsString(), sessionId))) {
-                if(resp.success()) {
-                    std::cout << "nodeType: " << resp.state().nodetype() << std::endl;
-                    std::cout << "dataLength: " << resp.state().datalength() << std::endl;
-                    std::cout << "numChildren: " << resp.state().numchildren() << std::endl;
-                    std::cout << "ephemeralOwner: " << std::hex << resp.state().ephemeralowner() << std::endl;
-                } else {
-                    std::cout << "ls 节点: " << path << " 失败, " << resp.errmsg() << std::endl;
+                    std::cout << "stat 节点: " << path << " 失败, " << resp.errmsg() << std::endl;
                 }
             }
         } else if(op == "exists") {
@@ -173,26 +177,4 @@ void test() {
             std::cout << "invalid operation" << std::endl;
         }
     }
-}
-
-int main() {
-
-    test();
-    return 0;
-
-
-    
-    
-    dwt::EventLoop loop;
-
-    dwt::SRCServer server(
-        &loop,
-        dwt::InetAddress("127.0.0.1", 8888),
-        "SRCServer"
-    );
-
-    server.start();
-    loop.loop();
-
-    return 0;
 }

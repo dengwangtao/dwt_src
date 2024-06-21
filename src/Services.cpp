@@ -5,6 +5,11 @@
 
 namespace dwt {
 
+Services& Services::getInstance() {
+    static Services instance;
+    return instance;
+}
+
 Services::Services()
     : m_dummy(std::make_unique<DNode>()) {
 
@@ -30,6 +35,28 @@ std::string Services::handle(dwt_proto::ServiceType operation, const std::string
     }
     return "error";
 }
+
+
+
+void Services::removeEphemeral(size_t sessionId) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    removeEphemeral(m_dummy.get(), sessionId);
+}
+
+void Services::removeEphemeral(DNode* node, size_t sessionId) {
+    if(!node) return;
+    for(auto it = node->children.begin(); it != node->children.end();) {
+        if(it->second->type == NodeType::EPHEMERAL && it->second->ephemeralOwner == sessionId) {
+            it = node->children.erase(it);
+        } else {
+            removeEphemeral(it->second.get(), sessionId);
+            ++ it;
+        }
+    }
+}
+
+
 
 
 /**
@@ -80,6 +107,7 @@ std::string Services::createNodeHandler(const std::string& str, size_t sessionId
         resp.set_errmsg("Create Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return createNode(sessionId, req.path(), req.nodedata(), static_cast<NodeType>(req.nodetype()));
 }
 std::string Services::createNode(size_t sessionId, const std::string& path, const std::string& nodeData, NodeType nodeType) {
@@ -133,6 +161,7 @@ std::string Services::getNodeHandler(const std::string& str, size_t sessionId) {
         resp.set_errmsg("Get Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return getNode(sessionId, req.path());
 }
 std::string Services::getNode(size_t sessionId, const std::string& path) {
@@ -176,6 +205,7 @@ std::string Services::setNodeHandler(const std::string& str, size_t sessionId) {
         resp.set_errmsg("Set Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return setNode(sessionId, req.path(), req.nodedata());
 }
 std::string Services::setNode(size_t sessionId, const std::string& path, const std::string& nodeData) {
@@ -220,6 +250,7 @@ std::string Services::deleteNodeHandler(const std::string& str, size_t sessionId
         resp.set_errmsg("Delete Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return deleteNode(sessionId, req.path());
 }
 std::string Services::deleteNode(size_t sessionId, const std::string& path) {
@@ -274,6 +305,7 @@ std::string Services::lsNodeHandler(const std::string& str, size_t sessionId) {
         resp.set_errmsg("Ls Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return lsNode(sessionId, req.path());
 }
 std::string Services::lsNode(size_t sessionId, const std::string& path) {
@@ -320,6 +352,7 @@ std::string Services::statNodeHandler(const std::string& str, size_t sessionId) 
         resp.set_errmsg("Stat Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return statNode(sessionId, req.path());
 }
 std::string Services::statNode(size_t sessionId, const std::string& path) {
@@ -366,6 +399,7 @@ std::string Services::existsNodeHandler(const std::string& str, size_t sessionId
         resp.set_errmsg("Exists Node Request Parse Error");
         return resp.SerializeAsString();
     }
+    std::lock_guard<std::mutex> lock(m_mutex);
     return existsNode(sessionId, req.path());
 }
 std::string Services::existsNode(size_t sessionId, const std::string& path) {

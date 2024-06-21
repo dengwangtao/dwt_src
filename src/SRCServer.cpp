@@ -4,6 +4,7 @@
 
 #include "uuid4.h"
 #include "messages.pb.h"
+#include "Services.h"
 
 namespace dwt {
 
@@ -15,8 +16,7 @@ SRCServer::SRCServer(
     const std::string& name, int timeout, int max_heartbeat)
     : m_loop(loop)
     , m_server(loop, listenAddr, name)
-    , m_heartbeatCounter(listenAddr, timeout, max_heartbeat)
-    , m_services(std::make_unique<Services>(/* DOTO: 补齐参数 */)) {
+    , m_heartbeatCounter(listenAddr, timeout, max_heartbeat) {
 
 
     // 构造函数
@@ -74,6 +74,7 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
     if(!wrappedRequest.ParseFromString(data)) {
         LOG_ERROR("wrappedRequest.ParseFromString(%s)", data.c_str());
         resp.set_responsetype(dwt_proto::MessageType::Error);
+        resp.set_data("request parse error");
         conn->send(resp.SerializeAsString());
         return;
     }
@@ -101,11 +102,39 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
         conn->send(resp.SerializeAsString());
 
 
-    } else {
+    } else if(wrappedRequest.requesttype() == dwt_proto::MessageType::Service) {
+
         // 业务请求
-        LOG_WARN("业务分支");
+        LOG_INFO("业务请求到达");
+        // 解析业务参数
+        dwt_proto::ServiceRequest serviceRequest;
+        if(!serviceRequest.ParseFromString(wrappedRequest.requestparameters())) {
+            LOG_ERROR("请求参数错误");
+            resp.set_responsetype(dwt_proto::MessageType::Error);
+            resp.set_data("service request parse error");
+            conn->send(resp.SerializeAsString());
+            return;
+        }
 
+        std::string serviceResp = Services::getInstance().handle(
+            serviceRequest.servicetype(),
+            serviceRequest.serviceparameters(),
+            serviceRequest.sessionid());
 
+        dwt_proto::ServiceResponse serviceResponse;
+        serviceResponse.set_servicetype(serviceRequest.servicetype());
+        serviceResponse.set_data(serviceResp);
+
+        resp.set_responsetype(dwt_proto::MessageType::Service);
+        resp.set_data(serviceResponse.SerializeAsString());
+
+        conn->send(resp.SerializeAsString());
+
+    } else {
+        LOG_ERROR("请求参数错误");
+        resp.set_responsetype(dwt_proto::MessageType::Error);
+        resp.set_data("illegal request parameters");
+        conn->send(resp.SerializeAsString());
     }
     
 }
@@ -125,14 +154,16 @@ void SRCServer::onUDPMessage(size_t sessionId) {
 
 
 /**
- * TODO:删除会话, 删除会话节点
- *      runinLoop ...
+ * 运行在udp thread
  */
 void SRCServer::onHeartbeatReachLimit(size_t sessionId) {
     LOG_INFO("session %lu died", sessionId);
     m_sessionManager.remove(sessionId);
 
-    // TODO: 删除会话节点
+    // 删除会话节点
+    Services::getInstance().removeEphemeral(sessionId);
+
+    
 }
 
 } // end namespace dwt

@@ -70,7 +70,7 @@ struct DNode {
         : name(name), data(data), type(type), ephemeralOwner(ephemeral) {}
     
     ~DNode() {
-        LOG_INFO("dtor DNode{name=%s, data=%s, type=%d, owner=%lx}", name.c_str(), data.c_str(), static_cast<int>(type), ephemeralOwner);
+        LOG_INFO("dtor DNode{name=%s, data=%s, type=%d, owner=%lu}", name.c_str(), data.c_str(), static_cast<int>(type), ephemeralOwner);
     }
 };
 
