@@ -129,9 +129,10 @@ message LsNodeResponse {
 
 // 节点状态信息
 message NodeState {
-    bytes   ephemeralOwner  = 1;
-    int32   numChildren     = 2;
-    int32   dataLength      = 3;
+    uint64      ephemeralOwner  = 1;
+    int32       numChildren     = 2;
+    int32       dataLength      = 3;
+    NodeType    NodeType        = 4;
 }
 
 message StatNodeRequest {

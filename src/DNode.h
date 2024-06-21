@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <memory>
 
+#include "tcp/Logger.h"
+
 /**
  * ZooKeeper -server host:port cmd args
         stat path [watch]
@@ -31,10 +33,20 @@
 
 namespace dwt {
 
-enum class NodeType {
+enum class NodeType: int {
+    NONE,               // 占位符
     PERSISTENT,         // 永久节点
     EPHEMERAL,          // 临时节点 (会话节点, 会话关闭后, 节点失效)
 };
+
+inline std::string getNodeTypeStr(NodeType type) {
+    switch(type) {
+        case NodeType::PERSISTENT:  return "PERSISTENT";
+        case NodeType::EPHEMERAL:   return "EPHEMERAL";
+        case NodeType::NONE:        return "UNKNOWN";
+    }
+    return "UNKNOWN";
+}
 
 
 // 节点类型
@@ -56,7 +68,10 @@ struct DNode {
 
     DNode(const std::string& name, const std::string& data, NodeType type, size_t ephemeral)
         : name(name), data(data), type(type), ephemeralOwner(ephemeral) {}
-        
+    
+    ~DNode() {
+        LOG_INFO("dtor DNode{name=%s, data=%s, type=%d, owner=%lx}", name.c_str(), data.c_str(), static_cast<int>(type), ephemeralOwner);
+    }
 };
 
 

@@ -44,14 +44,14 @@ public:
 private:
 
     std::vector<std::string> splitPath(const std::string& path);
-    bool walkTo(const std::string& path, std::string& nodeName, DNode** outNode);
+    DNode* walkTo(const std::vector<std::string>& pathes);
 
 
     using Handler = std::function<std::string(const std::string&, size_t)>;
 
     std::unordered_map<dwt_proto::ServiceType, Handler> m_funcs;
 
-    std::unique_ptr<DNode> m_root;   // 根节点 "/"
+    std::unique_ptr<DNode> m_dummy;   // 哑节点  [] => root
 };
 
 } // end namespace dwt

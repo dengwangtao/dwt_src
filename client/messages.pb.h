@@ -2810,19 +2810,15 @@ class NodeState final :
     kEphemeralOwnerFieldNumber = 1,
     kNumChildrenFieldNumber = 2,
     kDataLengthFieldNumber = 3,
+    kNodeTypeFieldNumber = 4,
   };
-  // bytes ephemeralOwner = 1;
+  // uint64 ephemeralOwner = 1;
   void clear_ephemeralowner();
-  const std::string& ephemeralowner() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_ephemeralowner(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_ephemeralowner();
-  PROTOBUF_NODISCARD std::string* release_ephemeralowner();
-  void set_allocated_ephemeralowner(std::string* ephemeralowner);
+  uint64_t ephemeralowner() const;
+  void set_ephemeralowner(uint64_t value);
   private:
-  const std::string& _internal_ephemeralowner() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ephemeralowner(const std::string& value);
-  std::string* _internal_mutable_ephemeralowner();
+  uint64_t _internal_ephemeralowner() const;
+  void _internal_set_ephemeralowner(uint64_t value);
   public:
 
   // int32 numChildren = 2;
@@ -2843,6 +2839,15 @@ class NodeState final :
   void _internal_set_datalength(int32_t value);
   public:
 
+  // .dwt_proto.NodeType NodeType = 4;
+  void clear_nodetype();
+  ::dwt_proto::NodeType nodetype() const;
+  void set_nodetype(::dwt_proto::NodeType value);
+  private:
+  ::dwt_proto::NodeType _internal_nodetype() const;
+  void _internal_set_nodetype(::dwt_proto::NodeType value);
+  public:
+
   // @@protoc_insertion_point(class_scope:dwt_proto.NodeState)
  private:
   class _Internal;
@@ -2851,9 +2856,10 @@ class NodeState final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ephemeralowner_;
+    uint64_t ephemeralowner_;
     int32_t numchildren_;
     int32_t datalength_;
+    int nodetype_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -4710,54 +4716,24 @@ inline void LsNodeResponse::set_allocated_errmsg(std::string* errmsg) {
 
 // NodeState
 
-// bytes ephemeralOwner = 1;
+// uint64 ephemeralOwner = 1;
 inline void NodeState::clear_ephemeralowner() {
-  _impl_.ephemeralowner_.ClearToEmpty();
+  _impl_.ephemeralowner_ = uint64_t{0u};
 }
-inline const std::string& NodeState::ephemeralowner() const {
+inline uint64_t NodeState::_internal_ephemeralowner() const {
+  return _impl_.ephemeralowner_;
+}
+inline uint64_t NodeState::ephemeralowner() const {
   // @@protoc_insertion_point(field_get:dwt_proto.NodeState.ephemeralOwner)
   return _internal_ephemeralowner();
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void NodeState::set_ephemeralowner(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.ephemeralowner_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+inline void NodeState::_internal_set_ephemeralowner(uint64_t value) {
+  
+  _impl_.ephemeralowner_ = value;
+}
+inline void NodeState::set_ephemeralowner(uint64_t value) {
+  _internal_set_ephemeralowner(value);
   // @@protoc_insertion_point(field_set:dwt_proto.NodeState.ephemeralOwner)
-}
-inline std::string* NodeState::mutable_ephemeralowner() {
-  std::string* _s = _internal_mutable_ephemeralowner();
-  // @@protoc_insertion_point(field_mutable:dwt_proto.NodeState.ephemeralOwner)
-  return _s;
-}
-inline const std::string& NodeState::_internal_ephemeralowner() const {
-  return _impl_.ephemeralowner_.Get();
-}
-inline void NodeState::_internal_set_ephemeralowner(const std::string& value) {
-  
-  _impl_.ephemeralowner_.Set(value, GetArenaForAllocation());
-}
-inline std::string* NodeState::_internal_mutable_ephemeralowner() {
-  
-  return _impl_.ephemeralowner_.Mutable(GetArenaForAllocation());
-}
-inline std::string* NodeState::release_ephemeralowner() {
-  // @@protoc_insertion_point(field_release:dwt_proto.NodeState.ephemeralOwner)
-  return _impl_.ephemeralowner_.Release();
-}
-inline void NodeState::set_allocated_ephemeralowner(std::string* ephemeralowner) {
-  if (ephemeralowner != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.ephemeralowner_.SetAllocated(ephemeralowner, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.ephemeralowner_.IsDefault()) {
-    _impl_.ephemeralowner_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:dwt_proto.NodeState.ephemeralOwner)
 }
 
 // int32 numChildren = 2;
@@ -4798,6 +4774,26 @@ inline void NodeState::_internal_set_datalength(int32_t value) {
 inline void NodeState::set_datalength(int32_t value) {
   _internal_set_datalength(value);
   // @@protoc_insertion_point(field_set:dwt_proto.NodeState.dataLength)
+}
+
+// .dwt_proto.NodeType NodeType = 4;
+inline void NodeState::clear_nodetype() {
+  _impl_.nodetype_ = 0;
+}
+inline ::dwt_proto::NodeType NodeState::_internal_nodetype() const {
+  return static_cast< ::dwt_proto::NodeType >(_impl_.nodetype_);
+}
+inline ::dwt_proto::NodeType NodeState::nodetype() const {
+  // @@protoc_insertion_point(field_get:dwt_proto.NodeState.NodeType)
+  return _internal_nodetype();
+}
+inline void NodeState::_internal_set_nodetype(::dwt_proto::NodeType value) {
+  
+  _impl_.nodetype_ = value;
+}
+inline void NodeState::set_nodetype(::dwt_proto::NodeType value) {
+  _internal_set_nodetype(value);
+  // @@protoc_insertion_point(field_set:dwt_proto.NodeState.NodeType)
 }
 
 // -------------------------------------------------------------------

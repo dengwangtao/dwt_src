@@ -6,9 +6,11 @@
 namespace dwt {
 
 Services::Services()
-    : m_root(std::make_unique<DNode>()) {
+    : m_dummy(std::make_unique<DNode>()) {
 
-    m_root->data = "root";
+    m_dummy->data = "dummy";
+    m_dummy->children[""] = std::make_unique<DNode>();   // 根节点
+    m_dummy->children[""]->data = "root";
 
     // 绑定handler
 
@@ -49,44 +51,24 @@ std::vector<std::string> Services::splitPath(const std::string& path) {
     return pathes;
 }
 
-/**
- * nodeName
- * outNode为传出参数
- */
-bool Services::walkTo(const std::string& path, std::string& nodeName, DNode** outNode) { // path: /userService/method1/para1
-    *outNode = nullptr;
-    std::vector<std::string> pathes = splitPath(path);  // 右值
 
-    if(pathes.size() <= 0) {
-        *outNode = nullptr;
-        return false;
-    }
-    nodeName = pathes.back();
-    pathes.pop_back();
+DNode* Services::walkTo(const std::vector<std::string>& pathes) { // path: /userService/method1/para1
 
     // walkto
-    DNode* curr = m_root.get();
+    DNode* curr = m_dummy.get();
     
-    for(int i = 1; i < pathes.size() && curr; ++ i) {
-        bool found = false;
-        for(auto& ch : curr->children) {
-            if(ch.first == pathes[i]) {
-                curr = ch.second.get();
-                found = true;
-                break;
-            }
-        }
-        if(!found) {
+    for(int i = 0; i < pathes.size(); ++ i) {
+        if(curr->children.count(pathes[i])) {
+            curr = curr->children[pathes[i]].get();
+        } else {
             // path不存在
-            *outNode = nullptr;
-            return false;
+            return nullptr;
         }
     }
-    *outNode = curr;
-    return true;
+    return curr;
 }
 
-
+// ===============================================================================
 
 std::string Services::createNodeHandler(const std::string& str, size_t sessionId) {
     dwt_proto::CreateNodeRequest req;
@@ -101,29 +83,45 @@ std::string Services::createNodeHandler(const std::string& str, size_t sessionId
     return createNode(sessionId, req.path(), req.nodedata(), static_cast<NodeType>(req.nodetype()));
 }
 std::string Services::createNode(size_t sessionId, const std::string& path, const std::string& nodeData, NodeType nodeType) {
-    DNode* curr = nullptr;
     dwt_proto::CreateNodeResponse resp;
-    std::string nodeName;
-    if(!walkTo(path, nodeName, &curr)) {
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    std::string nodeName = pathes.back();
+    pathes.pop_back();
+
+    DNode* curr = walkTo(pathes);   // 指向父节点
+
+    if(curr == nullptr) {
         // 错误
         resp.set_success(false);
         resp.set_errmsg("path not exists");
         return resp.SerializeAsString();
     }
 
-    if(curr->children.count(nodeName) || nodeName == "") { // 已存在/根节点
+    if(curr->children.count(nodeName)) { // 已存在
         // 节点已存在
         resp.set_success(false);
         resp.set_errmsg("node already exists");
     } else {
         // 创建节点
-        curr->children[nodeName] = std::make_unique<DNode>(nodeName, nodeData, nodeType, sessionId);
+        curr->children[nodeName] =
+            std::make_unique<DNode>(nodeName, nodeData, nodeType, (nodeType == NodeType::EPHEMERAL ? sessionId: 0));
         resp.set_success(true);
         
     }
     return resp.SerializeAsString();
 }
 
+
+// ===============================================================================
 
 std::string Services::getNodeHandler(const std::string& str, size_t sessionId) {
     dwt_proto::GetNodeRequest req;
@@ -132,31 +130,73 @@ std::string Services::getNodeHandler(const std::string& str, size_t sessionId) {
 
         dwt_proto::GetNodeResponse resp;
         resp.set_success(false);
-        resp.set_errmsg("Create Node Request Parse Error");
+        resp.set_errmsg("Get Node Request Parse Error");
         return resp.SerializeAsString();
     }
     return getNode(sessionId, req.path());
 }
 std::string Services::getNode(size_t sessionId, const std::string& path) {
-    DNode* curr = nullptr;
     dwt_proto::GetNodeResponse resp;
-    std::string nodeName;
-    if(!walkTo(path, nodeName, &curr)) {
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
         // 错误
         resp.set_success(false);
-        resp.set_errmsg("path not exists / path error");
+        resp.set_errmsg("path error");
         return resp.SerializeAsString();
     }
 
-    if(nodeName == "") {
-        // root 节点
+    DNode* curr = walkTo(pathes);
+
+    if(curr != nullptr) {
+        // 节点已存在
         resp.set_success(true);
         resp.set_nodedata(curr->data);
 
-    } else if(curr->children.count(nodeName)) {
+    } else {
+        // 节点不存在
+        resp.set_success(false);
+        resp.set_errmsg("node not exists");
+        
+    }
+    return resp.SerializeAsString();
+}
+
+// ===============================================================================
+
+
+std::string Services::setNodeHandler(const std::string& str, size_t sessionId) {
+    dwt_proto::SetNodeRequest req;
+    if(!req.ParseFromString(str)) {
+        LOG_ERROR("%s:%d ParseFromString error", __FILE__, __LINE__);
+
+        dwt_proto::SetNodeResponse resp;
+        resp.set_success(false);
+        resp.set_errmsg("Set Node Request Parse Error");
+        return resp.SerializeAsString();
+    }
+    return setNode(sessionId, req.path(), req.nodedata());
+}
+std::string Services::setNode(size_t sessionId, const std::string& path, const std::string& nodeData) {
+    dwt_proto::SetNodeResponse resp;
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    DNode* curr = walkTo(pathes);
+
+    if(curr != nullptr) {
         // 节点已存在
         resp.set_success(true);
-        resp.set_nodedata(curr->children[nodeName]->data);
+
+        curr->data = nodeData;
 
     } else {
         // 节点不存在
@@ -168,43 +208,185 @@ std::string Services::getNode(size_t sessionId, const std::string& path) {
 }
 
 
-std::string Services::setNodeHandler(const std::string& str, size_t sessionId) {
-return "";
-}
-std::string Services::setNode(size_t sessionId, const std::string& path, const std::string& nodeData) {
-return "";
-}
-
+// ===============================================================================
 
 std::string Services::deleteNodeHandler(const std::string& str, size_t sessionId) {
-return "";
+    dwt_proto::DeleteNodeRequest req;
+    if(!req.ParseFromString(str)) {
+        LOG_ERROR("%s:%d ParseFromString error", __FILE__, __LINE__);
+
+        dwt_proto::DeleteNodeResponse resp;
+        resp.set_success(false);
+        resp.set_errmsg("Delete Node Request Parse Error");
+        return resp.SerializeAsString();
+    }
+    return deleteNode(sessionId, req.path());
 }
 std::string Services::deleteNode(size_t sessionId, const std::string& path) {
-return "";
+    dwt_proto::DeleteNodeResponse resp;
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    if(pathes.size() == 1) { // 根节点不允许删除
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("delete the root node is not allowed");
+        return resp.SerializeAsString();
+    }
+
+    std::string nodeName = pathes.back();
+    pathes.pop_back();
+
+    DNode* curr = walkTo(pathes);   // 指向父节点
+
+    if(curr != nullptr && curr->children.count(nodeName)) {
+        // 节点已存在, 删除
+        resp.set_success(true);
+
+        curr->children.erase(nodeName); // 不需要递归删除, 节点使用了智能指针
+
+    } else {
+        // 节点不存在
+        resp.set_success(false);
+        resp.set_errmsg("node not exists");
+        
+    }
+    return resp.SerializeAsString();
 }
+
+// ===============================================================================
 
 
 std::string Services::lsNodeHandler(const std::string& str, size_t sessionId) {
-return "";
+    dwt_proto::LsNodeRequest req;
+    if(!req.ParseFromString(str)) {
+        LOG_ERROR("%s:%d ParseFromString error", __FILE__, __LINE__);
+
+        dwt_proto::LsNodeResponse resp;
+        resp.set_success(false);
+        resp.set_errmsg("Ls Node Request Parse Error");
+        return resp.SerializeAsString();
+    }
+    return lsNode(sessionId, req.path());
 }
 std::string Services::lsNode(size_t sessionId, const std::string& path) {
-return "";
+    dwt_proto::LsNodeResponse resp;
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    DNode* curr = walkTo(pathes);
+    if(curr != nullptr) {
+        // 节点已存在
+        resp.set_success(true);
+
+        // 遍历子节点
+        for(const auto& ch : curr->children) { // key: value
+            resp.add_children(ch.first);
+        }
+
+    } else {
+        // 节点不存在
+        resp.set_success(false);
+        resp.set_errmsg("node not exists");
+        
+    }
+    return resp.SerializeAsString();
 }
 
+
+// ===============================================================================
 
 std::string Services::statNodeHandler(const std::string& str, size_t sessionId) {
-return "";
+    dwt_proto::StatNodeRequest req;
+    if(!req.ParseFromString(str)) {
+        LOG_ERROR("%s:%d ParseFromString error", __FILE__, __LINE__);
+
+        dwt_proto::StatNodeResponse resp;
+        resp.set_success(false);
+        resp.set_errmsg("Stat Node Request Parse Error");
+        return resp.SerializeAsString();
+    }
+    return statNode(sessionId, req.path());
 }
 std::string Services::statNode(size_t sessionId, const std::string& path) {
-return "";
+    dwt_proto::StatNodeResponse resp;
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    DNode* curr = walkTo(pathes);
+
+    if(curr != nullptr) {
+        // 节点已存在
+        resp.mutable_state()->set_datalength(curr->data.size());
+        resp.mutable_state()->set_ephemeralowner(curr->ephemeralOwner);
+        resp.mutable_state()->set_numchildren(curr->children.size());
+        resp.mutable_state()->set_nodetype(static_cast<dwt_proto::NodeType>(curr->type));
+        resp.set_success(true);
+
+    } else {
+        // 节点不存在
+        resp.set_success(false);
+        resp.set_errmsg("node not exists");
+        
+    }
+    return resp.SerializeAsString();
 }
+
+// ===============================================================================
 
 
 std::string Services::existsNodeHandler(const std::string& str, size_t sessionId) {
-return "";
+    dwt_proto::ExistsNodeRequest req;
+    if(!req.ParseFromString(str)) {
+        LOG_ERROR("%s:%d ParseFromString error", __FILE__, __LINE__);
+
+        dwt_proto::ExistsNodeResponse resp;
+        resp.set_success(false);
+        resp.set_errmsg("Exists Node Request Parse Error");
+        return resp.SerializeAsString();
+    }
+    return existsNode(sessionId, req.path());
 }
 std::string Services::existsNode(size_t sessionId, const std::string& path) {
-return "";
+    dwt_proto::ExistsNodeResponse resp;
+    
+    auto pathes = splitPath(path);
+
+    if(pathes.size() <= 0) {
+        // 错误
+        resp.set_success(false);
+        resp.set_errmsg("path error");
+        return resp.SerializeAsString();
+    }
+
+    DNode* curr = walkTo(pathes);
+
+    resp.set_success(true);
+
+    resp.set_exist(curr != nullptr);
+
+    return resp.SerializeAsString();
 }
 
 
