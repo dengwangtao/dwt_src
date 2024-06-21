@@ -40,7 +40,7 @@ case:
 >
 > 当/node02被删除后, `ls /`命令不再显示node02
 
-![image-20240621162138021](.\resources\image-20240621162138021.png)
+![image-20240621162138021](https://github.com/dengwangtao/dwt_src/blob/main/resources/image-20240621162138021.png?raw=true)
 
 
 
