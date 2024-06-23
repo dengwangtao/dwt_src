@@ -20,7 +20,9 @@ int main() {
     dwt::SRCServer server(
         &loop,
         dwt::InetAddress("127.0.0.1", 8888),
-        "SRCServer"
+        "SRCServer",
+        12000,      // 超时时间
+        5           // 最大心跳
     );
 
     server.start();

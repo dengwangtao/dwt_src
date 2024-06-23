@@ -11,10 +11,10 @@ Services& Services::getInstance() {
 }
 
 Services::Services()
-    : m_dummy(std::make_unique<DNode>()) {
+    : m_dummy(std::make_shared<DNode>()) {
 
     m_dummy->data = "dummy";
-    m_dummy->children[""] = std::make_unique<DNode>();   // 根节点
+    m_dummy->children[""] = std::make_shared<DNode>();   // 根节点
     m_dummy->children[""]->data = "root";
 
     // 绑定handler
@@ -41,8 +41,15 @@ std::string Services::handle(dwt_proto::ServiceType operation, const std::string
 void Services::removeEphemeral(size_t sessionId) {
     std::lock_guard<std::mutex> lock(m_mutex);
 
-    removeEphemeral(m_dummy.get(), sessionId);
+    // removeEphemeral(m_dummy.get(), sessionId);
+
+    for(auto& ptr : m_sessionMap[sessionId]) {
+        if(!ptr.expired() && !ptr.lock()->parent.expired()) { // 没有被释放, 且父节点也未被释放
+            ptr.lock()->parent.lock()->children.erase(ptr.lock()->name);
+        }
+    }
 }
+
 
 void Services::removeEphemeral(DNode* node, size_t sessionId) {
     if(!node) return;
@@ -140,8 +147,15 @@ std::string Services::createNode(size_t sessionId, const std::string& path, cons
         resp.set_errmsg("node already exists");
     } else {
         // 创建节点
+
         curr->children[nodeName] =
-            std::make_unique<DNode>(nodeName, nodeData, nodeType, (nodeType == NodeType::EPHEMERAL ? sessionId: 0));
+            std::make_shared<DNode>(nodeName, nodeData, nodeType, (nodeType == NodeType::EPHEMERAL ? sessionId: 0), curr->shared_from_this());
+
+        if(nodeType == NodeType::EPHEMERAL) {
+            // 会话节点, 保存到会话节点表内
+            m_sessionMap[sessionId].push_back(curr->children[nodeName]);
+        }
+
         resp.set_success(true);
         
     }

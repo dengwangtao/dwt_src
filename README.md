@@ -8,8 +8,6 @@
 
 心跳使用UDP进行通信, 客户端需要每隔一段时间发送UDP心跳包来维护session, 服务端维护一个小根堆超时计时器和一个大根堆心跳计数器, 当连续(*max_heartbeat*=5)次接收不到心跳包, 执行回调, 删除会话节点
 
-
-
 ```shell
 # 构建
 mkdir build
@@ -17,6 +15,25 @@ cd build
 cmake ..
 make
 ```
+
+
+
+提供客户端CLI(/bin/client_cli)和客户端静态库API(/lib/src_client.a /client/src_client.h)供第三方软件使用
+```shell
+# client_cli 命令: 
+
+create	/userService/userinfo [node_data] [node_type 1:永久节点; 2:会话节点]
+get 	/userService/userinfo 
+set 	/userService/userinfo [node_data]
+delete 	/userService/userinfo
+ls 		/userService
+stat 	/userService/userinfo
+exists 	/userService/userinfo
+
+# []为可选字段
+```
+
+
 
 
 
@@ -44,68 +61,54 @@ case:
 
 
 
-```shell
-命令: 
-- create	/userService/userinfo data_xxxxxx [node_type 1:永久; 2:会话]
-- get 		/userService/userinfo 
-- set 		/userService/userinfo data_xxxxxx
-- delete 	/userService/userinfo
-- ls 		/userService
-- stat 		/userService/userinfo
-- exists 	/userService/userinfo
-```
-
-
-
 目录树
 
 ```
 .
-|-- CMakeLists.txt
-|-- README.md
-|-- bin				# 可执行文件目录
-|   |-- client
-|   |-- main
-|   `-- test
-|-- client			# 客户端代码
-|   |-- CMakeLists.txt
-|   |-- client.cpp
-|   |-- messages.pb.cc
-|   `-- messages.pb.h
-|-- lib				# 库文件
-|   |-- libdwt_src.a
-|   `-- libdwt_tcp.a
-|-- resources		# 其他资源
-|   `-- protobuf_message.vsdx
-|-- src				# 源码
-|   |-- CMakeLists.txt
-|   |-- Callbacks.h
-|   |-- DNode.h
-|   |-- HeapHeartbeatCounter.cpp
-|   |-- HeapHeartbeatCounter.h
-|   |-- HeapTimer.cpp
-|   |-- HeapTimer.h
-|   |-- HeartbeatCounter.cpp
-|   |-- HeartbeatCounter.h
-|   |-- SRCServer.cpp
-|   |-- SRCServer.h
-|   |-- Services.cpp
-|   |-- Services.h
-|   |-- Session.cpp
-|   |-- Session.h
-|   |-- SessionManager.cpp
-|   |-- SessionManager.h
-|   |-- main.cpp
-|   |-- messages.pb.cc
-|   |-- messages.pb.h
-|   |-- proto
-|   |-- tcp
-|   |-- uuid4.cpp
-|   `-- uuid4.h
-`-- test		# 测试目录
-    |-- CMakeLists.txt
-    |-- test.cpp
-    |-- test_HeapHeartbeatCounter.cpp
-    |-- test_HeapTimer.cpp
-    `-- test_Logger.cpp
+├── bin						# 可执行文件目录
+├── client					# 客户端目录
+│   ├── client_cli.cpp
+│   ├── CMakeLists.txt
+│   ├── messages.pb.cc
+│   ├── messages.pb.h
+│   ├── proto
+│   ├── src_client.cpp
+│   └── src_client.h
+├── CMakeLists.txt
+├── lib						# 静态库生成目录
+│   ├── libdwt_tcp.a
+│   └── libsrc_client.a
+├── README.md
+├── resources				# 其他资源文件
+├── src						# 核心源码
+│   ├── Callbacks.h
+│   ├── CMakeLists.txt
+│   ├── DNode.h
+│   ├── HeapHeartbeatCounter.cpp
+│   ├── HeapHeartbeatCounter.h
+│   ├── HeapTimer.cpp
+│   ├── HeapTimer.h
+│   ├── HeartbeatCounter.cpp
+│   ├── HeartbeatCounter.h
+│   ├── main.cpp
+│   ├── messages.pb.cc
+│   ├── messages.pb.h
+│   ├── proto				# 协议文件夹
+│   ├── Services.cpp
+│   ├── Services.h
+│   ├── Session.cpp
+│   ├── Session.h
+│   ├── SessionManager.cpp
+│   ├── SessionManager.h
+│   ├── SRCServer.cpp
+│   ├── SRCServer.h
+│   ├── tcp					# tcp网络模块
+│   ├── uuid4.cpp
+│   └── uuid4.h
+└── test
+    ├── CMakeLists.txt
+    ├── test.cpp
+    ├── test_HeapHeartbeatCounter.cpp
+    ├── test_HeapTimer.cpp
+    └── test_Logger.cpp
 ```

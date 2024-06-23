@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+package dwt_proto;
+
+// protoc messages.proto --cpp_out=../
+// protoc messages.proto --cpp_out=../../client
+
+enum MessageType {
+    Nothing_MessageType = 0;    // 占位符, 防止'\0'开始 (遇到了bug)
+    Connection          = 1;    // 连接请求
+    Service             = 2;    // 业务请求: get create ls ...
+    Error               = 3;    // 请求错误
+}
+
+// ==========================================
+
+// 整体字段 (请求)
+message WrappedRequest {
+    MessageType requestType = 1;
+    bytes       requestParameters = 2;
+}
+// 整体字段 (响应)
+message WrappedResponse {
+    MessageType responseType = 1;
+    bytes       data         = 2;
+}
+
+// ==========================================
+
+// 建立会话连接的响应
+message ConnectionResponse {
+    uint64  sessionId = 1;
+}
+
+// 心跳消息 （UDP传输）
+message HeartbeatMessage {
+    uint64  sessionId = 1;
+}
+
+// ==========================================
+
+// 业务类型
+enum ServiceType {
+    Nothing_ServiceType = 0;
+    Create              = 1;
+    Get                 = 2;
+    Set                 = 3;
+    Delete              = 4;
+    Ls                  = 5;
+    Stat                = 6;
+    Exists              = 7;
+}
+
+message ServiceRequest {
+    ServiceType     serviceType         = 1;    // 业务类型
+    bytes           serviceParameters   = 2;    // 业务参数
+    uint64          sessionId           = 3;    // 会话 Id
+}
+
+message ServiceResponse {
+    ServiceType     serviceType     = 1;    // 业务类型
+    bytes           data            = 2;    // 业务结果
+}
+
+// ==========================================
+
+enum NodeType {
+    Nothing_NodeType    = 0;
+    PERSISTENT          = 1;    // 永久节点
+    EPHEMERAL           = 2;    // 会话节点
+}
+
+// ==========================================
+
+message CreateNodeRequest {
+    bytes       path        = 1;    // /userService
+    bytes       nodeData    = 3;    // 127.0.0.1:8001
+    NodeType    nodeType    = 4;    // EPHEMERAL
+}
+
+message CreateNodeResponse {
+    bool    success = 1;
+    bytes   errmsg  = 2;
+}
+
+// ==========================================
+
+message GetNodeRequest {
+    bytes       path        = 1;    // /userService
+}
+
+message GetNodeResponse {
+    bool    success     = 1;    // 成功/失败
+    bytes   nodeData    = 2;    // 节点信息
+    bytes   errmsg      = 3;
+}
+
+// ==========================================
+
+message SetNodeRequest {
+    bytes       path        = 1;    // /userService
+    bytes       nodeData    = 3;    // 127.0.0.1:8001
+}
+
+message SetNodeResponse {
+    bool    success = 1;
+    bytes   errmsg  = 2;
+}
+
+// ==========================================
+
+message DeleteNodeRequest {
+    bytes       path        = 1;    // /userService
+}
+
+message DeleteNodeResponse {
+    bool    success = 1;
+    bytes   errmsg  = 2;
+}
+
+// ==========================================
+
+message LsNodeRequest {
+    bytes       path        = 1;    // /userService
+}
+
+message LsNodeResponse {
+                bool    success     = 1;
+    repeated    bytes   children    = 2;    // 子节点
+                bytes   errmsg      = 3;
+}
+
+// ==========================================
+
+// 节点状态信息
+message NodeState {
+    uint64      ephemeralOwner  = 1;
+    int32       numChildren     = 2;
+    int32       dataLength      = 3;
+    NodeType    NodeType        = 4;
+}
+
+message StatNodeRequest {
+    bytes       path        = 1;    // /userService
+}
+
+message StatNodeResponse {
+    bool        success = 1;
+    NodeState   state   = 2;
+    bytes       errmsg  = 3;
+}
+
+// ==========================================
+
+message ExistsNodeRequest {
+    bytes       path        = 1;    // /userService
+}
+
+message ExistsNodeResponse {
+    bool    success = 1;
+    bool    exist   = 2;
+    bytes   errmsg  = 3;
+}
+
+// ==========================================

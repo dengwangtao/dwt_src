@@ -18,7 +18,7 @@ public:
     SRCServer(
         EventLoop* loop, const InetAddress& listenAddr,
         const std::string& name,
-        int timeout = 10000, int max_heartbeat = 5);
+        int timeout = 12000, int max_heartbeat = 5);
 
     ~SRCServer();
 

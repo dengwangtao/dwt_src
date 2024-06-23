@@ -26,7 +26,7 @@ public:
     static Services& getInstance();
     
     std::string handle(dwt_proto::ServiceType operation, const std::string& str, size_t sessionId);
-
+    
     void removeEphemeral(size_t sessionId); // 删除会话节点
 
 private:
@@ -51,7 +51,10 @@ private:
     std::string existsNodeHandler(const std::string& str, size_t sessionId);
     std::string existsNode(size_t sessionId, const std::string& path);
 
-    void removeEphemeral(DNode* node, size_t sessionId); // 删除会话节点
+    /**
+     * @deprecated 递归扫图删除会话节点
+     */
+    void removeEphemeral(DNode* node, size_t sessionId);
 
 
 private:
@@ -63,7 +66,9 @@ private:
 
     std::unordered_map<dwt_proto::ServiceType, Handler> m_funcs;
 
-    std::unique_ptr<DNode> m_dummy;   // 哑节点  [] => root
+    std::unordered_map<size_t, std::vector<std::weak_ptr<DNode>>> m_sessionMap;
+
+    std::shared_ptr<DNode> m_dummy;   // 哑节点  [] => root
 
     std::mutex m_mutex;
 };

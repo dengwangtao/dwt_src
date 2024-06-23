@@ -50,24 +50,30 @@ inline std::string getNodeTypeStr(NodeType type) {
 
 
 // 节点类型
-struct DNode {
-    std::string name;   // 节点名称
-    std::string data;   // 节点数据
-    NodeType    type;   // 永久/会话
-    size_t      ephemeralOwner;     // 所属的会话Id
-    std::unordered_map<std::string, std::unique_ptr<DNode>> children;   // 子节点
+struct DNode : public std::enable_shared_from_this<DNode> {
+
+    std::string     name;               // 节点名称
+    std::string     data;               // 节点数据
+    NodeType        type;               // 永久/会话
+    size_t          ephemeralOwner;     // 所属的会话Id
+    std::unordered_map<std::string, std::shared_ptr<DNode>>    children; // 子节点
+    std::weak_ptr<DNode> parent;        // 父节点, 弱指针
 
     // dataLength
     // numChildren
 
     DNode()
-        : name(), data(), type(NodeType::PERSISTENT), ephemeralOwner(0) {}
+        : name(), data(), type(NodeType::PERSISTENT), ephemeralOwner(0), parent() {}
 
     DNode(const std::string& name, const std::string& data, NodeType type)
-        : name(name), data(data), type(type), ephemeralOwner(0) {}
+        : name(name), data(data), type(type), ephemeralOwner(0), parent() {}
 
     DNode(const std::string& name, const std::string& data, NodeType type, size_t ephemeral)
-        : name(name), data(data), type(type), ephemeralOwner(ephemeral) {}
+        : name(name), data(data), type(type), ephemeralOwner(ephemeral), parent() {}
+
+    DNode(const std::string& name, const std::string& data, NodeType type, size_t ephemeral, const std::shared_ptr<DNode>& parent)
+        : name(name), data(data), type(type), ephemeralOwner(ephemeral), parent(parent) {}
+
     
     ~DNode() {
         LOG_INFO("dtor DNode{name=%s, data=%s, type=%d, owner=%lu}", name.c_str(), data.c_str(), static_cast<int>(type), ephemeralOwner);
