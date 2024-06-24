@@ -12,6 +12,9 @@
 #include "src_client.h"
 #include "messages.pb.h"
 
+/**
+ * @deprecated 根据sessionId启动cli
+ */
 void run(size_t sessionId) {
     int fd = ::socket(AF_INET, SOCK_STREAM, 0);
 
@@ -30,6 +33,7 @@ void run(size_t sessionId) {
         
     std::string line;
     std::string op;
+    std::cout << "SRCCLI$ ";
     while(std::getline(std::cin, line)) {
         std::stringstream ss(line);
         ss >> op;    // get / create / set / ...
@@ -334,7 +338,7 @@ void run(size_t sessionId) {
                 }
             }
         }
-        
+        std::cout << "SRCCLI$ ";
     }
 }
 
@@ -345,6 +349,7 @@ void run2() {
            
     std::string line;
     std::string op;
+    std::cout << "SRCCLI$ ";
     while(std::getline(std::cin, line)) {
         std::stringstream ss(line);
         ss >> op;    // get / create / set / ...
@@ -452,6 +457,7 @@ void run2() {
             continue;
         }
         
+        std::cout << "SRCCLI$ ";
     }
 }
 

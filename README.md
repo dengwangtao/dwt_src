@@ -26,7 +26,7 @@ create	/userService/userinfo [node_data] [node_type 1:永久节点; 2:会话节�
 get 	/userService/userinfo 
 set 	/userService/userinfo [node_data]
 delete 	/userService/userinfo
-ls 		/userService
+ls      /userService
 stat 	/userService/userinfo
 exists 	/userService/userinfo
 
