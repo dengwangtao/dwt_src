@@ -9,6 +9,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 # 头文件位置
 include_directories(${PROJECT_SOURCE_DIR}/src)
 include_directories(${PROJECT_SOURCE_DIR}/src/tcp)
+include_directories(${PROJECT_SOURCE_DIR}/src/thirdyparty)
 
 # 静态库位置, 方便test使用
 link_directories(${PROJECT_SOURCE_DIR}/lib)

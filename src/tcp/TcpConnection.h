@@ -35,6 +35,8 @@ public:
     void send(const void* message, size_t len);
     void send(const std::string& str);
 
+    void appendAsync(std::function<void()> func);
+
     void shutdown();
 
 

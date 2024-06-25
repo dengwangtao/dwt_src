@@ -105,7 +105,7 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
     } else if(wrappedRequest.requesttype() == dwt_proto::MessageType::Service) {
 
         // 业务请求
-        LOG_INFO("业务请求到达");
+        // LOG_INFO("业务请求到达");
         // 解析业务参数
         dwt_proto::ServiceRequest serviceRequest;
         if(!serviceRequest.ParseFromString(wrappedRequest.requestparameters())) {
@@ -116,11 +116,14 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
             return;
         }
 
+        // 如果是 create delete set, 同步转发到其他节点 (2PC)
+        
+
         std::string serviceResp = Services::getInstance().handle(
             serviceRequest.servicetype(),
             serviceRequest.serviceparameters(),
             serviceRequest.sessionid());
-
+        
         dwt_proto::ServiceResponse serviceResponse;
         serviceResponse.set_servicetype(serviceRequest.servicetype());
         serviceResponse.set_data(serviceResp);
@@ -136,7 +139,6 @@ void SRCServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer, Timestam
         resp.set_data("illegal request parameters");
         conn->send(resp.SerializeAsString());
     }
-    
 }
 
 

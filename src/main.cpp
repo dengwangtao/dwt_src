@@ -7,19 +7,31 @@
 
 #include "Services.h"
 
+#include "cmdline.hpp"
+#include "Config.h"
+
 void test();
 
-int main() {
+int main(int argc, char** argv) {
+
+    cmdline::parser parser;
+    parser.add<std::string>("config", 'c', "configuration file", true);
+    parser.parse_check(argc, argv);
+
+    dwt::Config config;
+    config.loadConf(parser.get<std::string>("config"));
 
     // test();
     // return 0;
+    std::string ip = config.Get("ip");
+    int port = std::stoi(config.Get("port"));
 
 
     dwt::EventLoop loop;
 
     dwt::SRCServer server(
         &loop,
-        dwt::InetAddress("127.0.0.1", 8888),
+        dwt::InetAddress(ip, port),
         "SRCServer",
         12000,      // 超时时间
         5           // 最大心跳

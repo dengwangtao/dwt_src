@@ -63,6 +63,12 @@ TcpConnection::~TcpConnection() {
 }
 
 
+void TcpConnection::appendAsync(std::function<void()> func) {
+    // 放在队列中, 后序执行
+    m_loop->queueInLoop(std::move(func));
+}
+
+
 
 void TcpConnection::send(const void* message, size_t len) {
     if(m_state == StateE::kConnected) {
