@@ -12,6 +12,149 @@
 #include "src_client.h"
 #include "messages.pb.h"
 
+#include "cmdline.hpp"
+
+
+
+void run(const std::string& ip, int port, uint32_t seconds) {
+    
+    auto& client = dwt::SRCCLient::getInstance();
+    client.connect(ip, port, seconds);
+           
+    std::string line;
+    std::string op;
+    std::cout << "SRCCLI$ ";
+    while(std::getline(std::cin, line)) {
+        std::stringstream ss(line);
+        ss >> op;    // get / create / set / ...
+        if(op == "create") {
+            // create /userservice/method/info  [data]  [1:永久2:会话]
+            std::string path;
+            ss >> path;
+
+            std::string data;
+            ss >> data;
+
+            int type = 1; // 默认为永久节点
+            ss >> type;
+            if(type == 0) type = 1;
+
+            bool res = client.createNode(path, data, type);
+
+            if(res) {
+                std::cout << "create success" << std::endl;
+            } else {
+                std::cout << "create error" << std::endl;
+            }
+            
+
+        } else if(op == "get") {
+            // get /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            dwt_proto::GetNodeRequest req;
+            req.set_path(path);
+
+            std::string res = client.getNode(path);
+            std::cout << res << std::endl;
+
+            
+        } else if(op == "set") {
+            // set /userservice/method/info [data]
+            std::string path;
+            ss >> path;
+
+            std::string data;
+            ss >> data;
+
+            bool res = client.setNode(path, data);
+            if(res) {
+                std::cout << "set success" << std::endl;
+            } else {
+                std::cout << "set error" << std::endl;
+            }
+
+            
+        } else if(op == "delete") {
+            // delete /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            bool res = client.deleteNode(path);
+            if(res) {
+                std::cout << "set success" << std::endl;
+            } else {
+                std::cout << "set error" << std::endl;
+            }
+
+            
+        } else if(op == "ls") {
+            // ls /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            auto children = client.lsNode(path);
+            std::cout << "[";
+            for(int i = 0; i < children.size(); ++ i) {
+                if(i) std::cout << ", ";
+                std::cout << children[i];
+            }
+            std::cout << "]" << std::endl;
+
+            
+        } else if(op == "stat") {
+            // stat /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            auto res = client.statNode(path);
+            std::cout << "nodeType: " << res.nodetype() << std::endl;
+            std::cout << "dataLength: " << std::dec << res.datalength() << std::endl;
+            std::cout << "numChildren: " << res.numchildren() << std::endl;
+            std::cout << "ephemeralOwner: " << std::hex << res.ephemeralowner() << "\n" << std::endl;
+           
+        } else if(op == "exists") {
+            // exists /userservice/method/info
+            std::string path;
+            ss >> path;
+
+            bool res = client.existsNode(path);
+            if(res) {
+                std::cout << "exists" << std::endl;
+            } else {
+                std::cout << "not exists" << std::endl;
+            }
+            
+        } else {
+            std::cout << "invalid operation" << std::endl;
+            continue;
+        }
+        
+        std::cout << "SRCCLI$ ";
+    }
+}
+
+
+int main(int argc, char** argv) {
+
+    cmdline::parser parser;
+    parser.add<std::string>("ip", 'i', "ip address", false, "127.0.0.1");
+    parser.add<int>("port", 'p', "port", true, 10606);
+    parser.add<int>("interval", 't', "time interval", false, 10);
+
+    std::string ip = parser.get<std::string>("ip");
+    int port = parser.get<int>("port");
+    int seconds = parser.get<int>("interval");
+    std::cout << "addr: " << ip << ":" << port << " " << "interval=" << seconds << std::endl;
+
+    run(ip, port, seconds);
+
+    return 0;
+}
+
+
+#if 0
 /**
  * @deprecated 根据sessionId启动cli
  */
@@ -342,135 +485,7 @@ void run(size_t sessionId) {
     }
 }
 
-void run2() {
-    
-    auto& client = dwt::SRCCLient::getInstance();
-    client.connect("127.0.0.1", 8888);
-           
-    std::string line;
-    std::string op;
-    std::cout << "SRCCLI$ ";
-    while(std::getline(std::cin, line)) {
-        std::stringstream ss(line);
-        ss >> op;    // get / create / set / ...
-        if(op == "create") {
-            // create /userservice/method/info  [data]  [1:永久2:会话]
-            std::string path;
-            ss >> path;
 
-            std::string data;
-            ss >> data;
-
-            int type = 1; // 默认为永久节点
-            ss >> type;
-            if(type == 0) type = 1;
-
-            bool res = client.createNode(path, data, type);
-
-            if(res) {
-                std::cout << "create success" << std::endl;
-            } else {
-                std::cout << "create error" << std::endl;
-            }
-            
-
-        } else if(op == "get") {
-            // get /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            dwt_proto::GetNodeRequest req;
-            req.set_path(path);
-
-            std::string res = client.getNode(path);
-            std::cout << res << std::endl;
-
-            
-        } else if(op == "set") {
-            // set /userservice/method/info [data]
-            std::string path;
-            ss >> path;
-
-            std::string data;
-            ss >> data;
-
-            bool res = client.setNode(path, data);
-            if(res) {
-                std::cout << "set success" << std::endl;
-            } else {
-                std::cout << "set error" << std::endl;
-            }
-
-            
-        } else if(op == "delete") {
-            // delete /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            bool res = client.deleteNode(path);
-            if(res) {
-                std::cout << "set success" << std::endl;
-            } else {
-                std::cout << "set error" << std::endl;
-            }
-
-            
-        } else if(op == "ls") {
-            // ls /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            auto children = client.lsNode(path);
-            std::cout << "[";
-            for(int i = 0; i < children.size(); ++ i) {
-                if(i) std::cout << ", ";
-                std::cout << children[i];
-            }
-            std::cout << "]" << std::endl;
-
-            
-        } else if(op == "stat") {
-            // stat /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            auto res = client.statNode(path);
-            std::cout << "nodeType: " << res.nodetype() << std::endl;
-            std::cout << "dataLength: " << std::dec << res.datalength() << std::endl;
-            std::cout << "numChildren: " << res.numchildren() << std::endl;
-            std::cout << "ephemeralOwner: " << std::hex << res.ephemeralowner() << "\n" << std::endl;
-           
-        } else if(op == "exists") {
-            // exists /userservice/method/info
-            std::string path;
-            ss >> path;
-
-            bool res = client.existsNode(path);
-            if(res) {
-                std::cout << "exists" << std::endl;
-            } else {
-                std::cout << "not exists" << std::endl;
-            }
-            
-        } else {
-            std::cout << "invalid operation" << std::endl;
-            continue;
-        }
-        
-        std::cout << "SRCCLI$ ";
-    }
-}
-
-
-int main() {
-
-    run2();
-
-    return 0;
-}
-
-
-#if 0
 int main() {
 
     int fd = ::socket(AF_INET, SOCK_STREAM, 0);

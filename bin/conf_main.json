@@ -1,6 +1,6 @@
 {
     "ip": "127.0.0.1",
-    "port": "8888",
+    "port": "10606",
     "heartbeatTimeout": "12000",
     "heartbeatMaxCount": "5"
 }
